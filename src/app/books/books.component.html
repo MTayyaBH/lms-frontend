@@ -1,0 +1,20 @@
+<main>
+    <aside
+        class="w-full grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6  px-8  dark:bg-[#0e0b1d] bg-gray-50">
+        <div *ngFor="let book of books" class="w-full flex p-5">
+            <div (click)="nevegat(book.uid)" 
+                class="w-full p-4   bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
+                <div
+                    class="flex w-full justify-center  select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
+                    <span
+                        class="h-20 w-20 grid place-content-center z-10 rounded-full bg-gray-200  dark:bg-[#ffff0015]">
+                        <img class="max-w-12 max-h-12 w-full h-full object-contain" [src]="book.image_url" alt="">
+                    </span>
+                </div>
+                <h1
+                    class="w-full uppercase text-sm text-center mt-3 font-medium  font-Montserrat select-none cursor-pointer text-gray-700 dark:text-gray-100">
+                    {{book.book_name}} </h1>
+            </div>
+        </div>
+    </aside>
+</main>

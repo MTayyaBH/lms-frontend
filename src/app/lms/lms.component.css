@@ -1,0 +1,14 @@
+/* .lms-div1{
+    background-image: url();
+} */
+.lms-div2{
+    background-image: url(../../assets/images/tuf-right-panel-banner.jpg);
+    
+}
+#mainbgimg {
+    transform-style:flat;
+    transition: background-image 1s ease-in-out 200ms;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../../assets/images/kashmeer.gif") 
+  }

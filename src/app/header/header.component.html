@@ -1,0 +1,36 @@
+<section style="box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;"
+    class="h-20 fixed z-50 top-0 w-full bg-white text-gray-800 dark:bg-slate-800 px-3 dark:text-gray-300 flex justify-between items-center">
+    <img routerLink="/Admin/AddMcqs" class="bg-transparent h-14 cursor-pointer" src="../../assets/images/download__3_-removebg-preview.png" alt="">
+    <div class="text-black hidden select-none lg:block min-w-[400px] text-xl space-x-20">
+        <span routerLink="/home" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 "
+            id="HOME">HOME</span>
+        <span routerLink="/LMS" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 " id="ABOUT">L M S</span>
+        <span routerLink="/AboutUs" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 " id="ABOUT">ABOUT US</span>
+        <span routerLink="/ContactUs" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 " id="CONTACTS">CONTACT US</span>
+    </div>
+    <div class="flex items-center space-x-3">
+        <app-toggle-switch></app-toggle-switch>
+        <button class="lg:hidden" (click)="open()"><i
+                class="text-blue-950 dark:text-yellow-500 text-3xl fa-solid fa-bars-staggered"></i></button>
+    </div>
+</section>
+<nz-drawer id="headerdrawer" class="dark:!bg-slate-900 dark:!text-gray-300" [nzClosable]="true" [nzWidth]="'50%'"
+    [nzVisible]="visible" (nzOnClose)="close()">
+    <main *nzDrawerContent class="w-full h-full flex flex-col justify-center items-center">
+        <div class="w-full dark:bg-slate-900 p-3 px-4">
+            <i (click)="close()" class="fa-solid fa-arrow-right text-2xl text-gray-900 dark:text-yellow-500"></i>
+        </div>
+        <section class="dark:bg-slate-800 h-full w-full flex justify-center items-center">
+            <div class=" flex flex-col text-xl space-y-10 select-none">
+                <span class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center"
+                    id="HOME">HOME</span>
+                <span class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center" id="ABOUT">L M
+                    S</span>
+                <span class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center" id="ABOUT">ABOUT
+                    US</span>
+                <span class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center"
+                    id="CONTACTS">CONTACT US</span>
+            </div>
+        </section>
+    </main>
+</nz-drawer>

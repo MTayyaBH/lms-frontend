@@ -1,0 +1,35 @@
+<div class="flex items-center justify-center min-h-screen px-4 py-6">
+    <div class="max-w-lg w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="bg-indigo-500 dark:bg-indigo-700 p-4">
+            <h1 class="text-2xl font-bold text-white">Quiz Results</h1>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6">
+            <div class="text-center mb-6">
+                <h2 class="text-xl font-semibold mb-2 dark:text-gray-100">Congratulations!</h2>
+                <p class="text-gray-600 dark:text-gray-400">You've completed the quiz. Here are your results:</p>
+            </div>
+
+            <div class="bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 p-4 rounded-lg shadow-sm">
+                <div class="flex justify-between mb-4">
+                    <span class="font-medium">Total Questions:</span>
+                    <span id="total-questions" class="font-semibold">{{result.total}}</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="font-medium">Correct Answers:</span>
+                    <span id="correct-answers" class="font-semibold">{{result.correct}}</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="font-medium">Incorrect Answers:</span>
+                    <span id="incorrect-answers" class="font-semibold">{{result.total-result.correct}}</span>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <button routerLink="/LMS/OnlineTest/Result-Details" class="text-indigo-500 dark:text-indigo-300 ">See Result Details</button>
+            </div>
+        </div>
+    </div>
+</div>

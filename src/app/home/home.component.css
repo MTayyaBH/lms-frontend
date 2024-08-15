@@ -1,0 +1,13 @@
+.dark\:buttonbg:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity));
+}
+.dark\:budiv:hover:is(.dark *) .dark\:buttonbg:is(.dark *) {
+  --tw-bg-opacity: 1;
+  color: black;
+  transition-duration: 500ms;
+}
+.budiv:hover .buttonbg {
+  transform: translateX(10px);
+  transition-duration: 700ms;
+}

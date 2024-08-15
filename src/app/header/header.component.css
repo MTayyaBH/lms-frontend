@@ -1,0 +1,47 @@
+.headergroup {
+  position: relative;
+  cursor: pointer;
+}
+
+.headergroup:hover {
+  color: rgb(4, 4, 46);
+  cursor: pointer;
+}
+
+.headergroup:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 3px;
+  top: 50px;
+  left: 0;
+  background-color: rgb(4, 4, 46);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease-out;
+}
+
+.headergroup:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.dark\:headergroup:is(.dark *):hover {
+  color: yellow;
+  cursor: pointer;
+}
+.dark\:headergroup:is(.dark *)::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 3px;
+  top: 50px;
+  left: 0;
+  background-color: yellow;
+  transform-origin: bottom left;
+  transition: transform 0.3s ease-out;
+}
+.dark\:headergroup:is(.dark *):hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

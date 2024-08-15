@@ -1,0 +1,20 @@
+<!-- src/app/quiz-result/quiz-result.component.html -->
+<div class="p-4 dark:bg-gray-800 dark:text-white transition duration-500 ease-in-out pt-24">
+    <div *ngFor="let question of questions; let i = index" class="question-block p-6 border-b border-gray-300 dark:border-gray-700">
+      <p class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Q No {{ i + 1 }}: {{ question.statement }}</p>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-3 lg:px-10">
+        <li
+          *ngFor="let option of ['option1', 'option2', 'option3', 'option4']"
+          [ngClass]="{
+            'bg-green-500 !text-gray-100': isCorrect(question, question[option]),
+            'bg-red-500 !text-white': isUserOption(question, question[option]) && !isCorrect(question, question[option]),
+            'bg-gray-200 dark:!bg-gray-700 dark:!text-gray-300': !isCorrect(question, question[option]) && !isUserOption(question, question[option])
+          }"
+          class="p-4 border text-gray-900 rounded-lg cursor-pointer text-center font-bold transition duration-500 ease-in-out"
+        >
+          {{ question[option] }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  

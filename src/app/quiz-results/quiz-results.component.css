@@ -1,0 +1,14 @@
+.question-block {
+    margin-bottom: 20px;
+  }
+  
+  .correct {
+    background-color: green;
+    color: white;
+  }
+  
+  .incorrect {
+    background-color: red;
+    color: white;
+  }
+  

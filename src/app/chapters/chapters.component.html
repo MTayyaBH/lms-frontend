@@ -1,0 +1,65 @@
+<section class="pt-20 grid place-items-center bg-gray-100 dark:bg-gray-900 w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-lg shadow-lg w-full max-w-lg md:max-w-xl lg:max-w-2xl">
+      <h1 class="text-2xl w-full text-center md:text-3xl font-semibold mb-6 text-gray-800 dark:text-gray-100">
+        Add New Book
+      </h1>
+  
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Class Selection -->
+        <div class="mb-4">
+          <label for="iconClass" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Class Name</label>
+          <nz-select (ngModelChange)="getbooks($event)" class="bookselected dark:bookselected" id="iconClass" nzSize="large" style="width: 100% !important;" nzShowSearch nzAllowClear nzPlaceHolder="Select a Class" formControlName="ClassName">
+            <nz-option *ngFor="let class of clases" [nzLabel]="class.classname" [nzValue]="class.uid"></nz-option>
+          </nz-select>
+        </div>
+        
+  
+        <!-- Book Name -->
+        <div class="mb-4">
+          <label for="book" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Book Name</label>
+          <nz-select  class="bookselected dark:bookselected" id="book" nzSize="large" style="width: 100% !important;" nzShowSearch nzAllowClear nzPlaceHolder="Select a Class" formControlName="bookName">
+            <nz-option *ngFor="let book of books" [nzLabel]="book.book_name" [nzValue]="book.uid"></nz-option>
+          </nz-select>
+        </div>
+  
+        <!-- Chapters -->
+        <div class="mb-4">
+          <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Chapters</label>
+          <div formArrayName="chapters">
+            <div *ngFor="let chapter of chapters.controls; let i = index" [formGroupName]="i" class="mb-4 p-4 border border-gray-300 dark:border-gray-600 rounded-md">
+              <label for="title{{i}}" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Chapter No {{i+1}}</label>
+              <input nz-input id="title{{i}}" formControlName="title" placeholder="Enter chapter Name"
+                     class="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 shadow-sm" />
+              
+              <label for="content{{i}}" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Chapter Content</label>
+              <textarea nz-input id="content{{i}}" formControlName="content" rows="4" placeholder="Enter chapter content"
+                        class="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 shadow-sm"></textarea>
+              
+              <button type="button" (click)="removeChapter(i)" class="mt-2 bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md">
+                Remove Chapter
+              </button>
+            </div>
+          </div>
+          <button type="button" (click)="addChapter()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">
+            Add Chapter
+          </button>
+        </div>
+  
+        <!-- Description -->
+        <div class="mb-4">
+          <label for="description" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Description</label>
+          <textarea nz-input id="description" formControlName="description" rows="4" placeholder="Enter description"
+                    class="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 shadow-sm"></textarea>
+        </div>
+  
+        <!-- Submit Button -->
+        <div>
+          <button type="submit"
+                  class="w-full bg-gray-800 hover:bg-gray-900 dark:bg-yellow-500 dark:hover:bg-yellow-400 text-white dark:text-gray-900 font-bold py-2 px-4 rounded-md shadow-md">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+  
