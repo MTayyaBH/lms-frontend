@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzDrawerPlacement } from 'ng-zorro-antd/drawer';
+import { DbServiceService } from '../db-service.service';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +8,12 @@ import { NzDrawerPlacement } from 'ng-zorro-antd/drawer';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit{
-  ngOnInit(): void {
-    // this.toggleDarkMode()
+  constructor(private sharedService: DbServiceService) {}
+
+  ngOnInit() {
+    this.sharedService.notify.subscribe(() => {
+      this.someFunction();
+    });
   }
   visible = false;
 
@@ -19,12 +24,7 @@ export class HeaderComponent implements OnInit{
   close(): void {
     this.visible = false;
   }
-  // toggleDarkMode() {
-  //   const elements = document.getElementsByClassName('ant-drawer-header');
-  //   for (let i = 0; i < elements.length; i++) {
-  //     const element = elements[i];
-  //       element.classList.add('dark:!bg-slate-800');
-  //   }
-  // }
-  
+  someFunction() {
+    console.log('Function in second component called!');
+  }
 }

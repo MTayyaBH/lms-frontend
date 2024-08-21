@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -10,6 +10,10 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class DbServiceService {
+  notify = new EventEmitter<void>();
+  triggerNotify() {
+    this.notify.emit();
+  }
   public secretkey: string = 'lmsdatadcinandularnestjsmongodb97etc';
   private url: string = 'http://localhost:3000';
   logindata: any;

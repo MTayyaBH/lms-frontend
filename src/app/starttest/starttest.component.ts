@@ -24,7 +24,8 @@ export class StarttestComponent implements OnInit {
   displaumcq: any = {};
   nextmcqs: number = 0;
   countstart: number = 3;
-
+  notfound: boolean = false
+  loader: boolean = true
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -36,14 +37,14 @@ export class StarttestComponent implements OnInit {
       option: [false]
     });
   }
-  parmsData: any={}
+  parmsData: any = {}
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.parmsData.ClassName = params['ClassName'];
       this.parmsData.BookName = params['BookName'];
       this.parmsData.TestType = params['TestType'];
     });
-    
+
     this.checkLogin();
     this.userdatadecript();
   }
@@ -88,7 +89,10 @@ export class StarttestComponent implements OnInit {
   startTest(type: any) {
     let mcqtype = type.toLowerCase()
     this.mcqs = this.mcqs.filter((mcq: { type: string }) => mcq.type.toLowerCase() === mcqtype)
-
+    if (this.mcqs?.length === 0) {
+      this.notfound = true
+      return
+    }
     this.isTestStart = !this.isTestStart;
     this.getquiz();
     this.counter();
@@ -121,6 +125,7 @@ export class StarttestComponent implements OnInit {
   }
 
 
+  headerdata: any
   getmcqs() {
     const data = {
       class: this.parmsData.ClassName,
@@ -128,31 +133,37 @@ export class StarttestComponent implements OnInit {
       testtype: this.parmsData.TestType
 
     };
-    
     console.log(data);
 
     this.dbservice.getallwithdata('lms-mcqs', data).subscribe((res: any) => {
       if (res) {
-        this.totalmcqs = res;
+        setTimeout(() => {
+          this.loader = false
+          if (Array.isArray(res.mcqs) && res.mcqs.length === 0) {
+            this.notfound = true;
+          } else {
+          }
+        }, 500);
+        let chaptername: string | undefined;
+        this.totalmcqs = res.mcqs;
         console.log(res);
-
-        this.mcqs = res
-        // const classLower = this.class?.toLocaleLowerCase();
-        // const subjectLower = this.subject?.toLocaleLowerCase();
-        // const testtypeLower = data.testtype.toLowerCase();
-
-        // const quiz = res.filter((mcq: { classname: string | null; bookname: string | null; }) =>
-        //   mcq.classname?.toLocaleLowerCase() === classLower &&
-        //   mcq.bookname?.toLocaleLowerCase() === subjectLower
-        // );
-
-        // this.mcqs = testtypeLower !== 'fullbook'
-        //   ? quiz.filter((mcq: { unit: string }) => mcq.unit.toLowerCase() === testtypeLower)
-        //   : quiz;
-
-
+        this.mcqs = res.mcqs;
+        if (res?.cbc?.[0]?.chapters === 'FullBook') {
+          chaptername = res.cbc[0].chapters;
+        } else {
+          const filterChapter = res?.cbc?.[0]?.chapters?.filter((c: { uid: any }) => c.uid === data.testtype);
+          chaptername = filterChapter?.[0]?.title || 'Single Chapter Test';
+        }
+        this.headerdata = {
+          classname: res?.cbc?.[0]?.classname || 'Class Name',
+          bookname: res?.cbc?.[0]?.book_name || 'Book Name',
+          chaptername
+        };
       }
+    }, (error) => {
+      console.error('Error fetching data:', error);
     });
+
   }
 
   getRandomIndex(array: any[]): number {

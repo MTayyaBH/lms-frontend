@@ -17,6 +17,7 @@ export class ChemistryComponent implements OnInit {
   bookname: any = 'bookname'
   chapters: any
   paremsData: any = {}
+  loader:boolean=true
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.paremsData.ClassName = params['ClassName'];
@@ -26,14 +27,23 @@ export class ChemistryComponent implements OnInit {
     });
   }
   imageurl: any = ''
+  notfound:boolean=false
   getData() {
     try {
       this.dbservice.getallwithdata('chapters/books', this.paremsData).subscribe((res: any) => {
-        this.classname = res['0'].classname;
-        this.bookname = res['0'].book_name;
-        this.chapters = res['0'].chapters;
-        this.imageurl = res['0'].image_url;
-        console.log(this.chapters);
+        if (res) {
+          setTimeout(() => {
+            this.loader=false
+            if (Array.isArray(res) && res.length === 0) {
+              this.notfound = true;
+            }else{
+              this.classname = res['0'].classname;
+              this.bookname = res['0'].book_name;
+              this.chapters = res['0'].chapters;
+              this.imageurl = res['0'].image_url;
+            }
+          }, 500);
+        }
 
       })
     } catch (error) {

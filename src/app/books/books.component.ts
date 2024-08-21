@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class BooksComponent implements OnInit {
 
   @Input() classuid: any
+  loader:boolean=true
+  notfound:boolean=false
   constructor(private http: DbServiceService, private router: Router) { }
   ngOnInit(): void {
     this.getbooks(this.classuid)
@@ -17,15 +19,26 @@ export class BooksComponent implements OnInit {
   routingdata: any
   books: any
   getbooks(id: any) {
-    try {
-      this.http.getbyid('books', id).subscribe((res) => {
-        console.log(res);
-        this.books = res
-      })
-    } catch (error) {
-      console.log(error);
-    }
+    this.http.getbyid('books', id).subscribe({
+      next: (res: any) => {
+        setTimeout(() => {
+          this.loader = false;
+          if (Array.isArray(res) && res.length === 0) {
+            this.notfound = true;
+          } else {
+            this.books = res;
+          }
+        }, 500);
+        
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    });
   }
+  
   nevegat(uid: any) {
     // const data = this.dbservice.encrypt(type,'112233')
     this.router.navigate(['/LMS/OnlineTest/Class/Book'], { queryParams: { ClassName: this.classuid, BookName: uid } });

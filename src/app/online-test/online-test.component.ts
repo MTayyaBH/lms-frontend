@@ -8,8 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./online-test.component.css']
 })
 export class OnlineTestComponent implements OnInit {
+  loader:boolean=true
   constructor(private http: DbServiceService,private router:Router) { }
   clases: any
+  notfound:boolean=false
   ngOnInit() {
     this.getdata()
   }
@@ -17,7 +19,14 @@ export class OnlineTestComponent implements OnInit {
     try {
       this.http.get('classes').subscribe((res: any) => {
         console.log(res);
-        this.clases =this.sortClasses(res) 
+        setTimeout(() => {
+          this.loader=false
+          if (Array.isArray(res) && res.length === 0) {
+            this.notfound = true;
+          } else {
+            this.clases =this.sortClasses(res) 
+          }
+        }, 500);
       })
     } catch (error) {
       console.log(error);

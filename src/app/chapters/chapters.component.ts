@@ -39,6 +39,8 @@ export class ChaptersComponent implements OnInit {
       content: ['']
     });
     this.chapters.push(chapter);
+    console.log(this.bookForm.value);
+    
   }
 
   removeChapter(index: number) {
