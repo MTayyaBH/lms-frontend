@@ -64,7 +64,7 @@
                     <div class="w-full">
                         <label for="bookname" class="block mb-1">Book Name</label>
 
-                        <nz-select class="w-full " [nzSize]="inputsize" id="bookname" nzShowSearch nzAllowClear
+                        <nz-select (ngModelChange)="getchapters($event)" class="w-full " [nzSize]="inputsize" id="bookname" nzShowSearch nzAllowClear
                             nzPlaceHolder="Select Book" formControlName="bookname">
                             <div *ngFor="let Book of Books">
                                 <nz-option nzLabel={{Book.book_name}} nzValue={{Book.uid}}></nz-option>
@@ -78,7 +78,7 @@
                         <nz-select class="w-full " [nzSize]="inputsize" id="unit" nzShowSearch nzAllowClear
                             nzPlaceHolder="Select Chapter" formControlName="unit">
                             <div *ngFor="let Chapter of Chapters">
-                                <nz-option nzLabel={{Chapter}} nzValue={{Chapter}}></nz-option>
+                                <nz-option nzLabel={{Chapter.title}} nzValue={{Chapter.uid}}></nz-option>
                             </div>
                         </nz-select>
                     </div>

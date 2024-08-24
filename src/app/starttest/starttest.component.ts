@@ -47,7 +47,6 @@ export class StarttestComponent implements OnInit {
       this.parmsData.TestType = params['TestType'];
     });
     this.checkLogin();
-    this.userdatadecript();
   }
   createMessage(type: string, msg: any): void {
     this.message.create(type, `${msg}`);
@@ -81,6 +80,7 @@ export class StarttestComponent implements OnInit {
     const user = localStorage.getItem('userdata');
     if (user) {
       this.islogin = true;
+    this.userdatadecript();
       this.getmcqsinlocalstorage()
     } else {
       this.router.navigate(['/Login']);
@@ -248,7 +248,73 @@ export class StarttestComponent implements OnInit {
       this.createMessage('warning', 'Quiz MCQs Limit Reached!')
     }
   }
-
+  Cancel(){
+    Swal.fire({
+      title: `<strong class="text-sm md:text-xl">Are You Want to Cancel!</strong>`,
+      icon: "warning",
+      // html: `
+      //       <div class="text-xs md:text-lg text-gray-700 dark:text-gray-200">
+      //         Please Submit or Cancel Test!
+      //       </div>`,
+      showCloseButton: false,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:`<i class="fa-solid fa-check-circle"></i> Confirm!` ,
+      confirmButtonAriaLabel: 'Confirm cancellation of the test',
+      cancelButtonText: `<i class="fa-solid fa-times-circle"></i> Cancel`,
+      cancelButtonAriaLabel: 'Cancel the test',
+      customClass: {
+        popup: 'bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-full sm:max-w-md md:max-w-lg mx-auto p-4 overflow-hidden',
+        title: 'text-gray-800 dark:text-gray-100 text-sm md:text-xl',
+        icon: 'text-yellow-500',
+        confirmButton: 'bg-green-600 hover:bg-green-700 text-white select-none outline-none border-0 mr-2 px-4 py-2 rounded-md text-sm md:text-base',
+        cancelButton: 'bg-red-600 hover:bg-red-700 text-white px-4 select-none outline-none border-0 ml-2 py-2 rounded-md text-sm md:text-base',
+      },
+      buttonsStyling: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.removemcqsinlocalstorage();
+        this.countstart=3
+        this.isTestStart=false
+        this.getmcqs();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        
+      }})
+  }
+  submitbutton(){
+    Swal.fire({
+      title: `<strong class="text-sm md:text-xl">Are You Want to Submit!</strong>`,
+      icon: "warning",
+      // html: `
+      //       <div class="text-xs md:text-lg text-gray-700 dark:text-gray-200">
+      //         Please Submit or Cancel Test!
+      //       </div>`,
+      showCloseButton: false,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:`<i class="fa-solid fa-check-circle"></i> Confirm!` ,
+      confirmButtonAriaLabel: 'Confirm cancellation of the test',
+      cancelButtonText: `<i class="fa-solid fa-times-circle"></i> Cancel`,
+      cancelButtonAriaLabel: 'Cancel the test',
+      customClass: {
+        popup: 'bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-full sm:max-w-md md:max-w-lg mx-auto p-4 overflow-hidden',
+        title: 'text-gray-800 dark:text-gray-100 text-sm md:text-xl',
+        icon: 'text-yellow-500',
+        confirmButton: 'bg-green-600 hover:bg-green-700 text-white select-none outline-none border-0 mr-2 px-4 py-2 rounded-md text-sm md:text-base',
+        cancelButton: 'bg-red-600 hover:bg-red-700 text-white px-4 select-none outline-none border-0 ml-2 py-2 rounded-md text-sm md:text-base',
+      },
+      buttonsStyling: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.Submit()
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        
+      }})
+  }
   prev() {
     if (this.nextmcqs > 0) {
       this.scrollPrev1()

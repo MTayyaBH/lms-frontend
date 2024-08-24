@@ -28,31 +28,34 @@
         </section> -->
         <section *ngIf="!isTestStart && !loader" class="space-y-4 md:flex md:space-y-0 md:space-x-4">
             <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center">
-              <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Easy MCQ's</span>
-              <br>
-              <button (click)="startTest('Easy')"
-                      class="w-32 py-2 dark:hover:bg-[#ffff00] dark:hover:text-gray-900 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 ">
-                Start Now
-              </button>
+                <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Easy
+                    MCQ's</span>
+                <br>
+                <button (click)="startTest('Easy')"
+                    class="w-32 py-2 dark:hover:bg-[#ffff00] dark:hover:text-gray-900 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 ">
+                    Start Now
+                </button>
             </div>
             <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center">
-              <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Medium MCQ's</span>
-              <br>
-              <button (click)="startTest('Medium')"
-                      class="w-32 py-2 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-900">
-                Start Now
-              </button>
+                <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Medium
+                    MCQ's</span>
+                <br>
+                <button (click)="startTest('Medium')"
+                    class="w-32 py-2 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-900">
+                    Start Now
+                </button>
             </div>
             <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center">
-              <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Hard MCQ's</span>
-              <br>
-              <button (click)="startTest('Hard')"
-                      class="w-32 py-2 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-900">
-                Start Now
-              </button>
+                <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Hard
+                    MCQ's</span>
+                <br>
+                <button (click)="startTest('Hard')"
+                    class="w-32 py-2 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-900">
+                    Start Now
+                </button>
             </div>
-          </section>
-          
+        </section>
+
         <section *ngIf="loader" class="space-y-4 md:flex md:space-y-0 md:space-x-4">
             <div
                 class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center animate-pulse">
@@ -77,7 +80,7 @@
     </div>
     <section *ngIf="countstart===0">
         <main class="w-full pt-20 pb-6 select-none">
-            <header class="w-full h-16 my-4 justify-between flex items-center bg-gray-300 px-6 dark:bg-gray-800">
+            <header class="w-full h-16 my-4 justify-between  flex items-center bg-gray-300 px-6 dark:bg-gray-800">
                 <div class="space-x-1">
                     <span
                         class="md:text-lg font-semibold text-gray-950 dark:text-gray-200 ">{{headerdata.classname}}</span>
@@ -90,10 +93,11 @@
                     <span
                         class="md:text-lg font-semibold text-gray-950 dark:text-gray-200 uppercase">{{userdata.fullname}}</span>
                     <img class="h-10 w-10 rounded-full object-cover"
-                        src="../../assets/images/download__3_-removebg-preview.png" alt="">
+                        [src]="userdata.image?userdata.image:'../../assets/images/download__3_-removebg-preview.png'"
+                        alt="Image">
                 </div>
             </header>
-           
+
             <section class="">
                 <div class="flex justify-around">
                     <h1 class="w-fit text-center   text-gray-900 font-bold text-lg tracking-wider dark:text-gray-200">
@@ -123,8 +127,7 @@
                                 <div class=" w-fit overflow-hidden">
                                     <label class="container">
                                         <input id="option1" [value]="displaumcq.option1" name="option" type="radio"
-                                            formControlName="option"
-                                            [checked]="displaumcq.option1===this.Answer">
+                                            formControlName="option" [checked]="displaumcq.option1===this.Answer">
                                         <div class="checkmark"></div>
                                     </label>
                                 </div>
@@ -138,8 +141,7 @@
                                 <div class="w-fit overflow-hidden">
                                     <label class="container">
                                         <input id="option2" [value]="displaumcq.option2" name="option" type="radio"
-                                            formControlName="option"
-                                            [checked]="displaumcq.option2===this.Answer">
+                                            formControlName="option" [checked]="displaumcq.option2===this.Answer">
                                         <div class="checkmark"></div>
                                     </label>
                                 </div>
@@ -155,8 +157,8 @@
                                 <div class="w-fit overflow-hidden">
                                     <label class="container">
                                         <input id="option3" [value]="displaumcq.option3"
-                                            [checked]="displaumcq.option3===this.Answer"
-                                            type="radio" name="option" formControlName="option">
+                                            [checked]="displaumcq.option3===this.Answer" type="radio" name="option"
+                                            formControlName="option">
                                         <div class="checkmark"></div>
                                     </label>
                                 </div>
@@ -170,8 +172,7 @@
                                 <div class="w-fit overflow-hidden">
                                     <label class="container">
                                         <input id="option4" [value]="displaumcq.option4" type="radio" name="option"
-                                            formControlName="option"
-                                            [checked]="displaumcq.option4===this.Answer">
+                                            formControlName="option" [checked]="displaumcq.option4===this.Answer">
                                         <div class="checkmark"></div>
                                     </label>
                                 </div>
@@ -192,15 +193,17 @@
                         class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-950 dark:bg-gray-950 dark:text-gray-200 transform transition-transform duration-200 active:scale-95 hover:bg-gray-300 dark:hover:bg-[#ffff00]  dark:hover:text-gray-950 shadow-md hover:shadow-lg">
                         <i class="fa-solid fa-chevron-right"></i> Next
                     </button>
-                    <button *ngIf="nextmcqs >= this.givemcqs.length-1" (click)="Submit()"
+                    <button *ngIf="nextmcqs >= this.givemcqs.length-1" (click)="submitbutton()"
                         class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-950 dark:bg-gray-950 dark:text-gray-200 transform transition-transform duration-200 active:scale-95 hover:bg-gray-300 dark:hover:bg-[#ffff00]  dark:hover:text-gray-950 shadow-md hover:shadow-lg">
                         Submit
                     </button>
-                </footer>                
+                </footer>
             </section>
-            <div class="relative flex items-center  w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[800px] mx-auto">
+            <div
+                class="relative flex items-center  w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[800px] mx-auto">
                 <div (click)="scrollPrev()" class="cursor-pointer ">
-                    <i class="fas fa-chevron-left dark:hover:bg-[#ffff00] dark:text-gray-100 dark:hover:text-gray-950 dark:bg-gray-950 h-8 w-8 flex justify-center items-center mx-3 rounded-full bg-gray-400 text-gray-900 shadow-xl cursor-pointer transform transition-transform duration-200 active:scale-90 hover:bg-gray-500 hover:text-white"></i>
+                    <i
+                        class="fas fa-chevron-left dark:hover:bg-[#ffff00] dark:text-gray-100 dark:hover:text-gray-950 dark:bg-gray-950 h-8 w-8 flex justify-center items-center mx-3 rounded-full bg-gray-400 text-gray-900 shadow-xl cursor-pointer transform transition-transform duration-200 active:scale-90 hover:bg-gray-500 hover:text-white"></i>
                 </div>
                 <div class="flex overflow-x-auto gap-3 scrollbar-hide" #paginationContainer
                     (mousedown)="startDrag($event)" (mouseup)="stopDrag()" (mouseleave)="stopDrag()"
@@ -214,10 +217,21 @@
                     </div>
                 </div>
                 <div (click)="scrollNext()" class="cursor-pointer">
-                    <i class="fas fa-chevron-right dark:hover:bg-[#ffff00] dark:text-gray-100 dark:hover:text-gray-950 dark:bg-gray-950 h-8 w-8 flex justify-center items-center mx-3 rounded-full bg-gray-400 text-gray-900 shadow-xl cursor-pointer transform transition-transform duration-200 active:scale-90 hover:bg-gray-500 hover:text-white"></i>
-                </div>                
+                    <i
+                        class="fas fa-chevron-right dark:hover:bg-[#ffff00] dark:text-gray-100 dark:hover:text-gray-950 dark:bg-gray-950 h-8 w-8 flex justify-center items-center mx-3 rounded-full bg-gray-400 text-gray-900 shadow-xl cursor-pointer transform transition-transform duration-200 active:scale-90 hover:bg-gray-500 hover:text-white"></i>
+                </div>
             </div>
         </main>
+        <footer class="flex space-x-5 px-7 justify-between items-center pb-3">
+            <button (click)="Cancel()"
+                class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-950 dark:bg-gray-950 dark:text-gray-200 transform transition-transform duration-200 active:scale-95 hover:bg-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-950 shadow-md hover:shadow-lg">
+                <i class="fa-solid fa-chevron-left"></i> Cancel
+            </button>
+            <button (click)="submitbutton()"
+                class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-950 dark:bg-gray-950 dark:text-gray-200 transform transition-transform duration-200 active:scale-95 hover:bg-gray-300 dark:hover:bg-[#ffff00]  dark:hover:text-gray-950 shadow-md hover:shadow-lg">
+                <i class="fa-solid fa-chevron-right"></i> Submit
+            </button>
+        </footer>
     </section>
 </main>
 <div *ngIf="notfound"

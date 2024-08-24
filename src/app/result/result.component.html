@@ -30,48 +30,63 @@
         </div>
     </div>
 </div> -->
-<section class="flex items-center justify-center min-h-screen px-4 py-6 pt-24">
-    <div class="bg-blue-100 dark:bg-gray-800 p-6  rounded-lg shadow-lg max-w-md mx-auto">
+<section class="flex items-center  justify-center min-h-screen px-4 py-6 pt-24 bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600">
+    <div class="bg-white dark:bg-gray-900 p-8 rounded-3xl shadow-2xl max-w-md mx-auto transform transition duration-500 ">
         <div class="text-center">
-            <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200">Grand Test (Revision Check)</h2>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Taken on {{currentDate}}</p>
+            <h2 class="sm:text-xl tex-lg font-extrabold  text-gray-800 dark:text-gray-100">Grand Test (Revision Check)</h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Taken on {{currentDate}}</p>
         </div>
-        <div class="flex flex-col items-center my-4">
-            <img class="w-40 h-40 object-contain" src="../../assets/images/tf.png" alt="image">
-            <p [ngClass]="{'text-green-600 dark:text-green-400':resultstatement==='Congratulation You Have passesd this quiz','text-red-600 dark:text-red-400':resultstatement==='Bad you have not passed try again'}" class="text-lg font-semibold  mt-2">{{resultstatement}}</p>
-            <!-- <p class="text-4xl font-bold text-gray-700 dark:text-gray-200 mt-2">2106<sup>th</sup></p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Out of 37742</p> -->
+        <div class="flex flex-col items-center my-8">
+            <img class="w-40 h-40 object-contain animate-pulse" src="../../assets/images/tf.png" alt="image">
+            <p [ngClass]="{
+                'text-green-600 dark:text-green-400': resultstatement === 'Congratulation You Have passed this quiz', 
+                'text-red-600 dark:text-red-400': resultstatement === 'Bad you have not passed try again'
+                }" 
+                class="sm:text-lg text-center font-semibold mt-6">
+                {{resultstatement}}
+                <span *ngIf="resultstatement === 'Congratulation You Have passed this quiz'">🎉</span>
+                <span *ngIf="resultstatement === 'Bad you have not passed try again'">😢</span>
+            </p>
         </div>
-        <div class="bg-blue-50 dark:bg-gray-700 dark:text-gray-300 p-4 rounded-md text-center text-xs text-gray-600">
-            <p> Since you have taken this test after announcement of results, your rank is predicted. Next time take tests when they are Live to get a real time rank and be featured in the top rankers list.</p>
+        <div class="bg-blue-50 dark:bg-gray-800 dark:text-gray-300 sm:p-6 p-3 rounded-lg text-[10px] text-center sm:text-xs text-gray-600 shadow-inner">
+            <p>Since you have taken this test after the announcement of results, your rank is predicted. Next time take tests when they are Live to get a real-time rank and be featured in the top rankers list.</p>
         </div>
-        <div class="text-center mt-6">
-            <p class="text-4xl font-bold text-gray-700 dark:text-gray-200">{{result.correct}}</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Total score out of {{result.total}}</p>
-            <div class="bg-yellow-200 dark:bg-yellow-600 dark:text-yellow-100 text-yellow-800 font-semibold rounded-md inline-block px-4 py-1 mt-2">
+        <div class="text-center mt-8">
+            <p class="text-2xl font-extrabold text-gray-800 dark:text-gray-100 animate-fadeIn">{{result.correct}}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Total score out of {{result.total}}</p>
+            <div class="bg-yellow-200 dark:bg-yellow-600 dark:text-yellow-100 text-yellow-800 font-semibold rounded-full inline-block px-8 py-2 mt-4 transform transition-all duration-500 hover:bg-yellow-300 dark:hover:bg-yellow-700">
                 {{percentage}} Percentile
             </div>
         </div>
-        <div class="flex justify-around mt-6">
+        <div class="flex justify-around mt-10 space-x-4">
             <div class="text-center">
-                <div class="w-16 h-16 rounded-full bg-green-100 dark:bg-green-600 dark:text-green-100 flex items-center justify-center">
-                    <p class="text-lg font-semibold text-green-600 dark:text-green-100">{{result.correct}}</p>
+                <div class="w-16 h-16 rounded-full bg-green-200 dark:bg-green-700 flex items-center justify-center shadow-lg animate-bounce">
+                    <p class="text-lg font-bold text-green-700 dark:text-green-200">{{result.correct}}</p>
                 </div>
-                <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">Correct</p>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mt-3">Correct</p>
             </div>
             <div class="text-center">
-                <div class="w-16 h-16 rounded-full bg-red-100 dark:bg-red-600 dark:text-red-100 flex items-center justify-center">
-                    <p class="text-lg font-semibold text-red-600 dark:text-red-100">{{result.wrong}}</p>
+                <div class="w-16 h-16 rounded-full bg-red-200 dark:bg-red-700 flex items-center justify-center shadow-lg animate-bounce">
+                    <p class="text-lg font-bold text-red-700 dark:text-red-200">{{result.wrong}}</p>
                 </div>
-                <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">Wrong</p>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mt-3">Wrong</p>
             </div>
             <div class="text-center">
-                <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-600 dark:text-gray-300 flex items-center justify-center">
-                    <p class="text-lg font-semibold text-gray-600 dark:text-gray-100">{{result.skipped}}</p>
+                <div class="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center shadow-lg animate-bounce">
+                    <p class="text-lg font-bold text-gray-700 dark:text-gray-200">{{result.skipped}}</p>
                 </div>
-                <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">Skipped</p>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mt-3">Skipped</p>
             </div>
         </div>
+        <div class="flex justify-end">
+            <button [routerLink]="['/LMS/OnlineTest/Result-Details']" class="bg-gray-800 dark:bg-gray-700 dark:hover:text-gray-900 dark:text-gray-50 font-semibold rounded-full inline-flex items-center px-5 py-1 mt-7 transform transition-all duration-300 hover:bg-gray-900 dark:hover:bg-yellow-400 hover:scale-90 shadow-md hover:shadow-lg focus:outline-none">
+                <span class="mr-2 text-sm">Check Result</span>
+                <i class="fas fa-arrow-right transition-transform transform group-hover:translate-x-2"></i>
+            </button>
+        </div>                 
     </div>
+    
 </section>
+
+
 

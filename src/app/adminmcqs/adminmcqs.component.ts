@@ -13,7 +13,7 @@ export class AdminmcqsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dbservice:DbServiceService
+    private dbservice: DbServiceService
   ) {
     this.form = this.fb.group({
       statement: ['', Validators.required],
@@ -39,34 +39,34 @@ export class AdminmcqsComponent implements OnInit {
       const validOptions = [option1, option2, option3, option4];
       if (validOptions.includes(trueoption)) {
         console.log(this.form.value);
-        this.dbservice.post('lms-mcqs',this.form.value).subscribe((res:any)=>{
+        this.dbservice.post('lms-mcqs', this.form.value).subscribe((res: any) => {
           console.log(res);
           if (res.submit) {
-            this.dbservice.createMessage('success','Data Submit Success Full')
+            this.dbservice.createMessage('success', 'Data Submit Success Full')
             this.form.reset()
           }
         })
       } else {
         console.log('trueoption is invalid');
-        this.dbservice.createMessage('error','True Option invalid')
+        this.dbservice.createMessage('error', 'True Option invalid')
       }
     } else {
       console.log('Form is invalid');
-      this.dbservice.createMessage('error','Some expansion has been occurred')
+      this.dbservice.createMessage('error', 'Some expansion has been occurred')
     }
   }
   getdata() {
     try {
       this.dbservice.get('classes').subscribe((res: any) => {
         console.log(res);
-        this.classes =this.sortClasses(res) 
+        this.classes = this.sortClasses(res)
       })
     } catch (error) {
       console.log(error);
 
     }
   }
-   sortClasses(classes: any) {
+  sortClasses(classes: any) {
     return classes.sort((a: { classname: string; }, b: { classname: string; }) => {
       const numA = this.extractNumber(a.classname);
       const numB = this.extractNumber(b.classname);
@@ -76,14 +76,15 @@ export class AdminmcqsComponent implements OnInit {
       return numA - numB;
     });
   }
-  
-   extractNumber(classname: string): number | null {
+
+  extractNumber(classname: string): number | null {
     const match = classname.match(/\d+/);
     return match ? parseInt(match[0], 10) : null;
   }
+  bookid: any
   getbooks(id: any) {
     console.log(id);
-    
+    this.bookid = id
     try {
       this.dbservice.getbyid('books', id).subscribe((res) => {
         console.log(res);
@@ -93,7 +94,31 @@ export class AdminmcqsComponent implements OnInit {
       console.log(error);
     }
   }
+  chapterids={
+
+  }
+  getchapters(id: any): void {
+    let  chapterids={
+      ClassName :this.bookid,
+      BookName :id
+    }
+    this.dbservice.getallwithdata('chapters/books', chapterids)
+      .subscribe({
+        next: (res: any) => {
+          if (res && res['0'] && res['0'].chapters) {
+            this.Chapters = res['0'].chapters;
+            console.log(this.Chapters);
+          } else {
+            console.log(res)
+            this.Chapters=res
+          }
+        },
+        error: (error: any) => {
+          console.error('Error fetching chapters:', error);
+        }
+      });
+  }  
   classes: any = []
   Books: any = []
-  Chapters: any = ['Ch#1', 'Ch#2', 'Ch#3', 'Ch#4', 'Ch#5', 'Ch#6', 'Ch#7', 'Ch#8', 'Ch#9', 'Ch#10', 'Ch#11', 'Ch#13', 'Ch#14', 'Ch#15', 'Ch#16', 'Ch#17']
+  Chapters: any = []
 }
