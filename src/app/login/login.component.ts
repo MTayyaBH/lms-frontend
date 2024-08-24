@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   submitForm() {
     if (this.signupForm.valid) {
       // debugger
-      this.service.checkuserlogin(this.signupForm.value)
+      this.service.login(this.signupForm.value)
 
     } else {
       this.signupForm.markAllAsTouched();

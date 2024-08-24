@@ -53,7 +53,8 @@
 }
 .ant-message-success,
 .ant-message-error,
-.ant-message-warning {
+.ant-message-warning,
+.ant-message-info  {
   display: inline !important ;
   display: flex !important;
   align-items: center !important;

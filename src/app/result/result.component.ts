@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { DbServiceService } from '../db-service.service';
-
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -9,6 +9,9 @@ import { DbServiceService } from '../db-service.service';
 export class ResultComponent implements OnInit {
   constructor(private dbservice: DbServiceService) { }
   result:any={}
+   dateOptions:any = { day: '2-digit', month: 'short', year: 'numeric' };
+ currentDate = new Date().toLocaleDateString('en-GB', this.dateOptions);
+
   ngOnInit() {
     this.getmcqs()
   }
@@ -22,14 +25,33 @@ export class ResultComponent implements OnInit {
   calculateResults(questions: any) {
     let total = 0;
     let correct = 0;
-
+    let wrong = 0;
+    let skipped = 0;
     for (const question of questions) {
-      console.log(question);
       total++;
-      if (question.useranswer === question.trueoption) {
-        correct++;
+      if (question.useranswer) {
+        if (question.useranswer === this.decrypt(question.trueoption, 'trueoption')) {
+          correct++;
+        } else {
+          wrong++;
+        }
+      } else {
+        skipped++;
       }
     }
-    return { total, correct };
+    this.percentage = Number(((correct / total) * 100).toFixed(2));
+    if (this.percentage>50) {
+      this.resultstatement='Congratulation You Have passesd this quiz'
+    } else {
+      this.resultstatement='Bad you have not passed try again'
+    }
+    return { total, correct, wrong, skipped };
   }
+  
+  decrypt(encryptedMessage: string, key: string): string {
+    const bytes = CryptoJS.AES.decrypt(encryptedMessage, key);
+    return bytes.toString(CryptoJS.enc.Utf8);
+  }
+  resultstatement:any
+  percentage:any
 }

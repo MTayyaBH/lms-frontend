@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DbServiceService } from '../db-service.service';
 import * as CryptoJS from 'crypto-js';
 import { NzMessageService } from 'ng-zorro-antd/message';
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-starttest',
   templateUrl: './starttest.component.html',
@@ -32,6 +32,7 @@ export class StarttestComponent implements OnInit {
     private router: Router,
     private dbservice: DbServiceService,
     public message: NzMessageService,
+    private renderer: Renderer2
   ) {
     this.myForm = this.fb.group({
       option: [false]
@@ -39,20 +40,19 @@ export class StarttestComponent implements OnInit {
   }
   parmsData: any = {}
   ngOnInit(): void {
+
     this.route.queryParams.subscribe(params => {
       this.parmsData.ClassName = params['ClassName'];
       this.parmsData.BookName = params['BookName'];
       this.parmsData.TestType = params['TestType'];
     });
-
     this.checkLogin();
     this.userdatadecript();
   }
-
   createMessage(type: string, msg: any): void {
     this.message.create(type, `${msg}`);
   }
-  min: any = 10;
+  min: any = 9;
   sec: any = 59;
   intervalId: any;
 
@@ -60,12 +60,14 @@ export class StarttestComponent implements OnInit {
     this.intervalId = setInterval(() => {
       if (this.sec > 0) {
         this.sec--;
+        this.mcqssetinlocalstorage()
       } else if (this.min > 0) {
         this.min--;
+        this.mcqssetinlocalstorage()
         this.sec = 59;
       } else {
         this.stopCounter();
-        this.Submit();
+        this.testtimeout()
       }
       this.min = this.min.toString().padStart(2, '0');
       this.sec = this.sec.toString().padStart(2, '0');
@@ -79,7 +81,7 @@ export class StarttestComponent implements OnInit {
     const user = localStorage.getItem('userdata');
     if (user) {
       this.islogin = true;
-      this.getmcqs();
+      this.getmcqsinlocalstorage()
     } else {
       this.router.navigate(['/Login']);
       this.createMessage('error', 'Login Now!');
@@ -210,15 +212,22 @@ export class StarttestComponent implements OnInit {
     this.displaumcq = this.givemcqs[this.nextmcqs];
     if (this.displaumcq.useranswer) {
       this.myForm.patchValue({ option: this.displaumcq.useranswer });
+      this.Answer = this.displaumcq.useranswer
     } else {
       this.myForm.reset();
     }
+    this.mcqssetinlocalstorage()
   }
-
+  jumpmcqs(index: any) {
+    this.getuserquizanswer();
+    this.nextmcqs = index;
+    this.getonemcq();
+  }
   Next() {
     if (this.myForm.value.option) {
       if (this.nextmcqs < this.givemcqs.length - 1) {
         this.getuserquizanswer();
+        this.scrollNext1()
         this.nextmcqs++;
         this.getonemcq();
       } else {
@@ -229,9 +238,10 @@ export class StarttestComponent implements OnInit {
       this.createMessage('error', 'Please Select One Option!')
     }
   }
-
+  Answer: any
   skip() {
     if (this.nextmcqs < this.givemcqs.length - 1) {
+      this.scrollNext1()
       this.nextmcqs++;
       this.getonemcq();
     } else {
@@ -241,6 +251,7 @@ export class StarttestComponent implements OnInit {
 
   prev() {
     if (this.nextmcqs > 0) {
+      this.scrollPrev1()
       this.nextmcqs--;
       this.getonemcq();
     } else {
@@ -249,7 +260,9 @@ export class StarttestComponent implements OnInit {
   }
   Submit() {
     this.getuserquizanswer()
+    this.stopCounter();
     this.dbservice.TestMCQs = this.givemcqs
+    this.removemcqsinlocalstorage();
     this.router.navigate(['/LMS/OnlineTest/Result'])
   }
   getuserquizanswer() {
@@ -259,4 +272,204 @@ export class StarttestComponent implements OnInit {
     };
     console.log(this.givemcqs);
   }
+  encrypt(message: any, key: string): string {
+    const messageStr = typeof message === 'string' ? message : JSON.stringify(message);
+    return CryptoJS.AES.encrypt(messageStr, key).toString();
+  }
+  decrypt(encryptedMessage: string, key: string): any {
+    const bytes = CryptoJS.AES.decrypt(encryptedMessage, key);
+    const decryptedMessage = bytes.toString(CryptoJS.enc.Utf8);
+    return JSON.parse(decryptedMessage);
+  }
+  mcqssetinlocalstorage() {
+    let time = { min: this.min, sec: this.sec, index: this.nextmcqs, ctime: Date.now() };
+    let storetime = this.encrypt(time, 'time');
+    localStorage.setItem('classdata', JSON.stringify(this.headerdata))
+    localStorage.setItem('time', storetime);
+    localStorage.setItem('mcqs', JSON.stringify(this.givemcqs));
+    localStorage.setItem('dispalymcqs', JSON.stringify(this.displaumcq))
+  }
+  getmcqsinlocalstorage() {
+    try {
+      let time = localStorage.getItem('time');
+      let mcqs = localStorage.getItem('mcqs');
+      let data = localStorage.getItem('classdata');
+      let dispalymcqs = localStorage.getItem('dispalymcqs');
+
+      if (time && mcqs && data && dispalymcqs) {
+        Swal.fire({
+          title: `<strong class="text-sm md:text-xl">Existing Test is Remain</strong>`,
+          icon: "warning",
+          html: `
+                <div class="text-xs md:text-lg text-gray-700 dark:text-gray-200">
+                  Start Your Remaining Test!
+                </div>`,
+          showCloseButton: false,
+          showCancelButton: true,
+          focusConfirm: false,
+          confirmButtonText: `<i class="fa fa-play"></i> Yes!`,
+          confirmButtonAriaLabel: "Start the test",
+          cancelButtonText: `<i class="fa fa-redo"></i> New Test`,
+          cancelButtonAriaLabel: "Restart the test",
+          customClass: {
+            popup: 'bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-full sm:max-w-md md:max-w-lg mx-auto p-4 overflow-hidden',
+            title: 'text-gray-800 dark:text-gray-100 text-sm md:text-xl',
+            icon: 'text-yellow-500',
+            confirmButton: 'bg-green-500 hover:bg-green-600 text-white select-none outline-none border-0 mr-2 px-4 py-2 rounded-md text-sm md:text-base',
+            cancelButton: 'bg-red-500 hover:bg-red-600 text-white px-4 select-none outline-none border-0 ml-2 py-2 rounded-md text-sm md:text-base',
+          },
+          buttonsStyling: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let timegiv = this.decrypt(time as string, 'time');
+            let currentTime = Date.now();
+            let elapsedTime = Math.floor((currentTime - timegiv.ctime) / 1000);
+            let usertime = timegiv.min * 60 + timegiv.sec;
+            let csec = usertime - elapsedTime;
+            if (csec > 0) {
+              this.min = Math.floor(csec / 60);
+              if (this.min >= 0 && this.min < 10) {
+                this.headerdata = JSON.parse(data as string);
+                this.givemcqs = JSON.parse(mcqs as string);
+                this.displaumcq = JSON.parse(dispalymcqs as string);
+                this.sec = csec % 60;
+                this.nextmcqs = timegiv.index;
+                this.countstart = 0;
+                this.counterquiz();
+              } else {
+                this.removemcqsinlocalstorage();
+                this.getmcqs();
+                this.message.error('Some Problem Found');
+              }
+            } else {
+              // this.removemcqsinlocalstorage();
+              // this.getmcqs()
+              this.testtimeout()
+            }
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            this.removemcqsinlocalstorage();
+            this.getmcqs();
+          }
+        });
+      } else {
+        this.getmcqs();
+      }
+    } catch (error) {
+      console.error('Error retrieving or processing quiz data:', error);
+      this.getmcqs();
+    }
+  }
+  testtimeout() {
+    try {
+      let time = localStorage.getItem('time');
+      let mcqs = localStorage.getItem('mcqs');
+      let data = localStorage.getItem('classdata');
+      let dispalymcqs = localStorage.getItem('dispalymcqs');
+
+      if (time && mcqs && data && dispalymcqs) {
+        Swal.fire({
+          title: `<strong class="text-sm md:text-xl">Yout Test Time is out!</strong>`,
+          icon: "warning",
+          html: `
+                <div class="text-xs md:text-lg text-gray-700 dark:text-gray-200">
+                  Please Submit or Cancel Test!
+                </div>`,
+          showCloseButton: false,
+          showCancelButton: true,
+          focusConfirm: false,
+          confirmButtonText: `<i class="fa fa-check-circle"></i> Submit`,
+          confirmButtonAriaLabel: 'Submit the test',
+          cancelButtonText: `<i class="fa fa-times-circle"></i> Cancel`,
+          cancelButtonAriaLabel: 'Cancel the test',
+          customClass: {
+            popup: 'bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-full sm:max-w-md md:max-w-lg mx-auto p-4 overflow-hidden',
+            title: 'text-gray-800 dark:text-gray-100 text-sm md:text-xl',
+            icon: 'text-yellow-500',
+            confirmButton: 'bg-green-500 hover:bg-green-600 text-white select-none outline-none border-0 mr-2 px-4 py-2 rounded-md text-sm md:text-base',
+            cancelButton: 'bg-red-500 hover:bg-red-600 text-white px-4 select-none outline-none border-0 ml-2 py-2 rounded-md text-sm md:text-base',
+          },
+          buttonsStyling: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.headerdata = JSON.parse(data as string);
+            this.givemcqs = JSON.parse(mcqs as string);
+            this.displaumcq = JSON.parse(dispalymcqs as string);
+            this.Submit()
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            this.removemcqsinlocalstorage();
+            this.countstart=3
+            this.isTestStart=false
+            this.getmcqs();
+          }
+        });
+      } else {
+        this.countstart=3
+        this.isTestStart=false
+        this.getmcqs();
+      }
+    } catch (error) {
+      console.error('Error retrieving or processing quiz data:', error);
+      this.countstart=3
+      this.isTestStart=false
+      this.getmcqs();
+    }
+  }
+
+
+  removemcqsinlocalstorage() {
+    this.stopCounter()
+    localStorage.removeItem('time');
+    localStorage.removeItem('mcqs')
+    localStorage.removeItem('dispalymcqs')
+    localStorage.removeItem('classdata')
+  }
+  @ViewChild('paginationContainer', { read: ElementRef }) paginationContainer!: ElementRef;
+  private isDragging = false;
+  private startX = 0;
+  private scrollLeft = 0;
+  scrollNext() {
+    const container = this.paginationContainer.nativeElement;
+    container.scrollLeft += 70;
+  }
+  scrollPrev() {
+    const container = this.paginationContainer.nativeElement;
+    container.scrollLeft -= 70;
+  }
+  scrollNext1() {
+    if (this.nextmcqs >= 2) {
+      const container = this.paginationContainer.nativeElement;
+      container.scrollLeft += 40;
+    }
+  }
+  scrollPrev1() {
+    if (this.nextmcqs <= 17) {
+      const container = this.paginationContainer.nativeElement;
+      container.scrollLeft -= 40;
+    }
+  }
+  startDrag(event: MouseEvent) {
+    this.isDragging = true;
+    const container = this.paginationContainer.nativeElement;
+    this.startX = event.pageX - container.offsetLeft;
+    this.scrollLeft = container.scrollLeft;
+    this.renderer.addClass(container, 'dragging');
+  }
+  stopDrag() {
+    this.isDragging = false;
+    const container = this.paginationContainer.nativeElement;
+    this.renderer.removeClass(container, 'dragging');
+  }
+  onDrag(event: MouseEvent) {
+    if (!this.isDragging) return;
+    event.preventDefault();
+    const container = this.paginationContainer.nativeElement;
+    const x = event.pageX - container.offsetLeft;
+    const walk = (x - this.startX) * 1.5; // Scroll faster
+    container.scrollLeft = this.scrollLeft - walk;
+  }
+
 }

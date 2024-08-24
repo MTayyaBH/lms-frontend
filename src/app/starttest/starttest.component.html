@@ -1,6 +1,6 @@
 <main *ngIf="!notfound" class="w-full">
     <div *ngIf="countstart != 0" class="w-full h-screen grid place-items-center">
-        <section *ngIf="!isTestStart && !loader" class="space-y-4 md:flex md:space-y-0 md:space-x-4">
+        <!-- <section *ngIf="!isTestStart && !loader" class="space-y-4 md:flex md:space-y-0 md:space-x-4">
             <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center">
                 <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Easy
                     MCQ's</span>
@@ -25,29 +25,59 @@
                     class="w-32  py-2 font-bold select-none hover:bg-gray-900 duration-500 transition-all dark:bg-gray-950 rounded-full bg-gray-800 text-gray-100 text-sm dark:text-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-900">Start
                     Now</button>
             </div>
-        </section>
+        </section> -->
+        <section *ngIf="!isTestStart && !loader" class="space-y-4 md:flex md:space-y-0 md:space-x-4">
+            <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center">
+              <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Easy MCQ's</span>
+              <br>
+              <button (click)="startTest('Easy')"
+                      class="w-32 py-2 dark:hover:bg-[#ffff00] dark:hover:text-gray-900 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 ">
+                Start Now
+              </button>
+            </div>
+            <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center">
+              <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Medium MCQ's</span>
+              <br>
+              <button (click)="startTest('Medium')"
+                      class="w-32 py-2 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-900">
+                Start Now
+              </button>
+            </div>
+            <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center">
+              <span class="text-gray-900 dark:text-gray-200 font-semibold text-xl text-center w-full">Hard MCQ's</span>
+              <br>
+              <button (click)="startTest('Hard')"
+                      class="w-32 py-2 font-bold select-none transition-transform duration-300 transform hover:scale-105 hover:shadow-lg bg-gray-800 text-gray-100 rounded-full hover:bg-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-900">
+                Start Now
+              </button>
+            </div>
+          </section>
+          
         <section *ngIf="loader" class="space-y-4 md:flex md:space-y-0 md:space-x-4">
-            <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center animate-pulse">
+            <div
+                class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center animate-pulse">
                 <div class="h-6 w-24 bg-gray-300 dark:bg-gray-700 rounded"></div>
                 <div class="h-10 w-32 bg-gray-300 dark:bg-gray-700 rounded mt-4"></div>
             </div>
-            <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center animate-pulse">
+            <div
+                class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center animate-pulse">
                 <div class="h-6 w-24 bg-gray-300 dark:bg-gray-700 rounded"></div>
                 <div class="h-10 w-32 bg-gray-300 dark:bg-gray-700 rounded mt-4"></div>
             </div>
-            <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center animate-pulse">
+            <div
+                class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center animate-pulse">
                 <div class="h-6 w-24 bg-gray-300 dark:bg-gray-700 rounded"></div>
                 <div class="h-10 w-32 bg-gray-300 dark:bg-gray-700 rounded mt-4"></div>
             </div>
         </section>
-        
+
         <span *ngIf="isTestStart" class="text-[8rem]  transition-all scale-75 dark:text-gray-200 text-gray-900">
             {{countstart}}
         </span>
     </div>
     <section *ngIf="countstart===0">
-        <main class="w-full pt-20 select-none">
-            <header class="w-full h-16 my-5 justify-between flex items-center bg-gray-300 px-6 dark:bg-gray-800">
+        <main class="w-full pt-20 pb-6 select-none">
+            <header class="w-full h-16 my-4 justify-between flex items-center bg-gray-300 px-6 dark:bg-gray-800">
                 <div class="space-x-1">
                     <span
                         class="md:text-lg font-semibold text-gray-950 dark:text-gray-200 ">{{headerdata.classname}}</span>
@@ -63,10 +93,10 @@
                         src="../../assets/images/download__3_-removebg-preview.png" alt="">
                 </div>
             </header>
+           
             <section class="">
                 <div class="flex justify-around">
-                    <h1
-                        class="w-fit text-center pb-6  text-gray-900 font-bold text-lg tracking-wider dark:text-gray-200">
+                    <h1 class="w-fit text-center   text-gray-900 font-bold text-lg tracking-wider dark:text-gray-200">
                         Question # {{nextmcqs +1}} / {{givemcqs.length}}</h1>
                     <div class="space-x-2 flex items-center">
                         <i class="fa-solid fa-clock text-xl text-gray-900 dark:text-[#ffff00]"></i>
@@ -74,104 +104,119 @@
                             class="w-fit text-center -mt-1 text-gray-900 font-bold text-xl tracking-wider dark:text-gray-200">{{min}}:{{sec}}</span>
                     </div>
                 </div>
-                <main class="w-full md:flex p-5">
+                <main class="w-full md:flex p-5  md:px-10">
                     <div class="w-full">
                         <p class="text-gray-900 text-lg dark:text-gray-200 text-start">
                             {{displaumcq.statement}}
                         </p>
                     </div>
-                    <form [formGroup]="myForm" class="w-full">
-                        <section class="bg-gray-900 space-y-5 dark:bg-[#ffff00] rounded-lg w-full p-5">
+                </main>
+                <form [formGroup]="myForm" class="w-full md:px-5">
+                    <section class="space-y-5 w-full p-5">
+                        <div class="md:flex gap-5 space-y-5 md:space-y-0">
                             <label for="option1"
-                                class="bg-gray-200 py-2 flex justify-between items-center w-full px-5 rounded-xl text-lg cursor-pointer text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                class="bg-gray-200 py-2 flex justify-between items-center w-full px-5 rounded-xl text-lg cursor-pointer text-gray-900 dark:bg-gray-950 dark:text-gray-200">
                                 <div class="space-x-5">
                                     <span>A:</span>
                                     <span>{{displaumcq.option1}}</span>
                                 </div>
-                                <div class=" w-fit">
+                                <div class=" w-fit overflow-hidden">
                                     <label class="container">
-                                        <input id="option1" value="{{displaumcq.option1}}" name="option" type="radio"
+                                        <input id="option1" [value]="displaumcq.option1" name="option" type="radio"
                                             formControlName="option"
-                                            [checked]="displaumcq.option1===this.givemcqs[this.nextmcqs].useranswer">
+                                            [checked]="displaumcq.option1===this.Answer">
                                         <div class="checkmark"></div>
                                     </label>
                                 </div>
                             </label>
                             <label for="option2"
-                                class="bg-gray-200 py-2 flex justify-between items-center w-full px-5 rounded-xl text-lg cursor-pointer text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                class="bg-gray-200 py-2 flex justify-between items-center w-full px-5 rounded-xl text-lg cursor-pointer text-gray-900 dark:bg-gray-950 dark:text-gray-200">
                                 <div class="space-x-5">
                                     <span>B:</span>
                                     <span>{{displaumcq.option2}}</span>
                                 </div>
-                                <div class="w-fit">
+                                <div class="w-fit overflow-hidden">
                                     <label class="container">
-                                        <input id="option2" value="{{displaumcq.option2}}" name="option" type="radio"
+                                        <input id="option2" [value]="displaumcq.option2" name="option" type="radio"
                                             formControlName="option"
-                                            [checked]="displaumcq.option2===this.givemcqs[this.nextmcqs].useranswer">
+                                            [checked]="displaumcq.option2===this.Answer">
                                         <div class="checkmark"></div>
                                     </label>
                                 </div>
                             </label>
+                        </div>
+                        <div class="md:flex gap-5 space-y-5 md:space-y-0">
                             <label for="option3"
-                                class="bg-gray-200 py-2 flex justify-between items-center w-full px-5 rounded-xl text-lg cursor-pointer text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                class="bg-gray-200 py-2 flex justify-between items-center w-full px-5 rounded-xl text-lg cursor-pointer text-gray-900 dark:bg-gray-950 dark:text-gray-200">
                                 <div class="space-x-5">
                                     <span>C:</span>
                                     <span>{{displaumcq.option3}}</span>
                                 </div>
-                                <div class="w-fit">
+                                <div class="w-fit overflow-hidden">
                                     <label class="container">
-                                        <input id="option3" value="{{displaumcq.option3}}"
-                                            [checked]="displaumcq.option3===this.givemcqs[this.nextmcqs].useranswer"
+                                        <input id="option3" [value]="displaumcq.option3"
+                                            [checked]="displaumcq.option3===this.Answer"
                                             type="radio" name="option" formControlName="option">
                                         <div class="checkmark"></div>
                                     </label>
                                 </div>
                             </label>
                             <label for="option4"
-                                class="bg-gray-200 py-2 flex justify-between items-center w-full px-5 rounded-xl text-lg cursor-pointer text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                class="bg-gray-200 py-2 flex justify-between items-center w-full px-5 rounded-xl text-lg cursor-pointer text-gray-900 dark:bg-gray-950 dark:text-gray-200">
                                 <div class="space-x-5">
                                     <span>D:</span>
                                     <span>{{displaumcq.option4}}</span>
                                 </div>
-                                <div class="w-fit">
+                                <div class="w-fit overflow-hidden">
                                     <label class="container">
-                                        <input id="option4" value="{{displaumcq.option4}}" type="radio" name="option"
+                                        <input id="option4" [value]="displaumcq.option4" type="radio" name="option"
                                             formControlName="option"
-                                            [checked]="displaumcq.option4===this.givemcqs[this.nextmcqs].useranswer">
+                                            [checked]="displaumcq.option4===this.Answer">
                                         <div class="checkmark"></div>
                                     </label>
                                 </div>
                             </label>
-                        </section>
-                    </form>
-                </main>
+                        </div>
+                    </section>
+                </form>
                 <footer class="flex space-x-5 justify-center items-center py-10">
                     <button (click)="prev()"
-                        class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                        class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-950 dark:bg-gray-950 dark:text-gray-200 transform transition-transform duration-200 active:scale-95 hover:bg-gray-300 dark:hover:bg-[#ffff00] dark:hover:text-gray-950 shadow-md hover:shadow-lg">
                         <i class="fa-solid fa-chevron-left"></i> Prev
                     </button>
                     <button (click)="skip()"
-                        class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                        class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-950 dark:bg-gray-950 dark:text-gray-200 transform transition-transform duration-200 active:scale-95 hover:bg-gray-300 dark:hover:bg-[#ffff00]  dark:hover:text-gray-950 shadow-md hover:shadow-lg">
                         <i class="fa-solid fa-chevron-right"></i> Skip
                     </button>
                     <button *ngIf="nextmcqs < this.givemcqs.length-1" (click)="Next()"
-                        class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                        class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-950 dark:bg-gray-950 dark:text-gray-200 transform transition-transform duration-200 active:scale-95 hover:bg-gray-300 dark:hover:bg-[#ffff00]  dark:hover:text-gray-950 shadow-md hover:shadow-lg">
                         <i class="fa-solid fa-chevron-right"></i> Next
                     </button>
                     <button *ngIf="nextmcqs >= this.givemcqs.length-1" (click)="Submit()"
-                        class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                        class="bg-gray-200 py-2 px-5 rounded-lg text-lg cursor-pointer text-gray-950 dark:bg-gray-950 dark:text-gray-200 transform transition-transform duration-200 active:scale-95 hover:bg-gray-300 dark:hover:bg-[#ffff00]  dark:hover:text-gray-950 shadow-md hover:shadow-lg">
                         Submit
                     </button>
-                </footer>
-                <!-- <div class="w-full space-x-4 flex justify-end items-center py-5 px-10">
-                <button
-                    class="w-20 py-2 font-bold select-none  duration-500 transition-all rounded-lg bg-gray-900 text-gray-200 dark:bg-[#ffff00] dark:text-gray-900 space-x-2 flex items-center justify-center"
-                    (click)="Next()"><span>Cancel</span></button>
-                <button
-                    class="w-20 py-2 font-bold select-none  duration-500 transition-all rounded-lg bg-gray-900 text-gray-200 dark:bg-[#ffff00] dark:text-gray-900 space-x-2 flex items-center justify-center"
-                    (click)="Next()"><span>Submit</span></button>
-            </div> -->
+                </footer>                
             </section>
+            <div class="relative flex items-center  w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[800px] mx-auto">
+                <div (click)="scrollPrev()" class="cursor-pointer ">
+                    <i class="fas fa-chevron-left dark:hover:bg-[#ffff00] dark:text-gray-100 dark:hover:text-gray-950 dark:bg-gray-950 h-8 w-8 flex justify-center items-center mx-3 rounded-full bg-gray-400 text-gray-900 shadow-xl cursor-pointer transform transition-transform duration-200 active:scale-90 hover:bg-gray-500 hover:text-white"></i>
+                </div>
+                <div class="flex overflow-x-auto gap-3 scrollbar-hide" #paginationContainer
+                    (mousedown)="startDrag($event)" (mouseup)="stopDrag()" (mouseleave)="stopDrag()"
+                    (mousemove)="onDrag($event)">
+                    <div *ngFor="let mcq of givemcqs; let i = index">
+                        <div (click)="jumpmcqs(i)"
+                            [ngClass]="{ 'bg-green-600 dark:bg-green-500': mcq.useranswer && nextmcqs!=i, 'bg-gray-500 ': !mcq.useranswer && nextmcqs!=i,'bg-gray-800 dark:bg-[#ffff00] dark:text-gray-900':nextmcqs===i }"
+                            class="w-7 h-7 rounded-md flex items-center justify-center ">
+                            {{ i + 1 }}
+                        </div>
+                    </div>
+                </div>
+                <div (click)="scrollNext()" class="cursor-pointer">
+                    <i class="fas fa-chevron-right dark:hover:bg-[#ffff00] dark:text-gray-100 dark:hover:text-gray-950 dark:bg-gray-950 h-8 w-8 flex justify-center items-center mx-3 rounded-full bg-gray-400 text-gray-900 shadow-xl cursor-pointer transform transition-transform duration-200 active:scale-90 hover:bg-gray-500 hover:text-white"></i>
+                </div>                
+            </div>
         </main>
     </section>
 </main>

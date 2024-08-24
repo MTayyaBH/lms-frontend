@@ -14,7 +14,7 @@ export class QuizResultsComponent implements OnInit {
   questions: any[] = [];
 
   isCorrect(question: any, option: string): boolean {
-    return question.trueoption === option;
+    return this.dbservice.decrypt(question.trueoption,'trueoption') === option;
   }
 
   isUserOption(question: any, option: string): boolean {
