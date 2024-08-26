@@ -1,8 +1,8 @@
-<main class="pt-20 w-full">
+<main class="pt-20 w-full overflow-hidden">
     <section class="flex flex-col-reverse md:flex-row w-full h-auto md:h-[80vh]">
         <div class="w-full md:w-[60%] h-full flex flex-col md:justify-center lg:px-16 mt-5 md:mt-0">
-            <div class="px-10">
-                <h1 class="text-2xl md:text-4xl text-gray-800 dark:text-gray-100 lg:w-full">Education and Traning
+            <div data-aos="fade-right" class="px-10">
+                <h1 class="text-2xl md:text-4xl  text-gray-800 dark:text-gray-100 lg:w-full">Education and Traning
                     Organization System!</h1>
                 <p class="text-xs lg:w-1/2 mt-3 dark:text-gray-100  text-gray-600">This is only one live first
                     application who provide all
@@ -10,28 +10,28 @@
                     education and facilities and all classes mcqs test online pattren etc all available in this website.
                 </p>
             </div>
-            <div class="p-10 lg:pt-20 select-none space-x-8 flex justify-evenly md:justify-start">
-                <button (click)="onClick()"
-                    class="md:w-44  w-32 h-10 rounded-full border-2  duration-500 dark:border-[#ffff00] border-gray-800 dark:text-white font-semibold text-gray-700 hover:bg-gray-800 hover:text-white dark:hover:bg-[#ffff00] text-lg dark:hover:text-gray-900">Learn
+            <div class="p-10 lg:pt-20 select-none space-x-8 flex  justify-evenly md:justify-start">
+                <button (click)="onClick()" data-aos="fade-right"
+                    class="md:w-44  w-32 h-10 rounded-full border-2   duration-500 dark:border-[#ffff00] border-gray-800 dark:text-white font-semibold text-gray-700 hover:bg-gray-800 hover:text-white dark:hover:bg-[#ffff00] text-lg dark:hover:text-gray-900">Learn
                     more
                 </button>
-                <button *ngIf="login" routerLink="/LMS"
+                <button data-aos="fade-left" *ngIf="login" routerLink="/LMS"
                     class="w-32 md:w-44 h-10  rounded-full border-2 duration-500 dark:border-[#ffff00] border-gray-800 dark:text-white text-lg font-semibold text-gray-700 hover:bg-gray-800 hover:text-white dark:hover:bg-[#ffff00] dark:hover:text-gray-900">Start
                     Now
                 </button>
-                <button *ngIf="!login" routerLink="/Login"
+                <button data-aos="fade-left" *ngIf="!login" routerLink="/Login"
                     class="w-32 md:w-44 h-10 rounded-full border-2 duration-500 dark:border-[#ffff00] border-gray-800 dark:text-white text-lg font-semibold text-gray-700 hover:bg-gray-800 hover:text-white dark:hover:bg-[#ffff00] dark:hover:text-gray-900">Login
                     Now
                 </button>
             </div>
         </div>
-        <div class="w-full md:w-[40%] h-full flex justify-center md:justify-start items-center">
+        <div data-aos="zoom-in-up" class="w-full md:w-[40%] h-full flex justify-center md:justify-start items-center">
             <img class="h-[300px] md:h-[90%]" src="../../assets/images/c7ki_coub_220829-removebg-preview.png" alt="">
         </div>
     </section>
     <section
         class="w-full dark:bg-slate-950 bg-slate-100 rounded-tr-[30px] flex flex-col md:flex-row rounded-tl-[30px] py-10">
-        <div class="px-14 py-8 w-full border-r border-gray-400 pb-10">
+        <div data-aos="zoom-in-right" class="px-14 py-8 w-full border-r border-gray-400 pb-10">
             <h1 class="text-xl font-bold font-sans text-gray-800 dark:text-slate-200 cursor-pointer">Quality Education
             </h1>
             <p class="pt-3 text-gray-500 dark:text-gray-400">Students who receive quality education tend to perform
@@ -45,7 +45,7 @@
                 <i class="fa-solid fa-arrow-right  buttonbg dark:buttonbg"></i>
             </div>
         </div>
-        <div class="px-14 py-8 w-full border-r border-gray-400 pb-10">
+        <div data-aos="fade-up" class="px-14 py-8  w-full border-r border-gray-400 pb-10">
             <h1 class="text-xl font-bold font-sans text-gray-800 dark:text-slate-200 cursor-pointer">Experienced
                 Teachers
             </h1>
@@ -60,7 +60,7 @@
                 <i class="fa-solid fa-arrow-right  buttonbg dark:buttonbg"></i>
             </div>
         </div>
-        <div class="px-14 py-8 w-full border-gray-400 pb-10">
+        <div data-aos="zoom-in-left" class="px-14 py-8 w-full border-gray-400 pb-10">
             <h1 class="text-xl font-bold font-sans text-gray-800 dark:text-slate-200 cursor-pointer">Delicious Food
             </h1>
             <p class="pt-3 text-gray-500 dark:text-gray-400">The use of aromatic spices and herbs can add depth and
@@ -77,16 +77,19 @@
         </div>
     </section>
     <section class="md:flex space-y-6 md:space-y-0 p-5 py-14">
-        <div class="w-full grid place-content-center">
+        <div data-aos="zoom-out-up" class="w-full grid place-content-center">
             <img class="w-full" src="../../assets/images/about.png" alt="">
         </div>
         <div class="w-full p-4 px-5 sm:px-9">
-            <h1 class="sm:text-4xl text-2xl  font-medium text-gray-800 dark:text-gray-100">Go Your Skill in Next Level
+            <h1 data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000"
+                class="sm:text-4xl text-2xl  font-medium text-gray-800 dark:text-gray-100">Go Your Skill in Next Level
             </h1>
-            <p class="pt-10 text-gray-500 dark:text-gray-400">Look for advanced courses, workshops, or seminars in your
+            <p data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2500"
+                class="pt-10 text-gray-500 dark:text-gray-400">Look for advanced courses, workshops, or seminars in your
                 field. Online platforms like Coursera, Udemy, and LinkedIn Learning offer a variety of courses that can
                 help you deepen your knowledge.</p>
-            <div class="flex items-center gap-6 mt-12">
+            <div data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="3000"
+                class="flex items-center gap-6 mt-12">
                 <i class="fa-regular fa-lightbulb text-gray-800 dark:text-[#ffff00] text-6xl"></i>
                 <div>
                     <h1 class="sm:text-3xl text-xl font-medium text-gray-800 dark:text-gray-100">Our Success Mission
@@ -96,7 +99,8 @@
                     </p>
                 </div>
             </div>
-            <div class="flex items-center gap-6 mt-12">
+            <div data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="4000"
+                class="flex items-center gap-6 mt-12">
                 <i class="fa-solid fa-book text-gray-800 text-6xl dark:text-[#ffff00]"></i>
                 <div>
                     <h1 class="sm:text-3xl text-xl font-medium text-gray-800 dark:text-gray-100">Learn Your Mission</h1>
@@ -108,7 +112,7 @@
     </section>
     <aside
         class="w-full lg:flex gap-7 space-y-24 lg:space-y-0 p-4 lg:px-20 md:px-12 pb-9 dark:bg-slate-950 bg-gray-100 pt-20">
-        <div class="w-full md:flex gap-7 space-y-24 md:space-y-0">
+        <div data-aos="fade-right" data-aos-duration="3000" class="w-full md:flex gap-7 space-y-24 md:space-y-0">
             <div
                 class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                 <div
@@ -138,11 +142,11 @@
                     class="w-full text-center mt-3 font-bold text-3xl font-Montserrat select-none cursor-pointer text-gray-700 dark:text-gray-100">
                     0.5k+</h1>
                 <h1
-                    class="w-full text-center mt-1 font-bold text-xl font-Montserrat select-none cursor-pointer text-gray-700 dark:text-gray-100">
+                    class="w-full text-center mt-1  font-bold text-xl font-Montserrat select-none cursor-pointer text-gray-700 dark:text-gray-100">
                     Enrolled Learnerss</h1>
             </div>
         </div>
-        <div class="w-full md:flex gap-7 space-y-24 md:space-y-0">
+        <div data-aos="fade-left" data-aos-duration="3000" class="w-full md:flex gap-7 space-y-24 md:space-y-0">
             <div
                 class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                 <div
@@ -177,16 +181,18 @@
             </div>
         </div>
     </aside>
-    <section class="w-[95vw] mx-auto overflow-x-hidden py-10">
+    <section data-aos="zoom-out-up" data-aos-duration="3000" class="w-[95vw] mx-auto overflow-x-hidden py-10">
         <app-card-slider></app-card-slider>
     </section>
-    <h1 class="text-blue-600 text-center mt-10 text-xl font-semibold dark:text-[#ffff00]">Browse Categories</h1>
-    <h1 class="text-gray-800 text-center mt-1 text-3xl font-bold dark:text-gray-100">Explore Our Courses</h1>
+    <h1 data-aos="fade-right" data-aos-duration="3000"
+        class="text-blue-600 text-center mt-10 text-xl font-semibold dark:text-[#ffff00]">Browse Categories</h1>
+    <h1 data-aos="fade-left" data-aos-duration="3000"
+        class="text-gray-800 text-center mt-1 text-3xl font-bold dark:text-gray-100">Explore Our Courses</h1>
     <section class="w-full mt-14">
         <aside
             class="w-full lg:flex gap-7 space-y-24 lg:space-y-0 p-4 lg:px-20 md:px-12 pb-9 dark:bg-[#0e0b1d] bg-gray-50 pt-20">
             <div class="w-full md:flex gap-7 space-y-24 md:space-y-0">
-                <div
+                <div data-aos="zoom-in-up" data-aos-duration="1000"
                     class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                     <div
                         class="flex w-full justify-center pt-3 select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
@@ -202,7 +208,7 @@
                         class="w-full text-center mt-1 font-normal text-lg font-Montserrat select-none cursor-pointer dark:text-gray-400 dark:hover:text-[#ffff00] text-gray-500 hover:text-blue-500 hover:underline underline-offset-[5px]">
                         2 Courses </h1>
                 </div>
-                <div
+                <div data-aos="zoom-in-up" data-aos-duration="1500"
                     class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                     <div
                         class="flex w-full justify-center pt-3 select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
@@ -220,7 +226,7 @@
                 </div>
             </div>
             <div class="w-full md:flex gap-7 space-y-24 md:space-y-0">
-                <div
+                <div data-aos="zoom-in-up" data-aos-duration="2000"
                     class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                     <div
                         class="flex w-full justify-center pt-3 select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
@@ -236,13 +242,13 @@
                         class="w-full text-center mt-1 font-normal text-lg font-Montserrat select-none cursor-pointer dark:text-gray-400 dark:hover:text-[#ffff00] text-gray-500 hover:text-blue-500 hover:underline underline-offset-[5px]">
                         4 Courses </h1>
                 </div>
-                <div
+                <div data-aos="zoom-in-up" data-aos-duration="2500"
                     class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                     <div
                         class="flex w-full justify-center pt-3 select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
                         <span
                             class="h-28 w-28 grid place-content-center z-10 rounded-full bg-gray-200  dark:bg-[#ffff0015]">
-                           <img class="w-14" src="../../assets/images/influencer-150x150.png" alt="">
+                            <img class="w-14" src="../../assets/images/influencer-150x150.png" alt="">
                         </span>
                     </div>
                     <h1
@@ -257,7 +263,7 @@
         <aside
             class="w-full lg:flex gap-7 space-y-24 lg:space-y-0 p-4 lg:px-20 md:px-12 pb-9 dark:bg-[#0e0b1d] bg-gray-50 pt-5">
             <div class="w-full md:flex gap-7 space-y-24 md:space-y-0">
-                <div
+                <div data-aos="zoom-in-up" data-aos-duration="3000"
                     class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                     <div
                         class="flex w-full justify-center pt-3 select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
@@ -273,7 +279,7 @@
                         class="w-full text-center mt-1 font-normal text-lg font-Montserrat select-none cursor-pointer dark:text-gray-400 dark:hover:text-[#ffff00] text-gray-500 hover:text-blue-500 hover:underline underline-offset-[5px]">
                         4 Courses </h1>
                 </div>
-                <div
+                <div data-aos="zoom-in-up" data-aos-duration="2500"
                     class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                     <div
                         class="flex w-full justify-center pt-3 select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
@@ -291,13 +297,13 @@
                 </div>
             </div>
             <div class="w-full md:flex gap-7 space-y-24 md:space-y-0">
-                <div
+                <div data-aos="zoom-in-up" data-aos-duration="2000"
                     class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                     <div
                         class="flex w-full justify-center pt-3 select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
                         <span
                             class="h-28 w-28 grid place-content-center z-10 rounded-full bg-gray-200  dark:bg-[#ffff0015]">
-                      <img class="w-14" src="../../assets/images/web-design1-150x150.png" alt="">
+                            <img class="w-14" src="../../assets/images/web-design1-150x150.png" alt="">
                         </span>
                     </div>
                     <h1
@@ -307,7 +313,7 @@
                         class="w-full text-center mt-1 font-normal text-lg font-Montserrat select-none cursor-pointer dark:text-gray-400 dark:hover:text-[#ffff00] text-gray-500 hover:text-blue-500 hover:underline underline-offset-[5px]">
                         5 Courses </h1>
                 </div>
-                <div
+                <div data-aos="zoom-in-up" data-aos-duration="1500"
                     class="w-full p-4 py-5  bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                     <div
                         class="flex w-full justify-center pt-3 select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
