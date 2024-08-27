@@ -24,7 +24,7 @@
     <aside
         class="w-full lg:flex gap-7 space-y-7 lg:space-y-0 p-4 lg:px-20 md:px-12 pb-5 dark:bg-[#0e0b1d] bg-gray-50 pt-5">
         <div class="w-full flex gap-7 md:space-y-0">
-            <div routerLink="/LMS/OnlineTest"
+            <div routerLink="/LMS/OnlineTest" data-aos="zoom-in" data-aos-duration="1000"
                 class="w-full p-4   bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                 <div class="flex w-full justify-center  select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
                     <span
@@ -36,7 +36,7 @@
                     class="w-full  text-center mt-3 font-bold text-lg font-Montserrat select-none cursor-pointer text-gray-700 dark:text-gray-100">
                     Online Test </h1>
             </div>
-            <div
+            <div data-aos="zoom-in" data-aos-duration="1500"
                 class="w-full p-4   bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                 <div class="flex w-full justify-center  select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
                     <span
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="w-full flex gap-7 md:space-y-0">
-            <div
+            <div data-aos="zoom-in" data-aos-duration="2000"
                 class="w-full p-4   bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                 <div class="flex w-full justify-center  select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
                     <span
@@ -62,7 +62,7 @@
                     class="w-full text-center mt-3 font-bold text-lg font-Montserrat select-none cursor-pointer text-gray-700 dark:text-gray-100">
                     Lectures</h1>
             </div>
-            <div
+            <div data-aos="zoom-in" data-aos-duration="2500"
                 class="w-full p-4   bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                 <div class="flex w-full justify-center  select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
                     <span
@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="w-full flex gap-7 md:space-y-0">
-            <div
+            <div data-aos="zoom-in" data-aos-duration="3000"
                 class="w-full p-4   bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                 <div class="flex w-full justify-center  select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
                     <span
@@ -88,7 +88,7 @@
                     class="w-full text-center mt-3 font-bold text-lg font-Montserrat select-none cursor-pointer text-gray-700 dark:text-gray-100">
                     Date Sheets </h1>
             </div>
-            <div
+            <div data-aos="zoom-in" data-aos-duration="3500"
                 class="w-full p-4   bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-300 dark:border-[#ffff00]">
                 <div class="flex w-full justify-center  select-none cursor-pointer text-gray-800 dark:text-[#ffff00]">
                     <span
@@ -103,27 +103,31 @@
         </div>
     </aside>
     <section class="w-full md:flex px-5 lg:px-20 py-2">
-        <div class="w-full md:w-2/5">
+        <div class="w-full md:w-2/5" data-aos="fade-right" data-aos-duration="3000">
             <nz-carousel nzAutoPlay class="h-[150px] sm:h-[200px]  md:h-[220px] lg:h-[250px]">
                 <div nz-carousel-content class="h-full w-full" *ngFor="let index of array">
                     <img class="w-full h-full cursor-grab" *ngIf="index===1"
                         src="../../assets/images/KPPSC-Physical-Test-Schedule-2024.jpg" alt="">
                     <img class="w-full h-full cursor-grab" *ngIf="index===2"
                         src="../../assets/images/Emerson-University-Multan-admissions.jpg" alt="">
-                    <img class="w-full h-full cursor-grab" *ngIf="index===3" src="../../assets/images/stem-slider.png" alt="">
-                    <img class="w-full h-full cursor-grab" *ngIf="index===4" src="../../assets/images/PPSC-result-2024-slider.jpg"
+                    <img class="w-full h-full cursor-grab" *ngIf="index===3" src="../../assets/images/stem-slider.png"
                         alt="">
+                    <img class="w-full h-full cursor-grab" *ngIf="index===4"
+                        src="../../assets/images/PPSC-result-2024-slider.jpg" alt="">
                     <img class="w-full h-full cursor-grab" *ngIf="index===5"
                         src="../../assets/images/superior-university-slider121.jpg" alt="">
-                    <img class="w-full h-full cursor-grab" *ngIf="index===6" src="../../assets/images/riphah-slider1234.jpg"
-                        alt="">
-                    <img class="w-full h-full cursor-grab" *ngIf="index===7" src="../../assets/images/tuf-ads-slider.jpg" alt="">
+                    <img class="w-full h-full cursor-grab" *ngIf="index===6"
+                        src="../../assets/images/riphah-slider1234.jpg" alt="">
+                    <img class="w-full h-full cursor-grab" *ngIf="index===7"
+                        src="../../assets/images/tuf-ads-slider.jpg" alt="">
                 </div>
             </nz-carousel>
         </div>
-        <div class="sm:flex-row flex flex-col pt-10 md:pt-0 space-y-7 sm:space-y-0 w-full md:pl-10 md:space-x-7">
-            <div  class="lms-div2 bg-no-repeat bg-cover h-[250px] md:h-[220px] lg:h-[250px] w-full"></div>
-            <div id="mainbgimg" [style.backgroundImage]="'url(' + backgroundUrl + ')'" class="transition-all lms-div1 bg-no-repeat bg-cover h-[250px] md:h-[220px] lg:h-[250px] w-full"></div>
+        <div data-aos="fade-left" data-aos-duration="3000" 
+            class="sm:flex-row flex flex-col pt-10 md:pt-0 space-y-7 sm:space-y-0 w-full md:pl-10 md:space-x-7">
+            <div data-aos="fade-up" data-aos-duration="3000" class="lms-div2 bg-no-repeat bg-cover h-[250px] md:h-[220px] lg:h-[250px] w-full"></div>
+            <div id="mainbgimg" [style.backgroundImage]="'url(' + backgroundUrl + ')'"
+                class="transition-all lms-div1 bg-no-repeat bg-cover h-[250px] md:h-[220px] lg:h-[250px] w-full"></div>
         </div>
     </section>
 </section>
