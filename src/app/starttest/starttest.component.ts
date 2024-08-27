@@ -80,7 +80,7 @@ export class StarttestComponent implements OnInit {
     const user = localStorage.getItem('userdata');
     if (user) {
       this.islogin = true;
-    this.userdatadecript();
+      this.userdatadecript();
       this.getmcqsinlocalstorage()
     } else {
       this.router.navigate(['/Login']);
@@ -248,7 +248,7 @@ export class StarttestComponent implements OnInit {
       this.createMessage('warning', 'Quiz MCQs Limit Reached!')
     }
   }
-  Cancel(){
+  Cancel() {
     Swal.fire({
       title: `<strong class="text-sm md:text-xl">Are You Want to Cancel!</strong>`,
       icon: "warning",
@@ -259,7 +259,7 @@ export class StarttestComponent implements OnInit {
       showCloseButton: false,
       showCancelButton: true,
       focusConfirm: false,
-      confirmButtonText:`<i class="fa-solid fa-check-circle"></i> Confirm!` ,
+      confirmButtonText: `<i class="fa-solid fa-check-circle"></i> Confirm!`,
       confirmButtonAriaLabel: 'Confirm cancellation of the test',
       cancelButtonText: `<i class="fa-solid fa-times-circle"></i> Cancel`,
       cancelButtonAriaLabel: 'Cancel the test',
@@ -276,14 +276,15 @@ export class StarttestComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.removemcqsinlocalstorage();
-        this.countstart=3
-        this.isTestStart=false
+        this.countstart = 3
+        this.isTestStart = false
         this.getmcqs();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        
-      }})
+
+      }
+    })
   }
-  submitbutton(){
+  submitbutton() {
     Swal.fire({
       title: `<strong class="text-sm md:text-xl">Are You Want to Submit!</strong>`,
       icon: "warning",
@@ -294,7 +295,7 @@ export class StarttestComponent implements OnInit {
       showCloseButton: false,
       showCancelButton: true,
       focusConfirm: false,
-      confirmButtonText:`<i class="fa-solid fa-check-circle"></i> Confirm!` ,
+      confirmButtonText: `<i class="fa-solid fa-check-circle"></i> Confirm!`,
       confirmButtonAriaLabel: 'Confirm cancellation of the test',
       cancelButtonText: `<i class="fa-solid fa-times-circle"></i> Cancel`,
       cancelButtonAriaLabel: 'Cancel the test',
@@ -312,8 +313,9 @@ export class StarttestComponent implements OnInit {
       if (result.isConfirmed) {
         this.Submit()
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        
-      }})
+
+      }
+    })
   }
   prev() {
     if (this.nextmcqs > 0) {
@@ -327,7 +329,17 @@ export class StarttestComponent implements OnInit {
   Submit() {
     this.getuserquizanswer()
     this.stopCounter();
-    this.dbservice.TestMCQs = this.givemcqs
+    let result = {
+      name: this.userdata.fullname,
+      image: this.userdata.image ? this.userdata.image : 'https://logodix.com/logo/1984166.png',
+      classname: this.parmsData.ClassName,
+      bookname: this.parmsData.BookName,
+      testtype: this.parmsData.TestType,
+      min: this.min,
+      sec: this.sec,
+      mcqs: this.givemcqs
+    }
+    this.dbservice.TestMCQs = result
     this.removemcqsinlocalstorage();
     this.router.navigate(['/LMS/OnlineTest/Result'])
   }
@@ -467,20 +479,20 @@ export class StarttestComponent implements OnInit {
             this.Submit()
           } else if (result.dismiss === Swal.DismissReason.cancel) {
             this.removemcqsinlocalstorage();
-            this.countstart=3
-            this.isTestStart=false
+            this.countstart = 3
+            this.isTestStart = false
             this.getmcqs();
           }
         });
       } else {
-        this.countstart=3
-        this.isTestStart=false
+        this.countstart = 3
+        this.isTestStart = false
         this.getmcqs();
       }
     } catch (error) {
       console.error('Error retrieving or processing quiz data:', error);
-      this.countstart=3
-      this.isTestStart=false
+      this.countstart = 3
+      this.isTestStart = false
       this.getmcqs();
     }
   }

@@ -15,12 +15,11 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
     this.getmcqs()
   }
-  @Output() quizzes:any=this.dbservice.TestMCQs
+  @Output() quizzes:any=this.dbservice.TestMCQs?.mcqs
+  mcqsdata: any
   getmcqs() {
-    const test = this.dbservice.TestMCQs
-    console.log(this.calculateResults(test));
-    this.result=this.calculateResults(test)
-
+    this.mcqsdata = this.dbservice.TestMCQs
+    this.result = this.calculateResults(this.mcqsdata?.mcqs)
   }
   calculateResults(questions: any) {
     let total = 0;
@@ -45,6 +44,7 @@ export class ResultComponent implements OnInit {
     } else {
       this.resultstatement='Bad you have not passed try again'
     }
+    this.postresult()
     return { total, correct, wrong, skipped };
   }
   
@@ -54,4 +54,22 @@ export class ResultComponent implements OnInit {
   }
   resultstatement:any
   percentage:any
+  postresult(){
+    try {
+      const mcqsdata={
+        ...this.mcqsdata,
+        total:this.result.total,
+        correct:this.result.correct,
+        skipped:this.result.skipped,
+        wrong:this.result.wrong,
+      }
+      this.dbservice.post('result/mcqs',mcqsdata).subscribe((res)=>{
+        console.log(res);
+        
+      })
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
 }
