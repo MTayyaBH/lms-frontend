@@ -11,7 +11,7 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-
+  array:any=[1,2,3,4,5,6,7]
   constructor(
     private http: DbServiceService,
     private message: NzMessageService,
@@ -92,7 +92,7 @@ export class SignupComponent {
           }
         });
       }else{
-        this.message.error('Invalid code!')
+        this.message.error('Invalid OTP!')
       }
 
     } else {
@@ -108,10 +108,10 @@ export class SignupComponent {
         this.http.post('signup-account/email-varifcation', this.signupForm.value)
           .subscribe(
             (res: any) => {
-              console.log('Response:', res);
+              console.log('Response:', res); 
               if (res) {
                 localStorage.setItem('token', JSON.stringify(res))
-                this.message.success('Email code sent to your email, please verify the code!')
+                this.message.success('Email OTP sent to your email, please verify the OTP!')
                 this.formsubmit = true
               }
               this.closeLoading();

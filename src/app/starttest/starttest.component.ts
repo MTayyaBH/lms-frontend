@@ -331,7 +331,7 @@ export class StarttestComponent implements OnInit {
     this.stopCounter();
     let result = {
       name: this.userdata.fullname,
-      image: this.userdata.image ? this.userdata.image : 'https://logodix.com/logo/1984166.png',
+      userid: this.userdata.uid,
       classname: this.parmsData.ClassName,
       bookname: this.parmsData.BookName,
       testtype: this.parmsData.TestType,

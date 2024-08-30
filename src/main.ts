@@ -4,7 +4,7 @@ import { AppModule } from './app/app.module';
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
   AOS.init({
-    offset: 100,
+    offset: 10,
     delay: 0,
     duration: 2000,
     easing: 'ease',

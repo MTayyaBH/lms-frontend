@@ -11,12 +11,21 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   logindata: any = localStorage.getItem('userdata')
+  array = [1, 2, 3, 4, 5, 6]
+  // triggerGoogleLogin(): void {
+  //   const loginButton = document.getElementById('login-google-btn');
+  //   if (loginButton) {
+  //     loginButton.click();
+  //   }
+  // }
   ngOnInit() {
     if (this.logindata) {
       this.rout.navigate(['/home'])
       this.createMessage('error', 'Logout First')
     }
+
   }
+
   constructor(
     private service: DbServiceService,
     private rout: Router,
@@ -28,21 +37,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
       callback: (res: any) => this.handleLogin(res)
     });
     google.accounts.id.renderButton(document.getElementById('login-google-btn'), {
-      theme: 'filled_white',
+      theme: 'outline', 
       size: 'large',
       shape: 'square',
-      width: 230,
+      width: 50,
     })
   }
+  loader:boolean=false
   private decodeToken(token: string) {
     return JSON.parse(atob(token.split(".")[1]))
   }
   handleLogin(res: any) {
-    // decode the token 
     if (res) {
       const payLoad = this.decodeToken(res.credential)
-      // console.log("payLoad", payLoad)
-      // store it in session
       let user = payLoad;
       let obj: any = {};
       obj['fullname'] = user.name;
@@ -53,13 +60,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.service.post('signup-account', obj).subscribe({
           next: (res: any) => {
             if (res && res.success) {
-            console.log(res.user);
-            const encryptedData = this.service.encrypt(JSON.stringify(res.user), this.service.secretkey);
-            localStorage.setItem('userdata', encryptedData);
-            this.createMessage('success', 'Login Successful!');
-            this.rout.navigate(['/home']);
-            }else{
-              this.createMessage('error',res.message)
+              console.log(res.user);
+              const encryptedData = this.service.encrypt(JSON.stringify(res.user), this.service.secretkey);
+              localStorage.setItem('userdata', encryptedData);
+              this.createMessage('success', 'Login Successful!');
+              this.rout.navigate(['/home']);
+            } else {
+              this.createMessage('error', res.message)
             }
           },
           error: (err) => {
@@ -70,7 +77,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         })
       } catch (error) {
         console.log(error);
-        
+
       }
     }
   }
@@ -91,11 +98,31 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
   submitForm() {
     if (this.signupForm.valid) {
-      // debugger
-      this.service.login(this.signupForm.value)
-
+      this.loader = true;  
+      this.service.login(this.signupForm.value).subscribe(
+        (res: any) => {
+          this.loader = false;  
+          if (res && res.success) {
+            this.createMessage('success', 'Login Successful!');
+            this.rout.navigate(['/home']);
+          } else {
+            if (res.message === 'Password Incorrect') {
+              this.createMessage('error', res.message);
+            } else {
+              this.createMessage('error', res.message);
+            }
+          }
+        },
+        (error) => {
+          this.loader = false;  
+          console.error('Error logging in:', error);
+          this.createMessage('error', error.message);
+        }
+      );
     } else {
       this.signupForm.markAllAsTouched();
     }
   }
+  
 }
+

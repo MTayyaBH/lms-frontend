@@ -1,13 +1,30 @@
-<div class="min-h-[calc(100vh-80px)] pt-20">
+<div class="min-h-screen">
     <div class="flex bg-white dark:bg-gray-950 rounded-lg shadow-lg w-full">
-        <div class="hidden lg:block lg:w-1/2 bg-cover" style="background-image:url('../../assets/images/log\ in.avif')">
+        <div class="hidden lg:block  lg:w-1/2 ">
+            <nz-carousel nzAutoPlay class="min-h-screen" >
+                <div nz-carousel-content class="h-full w-full" *ngFor="let index of array">
+                    <div class="w-full h-full bg-cover bg-no-repeat cursor-grab " *ngIf="index===2"
+                        style="background-image: url(../../assets/images/2111982.jpg);"></div>
+                    <div class="w-full h-full bg-cover bg-no-repeat cursor-grab " *ngIf="index===6"
+                        style="background-image: url(../../assets/images/32925.jpg);"></div>
+                    <div class="w-full h-full bg-cover bg-no-repeat cursor-grab " *ngIf="index===3"
+                        style="background-image: url(../../assets/images/26597.jpg);"></div>
+                    <div class="w-full h-full bg-cover bg-no-repeat cursor-grab " *ngIf="index===4"
+                        style="background-image: url(../../assets/images/3762183.jpg);"></div>
+                    <div class="w-full h-full bg-cover bg-no-repeat cursor-grab " *ngIf="index===5"
+                        style="background-image: url(../../assets/images/2481436.jpg);"></div>
+                    <div class="w-full h-full bg-cover bg-no-repeat cursor-grab " *ngIf="index===1"
+                        style="background-image: url(../../assets/images/2318983.jpg);"></div>
+                </div>
+            </nz-carousel>
         </div>
-        <div    id="loaderdiv" class="nzspin relative dark:nzspin   w-full lg:w-1/2 h-full">
-            <nz-spin *ngIf="loader" class="top-1/2  left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2"
+        <div id="loaderdiv"
+            class="nzspin relative dark:nzspin   w-full lg:w-1/2 min-h-screen flex align-items-center justify-center">
+            <nz-spin *ngIf="loader" class="top-1/2 z-50 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2"
                 [nzSize]="'large'" nzSimple></nz-spin>
-            <div *ngIf="!formsubmit"
+            <!-- <div *ngIf="!formsubmit"
                 class="w-full max-w-[450px] mx-auto p-8 py-4  grid place-items-center select-none min-h-[calc(100vh-80px)]">
-                <p class="text-xl w-full text-gray-600 text-center dark:text-gray-200 font-bold font-sans">Sign Up Your
+                <p class="text-xl md:text-3xl w-full text-gray-600 text-center dark:text-gray-200 font-bold font-sans">Sign Up Your
                     Account!</p>
                 <form [formGroup]="signupForm" class="w-full" (ngSubmit)="submitForm()">
 
@@ -100,7 +117,7 @@
                     <span class="border-b w-1/5 md:w-1/4"></span>
                 </div>
             </div>
-            <div  *ngIf="formsubmit" class="w-full max-w-[450px] mx-auto p-8 py-4  grid place-items-center select-none min-h-[calc(100vh-80px)]" >
+            <div  *ngIf="formsubmit" class="w-full max-w-[450px] mx-auto p-8 py-4  grid place-items-center select-none min-h-screen" >
                 <div class="mt-4 w-full" >
                     <p class="text-2xl w-full py-14  text-gray-600 text-center dark:text-gray-200 font-bold font-sans">Verification  Your
                         Account!</p>
@@ -129,8 +146,138 @@
                         </div>
                     </form>
                 </div>
+            </div> -->
+
+            <div *ngIf="!formsubmit" class="container4 min-h-screen overflow-hidden w-full">
+                <div class="screen">
+                    <div class="screen__content">
+                        <form class="login" [formGroup]="signupForm" (ngSubmit)="submitForm()">
+                            <div class="login__field">
+                                <i class="login__icon fas fa-user -mt-[9px]"></i>
+                                <input formControlName="fullname" type="text" class="login__input"
+                                    placeholder="Full Name">
+                                <div class="h-4 text-red-600">
+                                    <div *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)">
+                                        <div *ngIf="fullname.errors">
+                                            <div *ngIf="fullname.errors['required']">
+                                                Full Name is required
+                                            </div>
+                                            <div *ngIf="fullname.errors['minlength']">
+                                                Full Name must be at least 3 characters long
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="login__field">
+                                <i class="login__icon fas fa-user -mt-[9px]"></i>
+                                <input formControlName="email" type="text" class="login__input"
+                                    placeholder="User name / Email">
+                                <div class="h-4 text-red-600">
+                                    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                                        <div *ngIf="email.errors && email.errors['required']">
+                                            Email is required
+                                        </div>
+                                        <div *ngIf="email.errors && email.errors['email']">
+                                            Invalid email address
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="login__field">
+                                <i class="login__icon fas fa-lock -mt-[9px]"></i>
+                                <input formControlName="password" type="password" class="login__input"
+                                    placeholder="Password">
+                                <div class="h-4 text-red-600">
+                                    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                                        <div *ngIf="password.errors && password.errors['required']">
+                                            Password is required
+                                        </div>
+                                        <div *ngIf="password.errors && password.errors['minlength']">
+                                            Password must be at least 4 characters long
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="login__field">
+                                <i class="login__icon fas fa-lock -mt-[9px]"></i>
+                                <input formControlName="confirmPassword" type="password" class="login__input"
+                                    placeholder="Password">
+                                <div class="h-4 text-red-600">
+                                    <div
+                                        *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                                        <div *ngIf="confirmPassword.errors && confirmPassword.errors['required']">
+                                            Confirm Password is required
+                                        </div>
+                                        <div *ngIf="confirmPassword.errors && confirmPassword.errors['match']">
+                                            Passwords do not match
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button login__submit">
+                                <span class="button__text">Sign Up Now</span>
+                                <i class="button__icon fas fa-chevron-right"></i>
+                            </button>
+                        </form>
+                        <div class="mt-4 flex w-full items-center justify-between">
+                            <span class="border-b w-1/3"></span>
+                            <div routerLink="/Login"
+                                class="text-xs text-gray-50 uppercase cursor-pointer dark:hover:text-[#ffff00]">or Login
+                            </div>
+                            <span class="border-b w-1/3"></span>
+                        </div>
+                    </div>
+                    <div class="screen__background">
+                        <span class="screen__background__shape screen__background__shape4"></span>
+                        <span class="screen__background__shape screen__background__shape3"></span>
+                        <span class="screen__background__shape screen__background__shape2"></span>
+                        <span class="screen__background__shape screen__background__shape1"></span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="formsubmit" class="container4 min-h-screen overflow-hidden w-full">
+                <div class="screen">
+                    <div class="screen__content">
+                        <form class="login !pt-52" [formGroup]="varifcationform" (ngSubmit)="signupnow()">
+                            <div class="login__field">
+                                <i class="login__icon fas fa-user -mt-[9px]"></i>
+                                <input formControlName="verification" type="text" class="login__input"
+                                    placeholder="Enter Otp">
+                                <div class="h-4 text-red-600">
+                                    <div *ngIf="verification.invalid && (verification.dirty || verification.touched)">
+                                        <div *ngIf="verification.errors">
+                                            <div *ngIf="verification.errors['required']">
+                                                Verification code is required
+                                            </div>
+                                            <div *ngIf="verification.errors['minlength']">
+                                                Verification code must be at least 5 characters long
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button login__submit">
+                                <span class="button__text">Verification Now</span>
+                                <i class="button__icon fas fa-chevron-right"></i>
+                            </button>
+                        </form>
+                        <div class="mt-20 flex w-full items-center justify-between">
+                            <span class="border-b w-1/3"></span>
+                            <div routerLink="/Login"
+                                class="text-xs text-gray-50 uppercase cursor-pointer dark:hover:text-[#ffff00]">or Login
+                            </div>
+                            <span class="border-b w-1/3"></span>
+                        </div>
+                    </div>
+                    <div class="screen__background">
+                        <span class="screen__background__shape screen__background__shape4"></span>
+                        <span class="screen__background__shape screen__background__shape3"></span>
+                        <span class="screen__background__shape screen__background__shape2"></span>
+                        <span class="screen__background__shape screen__background__shape1"></span>
+                    </div>
+                </div>
             </div>
         </div>
-        
     </div>
 </div>

@@ -60,33 +60,14 @@ export class DbServiceService {
     }
   }
 
-  login(loginData: any) {
-    this.logindata = loginData;
-    this.httpclient.post(`${this.url}/login`, this.logindata).pipe(
+  login(loginData: any): Observable<any> {
+    return this.httpclient.post(`${this.url}/login`, loginData).pipe(
       catchError(error => {
-        console.error('Error logging in:', error);
-        return throwError(error);
+        return throwError(error);  
       })
-    ).subscribe((res: any) => {
-      if (res && res.success) {
-        console.log(res.user);
-
-        const encryptedData = this.encrypt(JSON.stringify(res.user), this.secretkey);
-        localStorage.setItem('userdata', encryptedData);
-        this.createMessage('success', 'Login Successful!');
-        this.router.navigate(['/home']);
-      } else {
-        console.log(res);
-
-        if (res.message === 'Password Incorrect') {
-          this.createMessage('error', res.message)
-        } else {
-          this.createMessage('error', res.message);
-        }
-
-      }
-    });
+    );
   }
+  
 
   encrypt(message: any, key: string): string {
     return CryptoJS.AES.encrypt(message, key).toString();
