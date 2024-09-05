@@ -1,0 +1,9 @@
+<main class="pt-20 w-full h-full flex">
+    <section [ngClass]="{'w-12 md:w-48':!iscolse,'w-12':iscolse}" #firstSection class="flex-shrink-0 z-30">
+        <app-menu  (dataChanged)="handleDataChanged($event)" class="fixed"></app-menu>
+    </section>
+    <section #secondSection class="flex-grow">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+  

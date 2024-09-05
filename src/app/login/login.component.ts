@@ -104,6 +104,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.loader = false;  
           if (res && res.success) {
             this.createMessage('success', 'Login Successful!');
+            const encryptedData = this.service.encrypt(JSON.stringify(res.user), this.service.secretkey);
+              localStorage.setItem('userdata', encryptedData);
             this.rout.navigate(['/home']);
           } else {
             if (res.message === 'Password Incorrect') {

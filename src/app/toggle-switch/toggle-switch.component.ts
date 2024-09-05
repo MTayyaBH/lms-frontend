@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { DbServiceService } from '../db-service.service';
 
 @Component({
   selector: 'app-toggle-switch',
   templateUrl: './toggle-switch.component.html',
   styleUrls: ['./toggle-switch.component.css']
 })
-export class ToggleSwitchComponent implements OnInit {  constructor() { }  ngOnInit(): void {
-    this.setInitialTheme();
-  }
+export class ToggleSwitchComponent implements OnInit {
+    constructor(private service:DbServiceService) { }
+     ngOnInit(): void {
+      this.setInitialTheme();
+    }
 
   toggleDarkMode(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
@@ -18,6 +21,7 @@ export class ToggleSwitchComponent implements OnInit {  constructor() { }  ngOnI
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+    this.service.triggerNotify();
   }
 
   setInitialTheme(): void {

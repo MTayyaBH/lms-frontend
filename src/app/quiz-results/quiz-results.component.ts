@@ -8,7 +8,7 @@ import { DbServiceService } from '../db-service.service';
 })
 export class QuizResultsComponent implements OnInit {
   ngOnInit() {
-    this.questions = this.dbservice.TestMCQs
+    this.questions = this.dbservice.TestMCQs.mcqs
   }
   constructor(private dbservice: DbServiceService) { }
   questions: any[] = [];

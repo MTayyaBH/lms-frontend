@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationEnd } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { catchError } from 'rxjs/operators';
@@ -22,7 +22,13 @@ export class DbServiceService {
     private httpclient: HttpClient,
     private message: NzMessageService,
     private router: Router
-  ) { }
+  ) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
+   }
   uploadBook(formData: any) {
     return this.httpclient.post<any>(`${this.url}/books/create`, formData);
   }
@@ -31,6 +37,12 @@ export class DbServiceService {
   }
   getbyid(tble: any, id: any) {
     return this.httpclient.get(`${this.url}/${tble}/${id}`);
+  }
+  updatebyid(table:any,id:any,data:any){
+    return this.httpclient.put(`${this.url}/${table}/${id}`,data)
+  }
+  delete(table:any,id:any){
+    return this.httpclient.delete(`${this.url}/${table}/${id}`);
   }
   get(table: any) {
     return this.httpclient.get(`${this.url}/${table}`)

@@ -39,13 +39,13 @@
         <div class="flex flex-col items-center my-8">
             <img class="w-40 h-40 object-contain animate-pulse" src="../../assets/images/tf.png" alt="image">
             <p [ngClass]="{
-                'text-green-600 dark:text-green-400': resultstatement === 'Congratulation You Have passed this quiz', 
-                'text-red-600 dark:text-red-400': resultstatement === 'Bad you have not passed try again'
+                'text-green-600 dark:text-green-400': resultstatement === 'Congratulations! You have passed this quiz.', 
+                'text-red-600 dark:text-red-400': resultstatement === 'Sorry, you have not passed. Try again.'
                 }" 
                 class="sm:text-lg text-center font-semibold mt-6">
                 {{resultstatement}}
-                <span *ngIf="resultstatement === 'Congratulation You Have passed this quiz'">🎉</span>
-                <span *ngIf="resultstatement === 'Bad you have not passed try again'">😢</span>
+                <span *ngIf="resultstatement === 'Congratulations! You have passed this quiz.'">🎉</span>
+                <span *ngIf="resultstatement === 'Sorry, you have not passed. Try again.'">😢</span>
             </p>
         </div>
         <div class="bg-blue-50 dark:bg-gray-800 dark:text-gray-300 sm:p-6 p-3 rounded-lg text-[10px] text-center sm:text-xs text-gray-600 shadow-inner">

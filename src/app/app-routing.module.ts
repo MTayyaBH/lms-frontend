@@ -16,6 +16,9 @@ import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 import { AdminClassesComponent } from './admin-classes/admin-classes.component';
 import { AdminBooksComponent } from './admin-books/admin-books.component';
 import { ChaptersComponent } from './chapters/chapters.component';
+import { AllresultsComponent } from './allresults/allresults.component';
+import { AdminComponent } from './admin/admin.component';
+import { McqslistComponent } from './mcqslist/mcqslist.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -24,7 +27,14 @@ const routes: Routes = [
   { path: 'ContactUs', component: ContactUsComponent },
   { path: 'SignUp', component: SignupComponent },
   { path: 'Login', component: LoginComponent },
-  { path: 'Admin/AddMcqs', component: AdminmcqsComponent },
+  { path: 'Results', component: AllresultsComponent },
+  { path: 'Admin', component: AdminComponent, 
+    children:[
+      { path: 'AddMcqs', component: AdminmcqsComponent },
+      { path: 'EditMCQs', component: AdminmcqsComponent },
+      { path: 'MCQsList', component: McqslistComponent },
+    ]
+  },
   { path: 'Admin/classes', component: AdminClassesComponent },
   { path: 'Admin/Books', component: AdminBooksComponent },
   { path: 'Admin/Chapters', component: ChaptersComponent },

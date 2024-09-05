@@ -1,6 +1,6 @@
 <section style="box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;"
     class="h-20 fixed z-50 top-0 w-full bg-white text-gray-800 dark:bg-slate-800 px-3 dark:text-gray-300 flex justify-between items-center">
-    <img routerLink="/Admin/AddMcqs" class="bg-transparent h-14 cursor-pointer" src="../../assets/images/download__3_-removebg-preview.png" alt="">
+    <img (click)="openl()" class="bg-transparent h-14 cursor-pointer" src="../../assets/images/download__3_-removebg-preview.png" alt="">
     <div class="text-black hidden select-none lg:block min-w-[400px] text-xl space-x-20">
         <span routerLink="/home" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 "
             id="HOME">HOME</span>
@@ -22,15 +22,36 @@
         </div>
         <section class="dark:bg-slate-800 h-full w-full flex justify-center items-center">
             <div class=" flex flex-col text-xl space-y-10 select-none">
-                <span class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center"
+                <span (click)="close()" routerLink="/home" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center"
                     id="HOME">HOME</span>
-                <span class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center" id="ABOUT">L M
+                <span (click)="close()" routerLink="/LMS" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center" id="ABOUT">L M
                     S</span>
-                <span class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center" id="ABOUT">ABOUT
+                <span (click)="close()" routerLink="/AboutUs" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center" id="ABOUT">ABOUT
                     US</span>
-                <span class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center"
+                <span (click)="close()" routerLink="/ContactUs" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center"
                     id="CONTACTS">CONTACT US</span>
             </div>
+        </section>
+    </main>
+</nz-drawer>
+<nz-drawer id="headerdrawer" class="dark:!bg-slate-900 dark:!text-gray-300" [nzPlacement]="placement" [nzClosable]="true" [nzWidth]="'150px'"
+    [nzVisible]="visiblel" (nzOnClose)="closel()">
+    <main *nzDrawerContent class="w-full h-full flex flex-col ">
+        <div class="w-full dark:bg-slate-900 bg-gray-100 flex justify-end p-3 px-4">
+            <i (click)="closel()" class="fa-solid fa-arrow-right text-2xl rotate-180 cursor-pointer text-gray-900 dark:text-yellow-500"></i>
+        </div>
+        <section class="dark:bg-slate-800 h-full w-full p-4">
+            <h1 (click)="closel()" routerLink="/Admin" class="text-gray-800 dark:text-gray-300 cursor-pointer">Admin</h1>
+            <!-- <div class=" flex flex-col text-xl space-y-10 select-none">
+                <span (click)="close()" routerLink="/home" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center"
+                    id="HOME">HOME</span>
+                <span (click)="close()" routerLink="/LMS" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center" id="ABOUT">L M
+                    S</span>
+                <span (click)="close()" routerLink="/AboutUs" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center" id="ABOUT">ABOUT
+                    US</span>
+                <span (click)="close()" routerLink="/ContactUs" class="headergroup dark:headergroup text-gray-800 dark:text-gray-300 text-center"
+                    id="CONTACTS">CONTACT US</span>
+            </div> -->
         </section>
     </main>
 </nz-drawer>

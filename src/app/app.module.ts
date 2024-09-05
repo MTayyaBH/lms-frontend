@@ -45,6 +45,18 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ChaptersComponent } from './chapters/chapters.component';
+import { AllresultsComponent } from './allresults/allresults.component';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { DragScrollDirective } from './drag-scroll.directive';
+import { AdminComponent } from './admin/admin.component';
+import { MenuComponent } from './menu/menu.component';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { McqslistComponent } from './mcqslist/mcqslist.component';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,16 +79,21 @@ import { ChaptersComponent } from './chapters/chapters.component';
     QuizResultsComponent,
     AdminBooksComponent,
     AdminClassesComponent,
-    ChaptersComponent
+    ChaptersComponent,
+    AllresultsComponent,
+    DragScrollDirective,
+    AdminComponent,
+    MenuComponent,
+    McqslistComponent
   ],
   imports: [
     BrowserModule,NzIconModule,NzDrawerModule,NzCarouselModule,NzMessageModule,
     AppRoutingModule,NzSpinModule,NzInputModule,NzDatePickerModule,
     FormsModule,NzSelectModule,NzButtonModule,NzTimePickerModule,
-    HttpClientModule,NzUploadModule,NzFormModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
+    HttpClientModule,NzUploadModule,NzFormModule,NzSkeletonModule,
+    BrowserAnimationsModule,NzListModule,NzToolTipModule,
+    IconsProviderModule,NzTableModule,NzPopconfirmModule,
+    NzLayoutModule,NzDropDownModule,NzPaginationModule,
     NzMenuModule,ReactiveFormsModule, 
   ],
   providers: [

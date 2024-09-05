@@ -9,14 +9,20 @@ import { DbServiceService } from '../db-service.service';
 })
 export class HeaderComponent implements OnInit{
   constructor(private sharedService: DbServiceService) {}
-
+  placement: NzDrawerPlacement = 'left';
   ngOnInit() {
     this.sharedService.notify.subscribe(() => {
       this.someFunction();
     });
   }
   visible = false;
-
+  visiblel=false
+  openl(){
+    this.visiblel=true
+  }
+  closel(){
+    this.visiblel=false
+  }
   open(): void {
     this.visible = true;
   }

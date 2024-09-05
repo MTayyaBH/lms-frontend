@@ -14,8 +14,4 @@ export class HomeComponent implements OnInit {
     this.userdata ? this.login = true : this.login = false;
     
   }
-
-  onClick() {
-    this.sharedService.triggerNotify();
-  }
 }

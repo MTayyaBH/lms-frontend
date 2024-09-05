@@ -93,3 +93,14 @@ font-weight: 400;
   font-weight: 400;
 }
 
+.dbli1 .ant-menu-title-content{
+  display: flex !important;
+  align-items: center !important;
+}
+.ngselectbn .ant-select-selector{
+  box-shadow: none !important;
+  border: 0 !important;
+}
+.ant-select-dropdown{
+  border-radius: 9px !important;
+}

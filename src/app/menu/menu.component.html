@@ -1,0 +1,36 @@
+
+<nz-layout class="layout ">
+
+    <nz-sider  [nzCollapsedWidth]="48"  nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+        <div class="logo"></div>
+        <ul class="min-h-[calc(100vh-5rem)]" nz-menu [nzTheme]="theme" nzMode="inline">
+           <div class="flex justify-end px-3 py-1">
+            
+            <div class=" w-fit overflow-hidden">
+                <label nzTooltipTitle="Collapsed" nzTooltipPlacement="right" [nzTooltipColor]="'black'"  nz-tooltip class="container">
+                    <input [checked]="" (change)="colbtn()" [(ngModel)]="isCollapsed" type="checkbox">
+                    <div class="checkmark"></div>
+                </label>
+            </div>
+           </div>
+            <li class="dbli1"   nz-menu-item nzSelected>
+                <span nz-icon nzType="dashboard" class="maindashboardhomeicon" nzTheme="outline"></span>
+                <span>Dashboard</span>
+            </li>
+          <li nz-submenu nzTitle="MCQs" nzIcon="shopping-cart">
+            <ul>
+              <li routerLink="AddMcqs" nz-menu-item>Add New MCQs</li>
+              <li *ngFor="let class of classes" (click)="navegater(class.uid)"  nz-menu-item>{{class.classname}} MCQs List</li>
+            </ul>
+          </li>
+          <li  nz-submenu nzTitle="Saved Data" nzIcon="database">
+            <ul>
+              <li nz-menu-item routerLink="SavedOreder">Saved Order</li>
+            </ul>
+          </li>
+          
+        </ul>
+       
+      </nz-sider>
+   
+</nz-layout>

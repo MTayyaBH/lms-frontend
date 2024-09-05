@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -9,7 +10,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   isCollapsed = false;
-  constructor(private router: Router) { }
+  constructor(private router: Router,private viewportScroller: ViewportScroller) { }
   isLoginPage: boolean = false
   ngOnInit(): void {
     this.router.events.pipe(
@@ -20,5 +21,12 @@ export class AppComponent implements OnInit {
         this.isLoginPage = this.router.url.includes('/SignUp') ? true : false
       }
     });
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.viewportScroller.scrollToPosition([0, 0]);
+      }
+    });
   }
+
+  
 }
