@@ -2,17 +2,25 @@
     <section class="w-full max-w-screen-lg mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
         <h1
             class="customshadow dark:customshadow rounded-full text-center my-2 mb-5 py-2  md:text-lg font-bold text-gray-800 dark:text-gray-200 tracking-widest">
-            Learning Management System MCQs Details
+            Learning Management System Books Details
         </h1>
         <div class="overflow-x-auto scrollbar dark:scrollbar select-none cursor-pointer" appDragScroll>
-            <nz-table  #sortTable [nzData]="list" nzTableLayout="auto" class="min-w-[800px]">
+            <nz-table #sortTable [nzData]="list" nzTableLayout="auto" class="min-w-[800px]">
                 <thead class="dark:!bg-gray-900">
                     <tr class="dark:!bg-gray-900 ">
                         <th
                             class="w-14 text-nowrap text-gray-800 dark:text-gray-200 border dark:bg-gray-900 dark:border-gray-700">
                             No</th>
+                        <th
+                            class=" text-nowrap text-center text-gray-800 dark:text-gray-200 border dark:bg-gray-900 dark:border-gray-700">
+                            Image</th>
                         <th class="text-gray-800 text-nowrap dark:text-gray-200 border dark:bg-gray-900 dark:border-gray-700"
-                            nzCustomFilter>Statement
+                            >Class Name
+                           
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:bg-gray-900 text-ellipsis dark:text-gray-200 border dark:border-gray-700">
+                            Book Name
                             <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                                 [nzDropdownMenu]="menu">
                                 <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
@@ -20,23 +28,18 @@
                             </nz-filter-trigger>
                         </th>
                         <th
-                            class="text-gray-800 text-nowrap dark:bg-gray-900 text-ellipsis dark:text-gray-200 border dark:border-gray-700">
-                            Option1
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Created Date
 
                         </th>
+                        <!-- <th
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Class Time
+                        </th> -->
                         <th
                             class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
-                            Option2
-
-                        </th>
-                        <th
-                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
-                            Option3
-                        </th>
-                        <th
-                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
-                            Option4</th>
-                        <th
+                            Book Description</th>
+                        <!-- <th
                             class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
                             Correct Option</th>
                         <th
@@ -55,7 +58,7 @@
                                 <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
                                     nz-icon nzType="search"></span>
                             </nz-filter-trigger>
-                        </th>
+                        </th> -->
                         <th
                             class="text-gray-800 text-center text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
                             Actions</th>
@@ -71,21 +74,26 @@
                             class="text-gray-700  text-nowrap dark:text-gray-300 text-center group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-x border-b dark:border-gray-700">
                             {{i+1}}</th>
                         <td
-                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{data.statement}}</td>
+                        class="text-gray-700 flex justify-center items-center text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            <img class="w-10 h-10 object-fill rounded-full"
+                                [src]="data.image_url?data.image_url:'../../assets/images/3970786.jpg'" alt="">
+                        </td>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{ data.option1 }}</td>
+                            {{data.classname}}</td>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{ data.option2 }}</td>
+                            {{ data.book_name }}</td>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{ data.option3 }}</td>
+                            {{ data.created_at | date:'dd-MM-yyyy' }}</td>
+                        <!-- <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.classtime }}</td> -->
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{data.option4}}</td>
-                        <td
+                            {{data.description}}</td>
+                        <!-- <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
                             {{data.trueoption}}</td>
                         <td
@@ -99,11 +107,12 @@
                             {{data.book_name}}</td>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{data.chaptername}}</td>
-                        <td class="text-gray-700 space-x-4 px-3 text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            <i (click)="editmcqs(data.uid)" class="font-semibold  text-blue-600 dark:text-[#ffff00] cursor-pointer fa-solid fa-pen-to-square"></i>
-                            <i nz-popconfirm nzPopconfirmTitle="Sure to delete?"
-                                (nzOnConfirm)="popconfirm(data.uid)"
+                            {{data.chaptername}}</td> -->
+                        <td
+                            class="text-gray-700 space-x-4 px-3 text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            <i (click)="editmcqs(data.uid)"
+                                class="font-semibold  text-blue-600 dark:text-[#ffff00] cursor-pointer fa-solid fa-pen-to-square"></i>
+                            <i nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="popconfirm(data.uid)"
                                 (nzOnCancel)="popcancel()"
                                 class="font-semibold  text-red-600 cursor-pointer fa-solid fa-trash-can"></i>
                         </td>
@@ -116,15 +125,6 @@
                 <div class="search-box">
                     <input (keyup)="search()" (keydown)="search()" (change)="search()" [(ngModel)]="searchStatement"
                         type="text" nz-input placeholder="Search Mcqs"
-                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300" />
-                </div>
-            </div>
-        </nz-dropdown-menu>
-        <nz-dropdown-menu #class="nzDropdownMenu">
-            <div class="ant-table-filter-dropdown bg-white dark:bg-gray-700 shadow-lg rounded-md p-3">
-                <div class="search-box">
-                    <input (keyup)="search()" (keydown)="search()" (change)="search()" [(ngModel)]="searchChapter"
-                        type="text" nz-input placeholder="Search Class Name"
                         class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300" />
                 </div>
             </div>

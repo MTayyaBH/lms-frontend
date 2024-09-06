@@ -71,7 +71,7 @@ export class MenuComponent implements OnInit {
     this.isCollapsed = this.isScreenMdOrGreater;
   }
   navegater(uid: string) {
-    this.router.navigate(['/Admin/MCQsList'], { queryParams: { ClassName: uid } });
+    this.router.navigate(['/Admin/Books-List'], { queryParams: { ClassName: uid } });
     console.log(uid);
   }
 }

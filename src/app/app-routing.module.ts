@@ -19,6 +19,8 @@ import { ChaptersComponent } from './chapters/chapters.component';
 import { AllresultsComponent } from './allresults/allresults.component';
 import { AdminComponent } from './admin/admin.component';
 import { McqslistComponent } from './mcqslist/mcqslist.component';
+import { ClasslistComponent } from './classlist/classlist.component';
+import { BooklistComponent } from './booklist/booklist.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -33,10 +35,13 @@ const routes: Routes = [
       { path: 'AddMcqs', component: AdminmcqsComponent },
       { path: 'EditMCQs', component: AdminmcqsComponent },
       { path: 'MCQsList', component: McqslistComponent },
+      { path: 'New-Class', component: AdminClassesComponent },
+      { path: 'Update-Class', component: AdminClassesComponent },
+      { path: 'Class-List', component: ClasslistComponent },
+      { path: 'Books', component: AdminBooksComponent },
+      { path: 'Books-List', component: BooklistComponent },
     ]
   },
-  { path: 'Admin/classes', component: AdminClassesComponent },
-  { path: 'Admin/Books', component: AdminBooksComponent },
   { path: 'Admin/Chapters', component: ChaptersComponent },
   { path: 'LMS/OnlineTest', component: OnlineTestComponent },
   { path: 'LMS/OnlineTest/Result', component: ResultComponent },

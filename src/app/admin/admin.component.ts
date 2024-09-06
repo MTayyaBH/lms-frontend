@@ -20,7 +20,7 @@ export class AdminComponent implements AfterViewInit, OnInit, OnDestroy {
     this.iscolse=data
   }
   ngOnInit(): void {
-
+    this.checkScreenSize()
   }
 
   ngAfterViewInit(): void {

@@ -1,14 +1,14 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { DbServiceService } from '../db-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-mcqslist',
-  templateUrl: './mcqslist.component.html',
-  styleUrls: ['./mcqslist.component.css']
+  selector: 'app-classlist',
+  templateUrl: './classlist.component.html',
+  styleUrls: ['./classlist.component.css']
 })
-export class McqslistComponent implements OnInit {
+export class ClasslistComponent implements OnInit{
   initLoading = true;
   loadingMore = false;
   data: any[] = [];
@@ -25,17 +25,17 @@ export class McqslistComponent implements OnInit {
   visiblebook: boolean = false
   searchValue = '';
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.classuid = params['ClassName'];
-      this.getdata()
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.classuid = params['ClassName'];
+    // });
+    this.getdata()
   }
   getdata() {
     this.loadingMore = true
     try {
-      this.http.getbyid('lms-mcqs', this.classuid).subscribe((res: any) => {
-        this.data = res
-        this.list = res;
+      this.http.get('classes').subscribe((res: any) => {
+        this.data = this.sortClasses(res)
+        this.list = this.sortClasses(res)
         console.log(res);
         this.loadingMore = false
       })
@@ -44,15 +44,11 @@ export class McqslistComponent implements OnInit {
       this.loadingMore = false
     }
   }
-  
-  searchChapter: string = ''
   searchStatement: string = ''
   search() {
     const searchstatement = this.searchStatement?.toLowerCase();
-    const searchchapter = this.searchChapter?.toLowerCase();
     this.list = this.data.filter(s =>
-      (!this.searchStatement || s.statement.toLowerCase().includes(searchstatement.toLowerCase())) &&
-      (!this.searchChapter || s.chaptername?.toLowerCase().includes(searchchapter.toLowerCase()))
+      (!this.searchStatement || s.classname.toLowerCase().includes(searchstatement.toLowerCase())) 
     );
   }
   sortByName() {
@@ -64,25 +60,40 @@ export class McqslistComponent implements OnInit {
     const currentUrlWithoutDomain = window.location.pathname + window.location.search;
     const path = this.http.encrypt(currentUrlWithoutDomain, 'path')
     console.log(path);
-    this.router.navigate(['/Admin/EditMCQs'], { queryParams: { UID: uid, Path: path } });
+    this.router.navigate(['/Admin/Update-Class'], { queryParams: { UID: uid, Path: path } });
   }
 
   popconfirm(uid: any) {
     try {
-      this.http.delete('lms-mcqs', uid).subscribe((res) => {
-        if (res) {
-          this.msg.success('Deleted Successfully')
-          this.getdata()
-        }
+      this.http.delete('classes',uid).subscribe((res:any)=>{
+       if (res.submit) {
+        this.msg.success(res?.message)
+        this.getdata()
+       }
       })
     } catch (error) {
       this.msg.error('Some error founded!')
       console.log(error);
-
+      
     }
 
   }
   popcancel() {
     this.msg.warning('Cancel Successfully')
+  }
+  sortClasses(classes: any) {
+    return classes.sort((a: { classname: string; }, b: { classname: string; }) => {
+      const numA = this.extractNumber(a.classname);
+      const numB = this.extractNumber(b.classname);
+      if (numA === null && numB === null) return 0;
+      if (numA === null) return 1;
+      if (numB === null) return -1;
+      return numA - numB;
+    });
+  }
+
+  extractNumber(classname: string): number | null {
+    const match = classname.match(/\d+/);
+    return match ? parseInt(match[0], 10) : null;
   }
 }

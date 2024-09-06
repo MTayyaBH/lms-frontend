@@ -3,7 +3,7 @@
         <h1 class="w-full text-center   text-gray-900 font-bold text-lg tracking-wider dark:text-gray-200">Select One
             And Start Test!</h1>
             <div class="w-4/5 mx-auto flex flex-wrap gap-3 md:gap-9 flex-col md:flex-row">
-                <div class="w-[46%]" *ngFor="let class of clases; let i = index">
+                <div class="w-full md:w-[46%]" *ngFor="let class of clases; let i = index">
                   <button (click)="nevegat(class.uid)"
                     [attr.data-aos]="i % 2 === 0 ? 'fade-right' : 'fade-left'"
                     data-aos-duration="3000"
@@ -21,12 +21,12 @@
         </div>
         <main *ngIf="loader" class="w-full ">
             <div *ngFor="let placeholder of [1,2,3,4,5]" class="w-4/5 mx-auto flex flex-wrap gap-3 md:gap-9 flex-col md:flex-row">
-                <div class="relative mx-auto flex w-[46%] animate-pulse gap-2 p-4">
+                <div class="relative mx-auto flex w-full md:w-[46%] animate-pulse gap-2 p-4">
                     <div class="flex-1">
                         <div class="h-9 rounded-full w-full bg-slate-400 text-sm"></div>
                     </div>
                 </div>
-                <div class="relative flex mx-auto w-[46%] animate-pulse gap-2 p-4">
+                <div class="relative flex mx-auto w-full  md:w-[46%] animate-pulse gap-2 p-4">
                     <div class="flex-1">
                         <div class="h-9 rounded-full w-full bg-slate-400 text-sm"></div>
                     </div>

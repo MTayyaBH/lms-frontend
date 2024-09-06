@@ -17,18 +17,24 @@
                 <span nz-icon nzType="dashboard" class="maindashboardhomeicon" nzTheme="outline"></span>
                 <span>Dashboard</span>
             </li>
-          <li nz-submenu nzTitle="MCQs" nzIcon="shopping-cart">
+          <li nz-submenu nzTitle="MCQs" nzIcon="question-circle">
             <ul>
               <li routerLink="AddMcqs" nz-menu-item>Add New MCQs</li>
               <li *ngFor="let class of classes" (click)="navegater(class.uid)"  nz-menu-item>{{class.classname}} MCQs List</li>
             </ul>
           </li>
-          <li  nz-submenu nzTitle="Saved Data" nzIcon="database">
+          <li  nz-submenu nzTitle="Classes" nzIcon="ci-circle">
             <ul>
-              <li nz-menu-item routerLink="SavedOreder">Saved Order</li>
+              <li nz-menu-item routerLink="New-Class">Add Class</li>
+              <li nz-menu-item routerLink="Class-List">Class List</li>
             </ul>
           </li>
-          
+          <li nz-submenu nzTitle="Books" nzIcon="book">
+            <ul>
+              <li routerLink="Books" nz-menu-item>Add New Book</li>
+              <li *ngFor="let class of classes" (click)="navegater(class.uid)"  nz-menu-item>{{class.classname}} Books List</li>
+            </ul>
+          </li>
         </ul>
        
       </nz-sider>

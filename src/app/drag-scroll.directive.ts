@@ -25,7 +25,7 @@ export class DragScrollDirective {
   @HostListener('mouseup')
   onMouseUp() {
     this.isMouseDown = false;
-    this.renderer.setStyle(this.el.nativeElement, 'cursor', 'grab');
+    this.renderer.setStyle(this.el.nativeElement, 'cursor', 'pointer');
   }
 
   @HostListener('mousemove', ['$event'])

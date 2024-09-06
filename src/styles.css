@@ -104,3 +104,25 @@ font-weight: 400;
 .ant-select-dropdown{
   border-radius: 9px !important;
 }
+.ant-menu-light.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: rgb(39, 39, 39) !important;
+  color: #f3f4f6 ;
+}
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: #ffff00 !important;
+  color: rgb(32, 32, 32) !important;
+}
+.ant-menu-item::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-right: 3px solid #ffff00 !important;
+  transform: scaleY(0.0001);
+  opacity: 0;
+  transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+  content: '';
+}
+.ant-menu-submenu-title:hover{
+color: #0e0e0e !important;
+}

@@ -57,6 +57,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { McqslistComponent } from './mcqslist/mcqslist.component';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { ClasslistComponent } from './classlist/classlist.component';
+import { BooklistComponent } from './booklist/booklist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +86,9 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     DragScrollDirective,
     AdminComponent,
     MenuComponent,
-    McqslistComponent
+    McqslistComponent,
+    ClasslistComponent,
+    BooklistComponent
   ],
   imports: [
     BrowserModule,NzIconModule,NzDrawerModule,NzCarouselModule,NzMessageModule,

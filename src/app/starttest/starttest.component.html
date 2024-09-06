@@ -1,4 +1,4 @@
-<main *ngIf="!notfound" class="w-full">
+<main *ngIf="!notfound" class="w-full overflow-hidden">
     <div *ngIf="countstart != 0" class="w-full h-screen grid place-items-center">
         <!-- <section *ngIf="!isTestStart && !loader" class="space-y-4 md:flex md:space-y-0 md:space-x-4">
             <div class="p-3 bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center">
@@ -234,7 +234,7 @@
         </footer>
     </section>
 </main>
-<div *ngIf="notfound"
+<div *ngIf="notfound "
     class="w-full p-4 h-screen grid place-content-center bg-gray-100 dark:bg-slate-950 border rounded-lg border-gray-200 dark:border-[#ffff00]">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="200" height="150"
         class="illustration styles_illustrationTablet__1DWOa">

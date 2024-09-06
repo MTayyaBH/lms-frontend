@@ -1,14 +1,14 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { DbServiceService } from '../db-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-mcqslist',
-  templateUrl: './mcqslist.component.html',
-  styleUrls: ['./mcqslist.component.css']
+  selector: 'app-booklist',
+  templateUrl: './booklist.component.html',
+  styleUrls: ['./booklist.component.css']
 })
-export class McqslistComponent implements OnInit {
+export class BooklistComponent implements OnInit{
   initLoading = true;
   loadingMore = false;
   data: any[] = [];
@@ -33,7 +33,7 @@ export class McqslistComponent implements OnInit {
   getdata() {
     this.loadingMore = true
     try {
-      this.http.getbyid('lms-mcqs', this.classuid).subscribe((res: any) => {
+      this.http.getbyid('books', this.classuid).subscribe((res: any) => {
         this.data = res
         this.list = res;
         console.log(res);
@@ -44,15 +44,11 @@ export class McqslistComponent implements OnInit {
       this.loadingMore = false
     }
   }
-  
-  searchChapter: string = ''
   searchStatement: string = ''
   search() {
     const searchstatement = this.searchStatement?.toLowerCase();
-    const searchchapter = this.searchChapter?.toLowerCase();
     this.list = this.data.filter(s =>
-      (!this.searchStatement || s.statement.toLowerCase().includes(searchstatement.toLowerCase())) &&
-      (!this.searchChapter || s.chaptername?.toLowerCase().includes(searchchapter.toLowerCase()))
+      (!this.searchStatement || s.book_name.toLowerCase().includes(searchstatement.toLowerCase()))
     );
   }
   sortByName() {
@@ -69,7 +65,7 @@ export class McqslistComponent implements OnInit {
 
   popconfirm(uid: any) {
     try {
-      this.http.delete('lms-mcqs', uid).subscribe((res) => {
+      this.http.delete('books', uid).subscribe((res) => {
         if (res) {
           this.msg.success('Deleted Successfully')
           this.getdata()

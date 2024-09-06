@@ -11,7 +11,15 @@ export class HomeComponent implements OnInit {
   login: boolean = false;
 
   ngOnInit() {
-    this.userdata ? this.login = true : this.login = false;
+    this.sharedService.notify.subscribe(() => {
+      this.checklogin();
+    });
+    this.checklogin()
     
   }
+  checklogin(){
+    const data=localStorage.getItem('userdata');
+    data ? this.login = true : this.login = false;
+  }
+  
 }
