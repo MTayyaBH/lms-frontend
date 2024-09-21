@@ -1,9 +1,13 @@
 <section class="p-7 grid place-items-center min-h-[calc(100vh-80px)] bg-gray-100 dark:bg-gray-900 w-full">
   <div class="bg-white dark:bg-gray-800  p-6 md:p-8 rounded-lg shadow-lg w-full max-w-3xl ">
-    <h1 class="text-2xl w-full text-center md:text-3xl font-semibold mb-6 text-gray-800 dark:text-gray-100">
+    <h1 *ngIf="!editMode"
+      class="text-2xl w-full text-center md:text-3xl font-semibold mb-6 text-gray-800 dark:text-gray-100">
       Add New Book
     </h1>
-
+    <h1 *ngIf="editMode"
+      class="text-2xl w-full text-center md:text-3xl font-semibold mb-6 text-gray-800 dark:text-gray-100">
+      Edit Book
+    </h1>
     <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="space-y-6">
       <div class="md:flex w-full md:space-x-4">
         <div class="mb-4 w-full">
@@ -35,9 +39,13 @@
         </div>
       </div>
       <div>
-        <button type="submit"
+        <button *ngIf="!editMode" type="submit"
           class="w-full bg-gray-800 hover:bg-gray-900 dark:bg-yellow-500 dark:hover:bg-yellow-400 text-white dark:text-gray-900 font-bold py-2 px-4 rounded-md shadow-md">
           Submit
+        </button>
+        <button *ngIf="editMode" type="submit"
+          class="w-full bg-gray-800 hover:bg-gray-900 dark:bg-yellow-500 dark:hover:bg-yellow-400 text-white dark:text-gray-900 font-bold py-2 px-4 rounded-md shadow-md">
+          Update
         </button>
       </div>
     </form>

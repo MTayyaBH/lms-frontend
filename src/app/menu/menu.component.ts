@@ -70,8 +70,29 @@ export class MenuComponent implements OnInit {
     this.isScreenMdOrGreater = screenWidth <= 768;
     this.isCollapsed = this.isScreenMdOrGreater;
   }
-  navegater(uid: string) {
+  navegatertobook(uid: string) {
     this.router.navigate(['/Admin/Books-List'], { queryParams: { ClassName: uid } });
-    console.log(uid);
+  }
+  navegatertomcq(uid: string) {
+    this.router.navigate(['/Admin/MCQsList'], { queryParams: { ClassName: uid } });
+  }
+  navegatertochapters(classuid: any,bookuid:any) {
+    this.router.navigate(['/Admin/Chapters-List'], { queryParams: { ClassName: classuid,BookName:bookuid } });
+  }
+  books: any[] = [];
+  getBooks(id: any): void {
+    try {
+      this.sharedService.getbyid('books', id).subscribe(
+        (res: any) => {
+          this.books[id] = res || [];
+        },
+        (error) => {
+          console.log(error);
+          this.books[id] = [];
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

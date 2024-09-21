@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormArray, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { DbServiceService } from '../db-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-chapters',
   templateUrl: './chapters.component.html',
@@ -14,18 +14,20 @@ export class ChaptersComponent implements OnInit {
   bookForm: any;
   clases: any; // Example classes
 
-  constructor(private fb: FormBuilder, private http: DbServiceService, private msg: NzMessageService
+  constructor(
+    private fb: FormBuilder, 
+    private http: DbServiceService, 
+    private msg: NzMessageService
   ) { }
 
   ngOnInit() {
     this.bookForm = this.fb.group({
-      bookName: [''],
-      ClassName: [''],
+      bookName: ['', [Validators.required]],
+      ClassName: ['', [Validators.required]],
       chapters: this.fb.array([]),
       description: ['']
     });
-    this.getdataClasses()
-   
+    this.getdataClasses();
   }
 
   get chapters() {
@@ -35,12 +37,10 @@ export class ChaptersComponent implements OnInit {
   addChapter() {
     const chapter = this.fb.group({
       uid: [uuidv4()],
-      title: [''],
+      title: ['', [Validators.required]],
       content: ['']
     });
     this.chapters.push(chapter);
-    console.log(this.bookForm.value);
-    
   }
 
   removeChapter(index: number) {
@@ -48,32 +48,39 @@ export class ChaptersComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.bookForm.invalid) {
+      this.msg.error('Please fill in the required fields');
+      this.bookForm.markAllAsTouched(); 
+      return;
+    }
+
     try {
       this.http.post('chapters', this.bookForm.value).subscribe((res) => {
         console.log(res);
         if (res) {
-          this.msg.success('Data Submit Successfully')
-          this.bookForm.reset()
+          this.msg.success('Data Submitted Successfully');
+          this.bookForm.reset();
         }
-      })
+      });
     } catch (error) {
       console.log(error);
-      this.msg.error('Some error founded')
+      this.msg.error('Some error occurred');
     }
   }
+
   getdataClasses() {
     try {
       this.http.get('classes').subscribe((res: any) => {
         console.log(res);
-        this.clases = this.sortClasses(res)
-      })
+        this.clases = this.sortClasses(res);
+      });
     } catch (error) {
       console.log(error);
-
     }
   }
+
   sortClasses(classes: any) {
-    return classes.sort((a: { classname: string; }, b: { classname: string; }) => {
+    return classes.sort((a: { classname: string }, b: { classname: string }) => {
       const numA = this.extractNumber(a.classname);
       const numB = this.extractNumber(b.classname);
       if (numA === null && numB === null) return 0;
@@ -87,13 +94,14 @@ export class ChaptersComponent implements OnInit {
     const match = classname.match(/\d+/);
     return match ? parseInt(match[0], 10) : null;
   }
-  books: any
+
+  books: any;
   getbooks(id: any) {
     try {
       this.http.getbyid('books', id).subscribe((res) => {
         console.log(res);
-        this.books = res
-      })
+        this.books = res;
+      });
     } catch (error) {
       console.log(error);
     }

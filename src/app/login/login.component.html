@@ -1,4 +1,4 @@
-<div class="min-h-screen ">
+<div class="h-screen w-full overflow-hidden">
     <div class="flex bg-white dark:bg-gray-950 rounded-lg shadow-lg w-full">
         <div class="hidden lg:block  lg:w-1/2 ">
             <nz-carousel nzAutoPlay class="min-h-screen">
@@ -18,72 +18,6 @@
                 </div>
             </nz-carousel>
         </div>
-        <!-- <div class="w-full max-w-[450px] mx-auto p-8 py-4 lg:w-1/2 grid place-items-center select-none min-h-screen">
-            <p class="text-xl w-full text-gray-600 text-center dark:text-gray-200 font-bold md:text-3xl font-sans">Log
-                In Your
-                Account!</p>
-            <button id="login-google-btn" class=""></button>
-            <div class="mt-4 flex w-full items-center justify-between">
-                <span class="border-b w-1/5 lg:w-1/4"></span>
-                <div class="text-xs text-center text-gray-500 uppercase cursor-pointer dark:hover:text-[#ffff00]">or
-                    login with email</div>
-                <span class="border-b w-1/5 lg:w-1/4"></span>
-            </div>
-            <form [formGroup]="signupForm" class="w-full" (ngSubmit)="submitForm()">
-
-                <div class="mt-2">
-                    <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-400">Email Address</label>
-                    <input formControlName="email"
-                        class="bg-gray-200  text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                        type="email" />
-                    <div class="h-4 text-red-600">
-                        <div *ngIf="email.invalid && (email.dirty || email.touched)">
-                            <div *ngIf="email.errors && email.errors['required']">
-                                Email is required
-                            </div>
-                            <div *ngIf="email.errors && email.errors['email']">
-                                Invalid email address
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <div class="flex justify-between">
-                        <label class="block text-gray-700 dark:text-gray-400 text-sm font-bold mb-2">Password</label>
-                    </div>
-                    <input formControlName="password"
-                        class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                        type="password" />
-                    <div class="h-4 text-red-600">
-                        <div *ngIf="password.invalid && (password.dirty || password.touched)">
-                            <div *ngIf="password.errors && password.errors['required']">
-                                Password is required
-                            </div>
-                            <div *ngIf="password.errors && password.errors['minlength']">
-                                Password must be at least 4 characters long
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-2 text-gray-900 dark:text-gray-200">
-                    <input formControlName="rememberme" class="outline-none" id="remember" type="checkbox">
-                    <label for="remember">Remember me</label>
-                </div>
-
-                <div class="mt-6">
-                    <button
-                        class="bg-gray-700 dark:bg-gray-900 outline-none dark:hover:bg-[#ffff00] dark:hover:text-gray-950 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Login
-                        Now</button>
-                </div>
-            </form>
-
-            <div class="mt-4 flex w-full items-center justify-between">
-                <span class="border-b w-1/5 md:w-1/4"></span>
-                <div routerLink="/SignUp"
-                    class="text-xs text-gray-500 uppercase cursor-pointer dark:hover:text-[#ffff00]">or sign up</div>
-                <span class="border-b w-1/5 md:w-1/4"></span>
-            </div>
-        </div> -->
         <div id="loaderdiv"
             class="nzspin relative dark:nzspin   w-full lg:w-1/2 min-h-screen flex align-items-center justify-center">
             <nz-spin *ngIf="loader" class="top-1/2 z-50 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2"

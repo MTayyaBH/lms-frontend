@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DbServiceService } from '../db-service.service';
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
   templateUrl: './starttest.component.html',
   styleUrls: ['./starttest.component.css']
 })
-export class StarttestComponent implements OnInit {
+export class StarttestComponent implements OnInit,OnDestroy {
   myForm: FormGroup;
   isTestStart: boolean = false;
   class: string | null = null;
@@ -50,6 +50,9 @@ export class StarttestComponent implements OnInit {
   }
   createMessage(type: string, msg: any): void {
     this.message.create(type, `${msg}`);
+  }
+  ngOnDestroy() {
+    this.stopCounter()
   }
   min: any = 9;
   sec: any = 59;

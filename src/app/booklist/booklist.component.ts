@@ -60,7 +60,7 @@ export class BooklistComponent implements OnInit{
     const currentUrlWithoutDomain = window.location.pathname + window.location.search;
     const path = this.http.encrypt(currentUrlWithoutDomain, 'path')
     console.log(path);
-    this.router.navigate(['/Admin/EditMCQs'], { queryParams: { UID: uid, Path: path } });
+    this.router.navigate(['/Admin/Edit-Book'], { queryParams: { UID: uid, Path: path } });
   }
 
   popconfirm(uid: any) {

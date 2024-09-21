@@ -16,7 +16,7 @@ export class DbServiceService {
   }
   public secretkey: string = 'lmsdatadcinandularnestjsmongodb97etc';
   private url: string = 'http://localhost:3000';
-  // private url: string = 'http://192.168.10.10:3000';
+  // private url: string = 'http://192.168.10.17:3000';
   logindata: any;
   TestMCQs: any
   constructor(

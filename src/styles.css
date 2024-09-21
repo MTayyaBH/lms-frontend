@@ -123,6 +123,23 @@ font-weight: 400;
   transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
   content: '';
 }
-.ant-menu-submenu-title:hover{
+/* .ant-menu-submenu-title:hover{
 color: #0e0e0e !important;
+} */
+/* nz-table-inner-default{
+  overflow: auto;
+}
+nz-table-inner-default::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+} */
+.spin .ant-spin-dot i{
+  background-color: #1a1a1a !important;
+}
+.dark\:spin:is(.dark *) .ant-spin-dot i {
+  background-color: #ffff00 !important;
+}
+
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+  background: transparent !important;
 }

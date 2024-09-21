@@ -59,6 +59,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { ClasslistComponent } from './classlist/classlist.component';
 import { BooklistComponent } from './booklist/booklist.component';
+import { ChapterslistComponent } from './chapterslist/chapterslist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +89,8 @@ import { BooklistComponent } from './booklist/booklist.component';
     MenuComponent,
     McqslistComponent,
     ClasslistComponent,
-    BooklistComponent
+    BooklistComponent,
+    ChapterslistComponent
   ],
   imports: [
     BrowserModule,NzIconModule,NzDrawerModule,NzCarouselModule,NzMessageModule,
