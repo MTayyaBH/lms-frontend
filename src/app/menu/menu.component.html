@@ -36,6 +36,7 @@
             List</li>
         </ul>
       </li>
+      
       <li nz-submenu nzTitle="Chapters" nzIcon="read">
         <ul>
           <li routerLink="Chapters" nz-menu-item>Add New Chapters</li>
@@ -46,6 +47,18 @@
                 {{ book.book_name }}</li>
             </ul>
           </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Questions" nzIcon="question">
+        <ul>
+          <li routerLink="Add-Questions" nz-menu-item>Add New Questions</li>
+          <li *ngFor="let class of classes" nz-submenu [nzTitle]="class.classname + ' Book List'"
+          (nzOpenChange)="getBooks(class.uid)">
+          <ul>
+            <li *ngFor="let book of books[class.uid]" (click)="navegatertoquestion(class.uid,book.uid)" nz-menu-item>
+              {{ book.book_name }}</li>
+          </ul>
+        </li>
         </ul>
       </li>
     </ul>

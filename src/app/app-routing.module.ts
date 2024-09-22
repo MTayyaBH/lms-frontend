@@ -22,6 +22,8 @@ import { McqslistComponent } from './mcqslist/mcqslist.component';
 import { ClasslistComponent } from './classlist/classlist.component';
 import { BooklistComponent } from './booklist/booklist.component';
 import { ChapterslistComponent } from './chapterslist/chapterslist.component';
+import { AddquestionsComponent } from './addquestions/addquestions.component';
+import { QuestionslistComponent } from './questionslist/questionslist.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -44,6 +46,9 @@ const routes: Routes = [
       { path: 'Books-List', component: BooklistComponent },
       { path: 'Chapters', component: ChaptersComponent },
       { path: 'Chapters-List', component: ChapterslistComponent },
+      { path: 'Add-Questions', component: AddquestionsComponent },
+      { path: 'Edit-Questions', component: AddquestionsComponent },
+      { path: 'Questions-List', component: QuestionslistComponent },
     ]
   },
   { path: 'LMS/OnlineTest', component: OnlineTestComponent },

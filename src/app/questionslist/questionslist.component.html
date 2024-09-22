@@ -1,0 +1,131 @@
+<section class="w-full items-center flex justify-center p-4">
+    <section class="w-full  mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+        <h1
+            class="customshadow dark:customshadow rounded-full text-center my-2 mb-5 py-2  md:text-lg font-bold text-gray-800 dark:text-gray-200 tracking-widest">
+            Learning Management System Classes Details
+        </h1>
+        <div class="overflow-x-auto scrollbar dark:scrollbar select-none cursor-pointer" appDragScroll>
+            <nz-table #sortTable [nzData]="list" nzTableLayout="auto" class="min-w-[800px]">
+                <thead class="dark:!bg-gray-900">
+                    <tr class="dark:!bg-gray-900 ">
+                        <th
+                            class="w-14 text-nowrap text-gray-800 dark:text-gray-200 border dark:bg-gray-900 dark:border-gray-700">
+                            No</th>
+                        <th class="text-gray-800 text-nowrap dark:text-gray-200 border dark:bg-gray-900 dark:border-gray-700"
+                            nzCustomFilter>Statements
+                            <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:bg-gray-900 text-ellipsis dark:text-gray-200 border dark:border-gray-700">
+                            Question Type
+                            <nz-filter-trigger [(nzVisible)]="visible2" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu2">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Type Difficulty
+                            <nz-filter-trigger [(nzVisible)]="visible3" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu3">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Chapter Name
+                            <nz-filter-trigger [(nzVisible)]="visible4" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu4">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Created Date
+                        </th>
+                        <th
+                            class="text-gray-800 text-center text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="dark:!bg-gray-800">
+                    <nz-spin *ngIf="loadingMore"
+                        class="!text-[#ffff00] absolute top-1/2 left-1/2 transform translate-x-1/2 translate-y-1/2 z-50"
+                        nzSize="large"></nz-spin>
+                    <tr *ngFor="let data of sortTable.data; let i=index"
+                        class="hover:!bg-gray-100 dark:hover:!bg-gray-900 group border-b dark:border-gray-700">
+                        <th
+                            class="text-gray-700  text-nowrap dark:text-gray-300 text-center group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-x border-b dark:border-gray-700">
+                            {{i+1}}</th>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{data.statement}}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.questiontype }}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.type }}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.chaptername }}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.cdate | date:'dd-MM-yyyy' }}</td>
+                        <td
+                            class="text-gray-700 space-x-4 px-3 text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            <i (click)="editmcqs(data.uid)"
+                                class="font-semibold  text-blue-600 dark:text-[#ffff00] cursor-pointer fa-solid fa-pen-to-square"></i>
+                            <i nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="popconfirm(data.uid)"
+                                (nzOnCancel)="popcancel()"
+                                class="font-semibold  text-red-600 cursor-pointer fa-solid fa-trash-can"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown bg-white dark:bg-gray-700 shadow-lg rounded-md p-3">
+                <div class="search-box">
+                    <input (keyup)="search()" (keydown)="search()" (change)="search()" [(ngModel)]="searchStatement"
+                        type="text" nz-input placeholder="Search Question"
+                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300" />
+                </div>
+            </div>
+        </nz-dropdown-menu>
+        <nz-dropdown-menu #menu2="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown bg-white dark:bg-gray-700 shadow-lg rounded-md p-3">
+                <div class="search-box">
+                    <input (keyup)="search()" (keydown)="search()" (change)="search()" [(ngModel)]="searchType"
+                        type="text" nz-input placeholder="Search Mcqs"
+                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300" />
+                </div>
+            </div>
+        </nz-dropdown-menu>
+        <nz-dropdown-menu #menu3="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown bg-white dark:bg-gray-700 shadow-lg rounded-md p-3">
+                <div class="search-box">
+                    <input (keyup)="search()" (keydown)="search()" (change)="search()" [(ngModel)]="type"
+                        type="text" nz-input placeholder="Search Mcqs"
+                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300" />
+                </div>
+            </div>
+        </nz-dropdown-menu>
+        <nz-dropdown-menu #menu4="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown bg-white dark:bg-gray-700 shadow-lg rounded-md p-3">
+                <div class="search-box">
+                    <input (keyup)="search()" (keydown)="search()" (change)="search()" [(ngModel)]="chapter"
+                        type="text" nz-input placeholder="Search Mcqs"
+                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300" />
+                </div>
+            </div>
+        </nz-dropdown-menu>
+    </section>
+</section>

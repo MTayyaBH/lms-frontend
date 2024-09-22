@@ -79,6 +79,9 @@ export class MenuComponent implements OnInit {
   navegatertochapters(classuid: any,bookuid:any) {
     this.router.navigate(['/Admin/Chapters-List'], { queryParams: { ClassName: classuid,BookName:bookuid } });
   }
+  navegatertoquestion(classuid: any,bookuid:any) {
+    this.router.navigate(['/Admin/Questions-List'], { queryParams: { ClassName: classuid,BookName:bookuid } });
+  }
   books: any[] = [];
   getBooks(id: any): void {
     try {

@@ -60,6 +60,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { ClasslistComponent } from './classlist/classlist.component';
 import { BooklistComponent } from './booklist/booklist.component';
 import { ChapterslistComponent } from './chapterslist/chapterslist.component';
+import { AddquestionsComponent } from './addquestions/addquestions.component';
+import { QuestionslistComponent } from './questionslist/questionslist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +92,9 @@ import { ChapterslistComponent } from './chapterslist/chapterslist.component';
     McqslistComponent,
     ClasslistComponent,
     BooklistComponent,
-    ChapterslistComponent
+    ChapterslistComponent,
+    AddquestionsComponent,
+    QuestionslistComponent
   ],
   imports: [
     BrowserModule,NzIconModule,NzDrawerModule,NzCarouselModule,NzMessageModule,
