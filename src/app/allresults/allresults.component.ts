@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, AfterViewInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { DbServiceService } from '../db-service.service';
 
@@ -8,7 +8,7 @@ import { DbServiceService } from '../db-service.service';
   templateUrl: './allresults.component.html',
   styleUrls: ['./allresults.component.css']
 })
-export class AllresultsComponent implements OnInit {
+export class AllresultsComponent implements OnInit,AfterViewInit{
   initLoading = true; 
   loadingMore = false;
   data: any[] = [];
@@ -18,6 +18,11 @@ export class AllresultsComponent implements OnInit {
     private msg: NzMessageService,
     private el: ElementRef
   ) { }
+  ngAfterViewInit(): void {
+    if (typeof window.runDragScroll === 'function') {
+      window.runDragScroll();
+    }
+  }
   visible: boolean = false
   visibleclass: boolean = false
   visiblebook: boolean = false

@@ -76,13 +76,14 @@
       <li nz-submenu nzTitle="Paperas Schemas" nzIcon="schedule">
         <ul>
           <li routerLink="Generate-Schemas" nz-menu-item>Add New Schemas</li>
-          <li *ngFor="let class of classes" nz-submenu [nzTitle]="class.classname + ' Book List'"
+          <li routerLink="List-Schemas" nz-menu-item>List Schemas</li>
+          <!-- <li *ngFor="let class of classes" nz-submenu [nzTitle]="class.classname + ' Book List'"
             (nzOpenChange)="getBooks(class.uid)">
             <ul>
               <li *ngFor="let book of books[class.uid]" nz-menu-item>
                 {{ book.book_name }}</li>
             </ul>
-          </li>
+          </li> -->
         </ul>
       </li>
     </ul>

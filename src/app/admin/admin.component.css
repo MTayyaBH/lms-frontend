@@ -8,8 +8,8 @@
   }
   
   .scrollbar::-webkit-scrollbar-thumb {
-    background: #1b1b1b; /* Scrollbar color */
-    border-radius: 4px; /* Rounded corners */
+    background: #1b1b1b; 
+    border-radius: 4px; 
   }
   .dark\:scrollbar:is(.dark *)::-webkit-scrollbar {
     width: 4px;

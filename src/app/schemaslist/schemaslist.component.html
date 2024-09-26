@@ -12,7 +12,7 @@
                             class="w-14 text-nowrap text-gray-800 dark:text-gray-200 border dark:bg-gray-900 dark:border-gray-700">
                             No</th>
                         <th class="text-gray-800 text-nowrap dark:text-gray-200 border dark:bg-gray-900 dark:border-gray-700"
-                            nzCustomFilter>Statements
+                            nzCustomFilter>Schema Name
                             <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                                 [nzDropdownMenu]="menu">
                                 <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
@@ -21,7 +21,7 @@
                         </th>
                         <th nzCustomFilter
                             class="text-gray-800 text-nowrap dark:bg-gray-900 text-ellipsis dark:text-gray-200 border dark:border-gray-700">
-                            Question Type
+                            Question In Short Portion 1
                             <nz-filter-trigger [(nzVisible)]="visible2" [nzActive]="searchValue.length > 0"
                                 [nzDropdownMenu]="menu2">
                                 <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
@@ -30,7 +30,7 @@
                         </th>
                         <th nzCustomFilter
                             class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
-                            Type Difficulty
+                            Question In Short Portion 2
                             <nz-filter-trigger [(nzVisible)]="visible3" [nzActive]="searchValue.length > 0"
                                 [nzDropdownMenu]="menu3">
                                 <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
@@ -39,7 +39,52 @@
                         </th>
                         <th nzCustomFilter
                             class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
-                            Chapter Name
+                            Question In Short Portion 3
+                            <nz-filter-trigger [(nzVisible)]="visible4" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu4">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Question In Long Portion 
+                            <nz-filter-trigger [(nzVisible)]="visible4" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu4">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Choice  In Short Portion 1
+                            <nz-filter-trigger [(nzVisible)]="visible4" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu4">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Choice  In Short Portion 2 
+                            <nz-filter-trigger [(nzVisible)]="visible4" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu4">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Choice  In Short Portion 3 
+                            <nz-filter-trigger [(nzVisible)]="visible4" [nzActive]="searchValue.length > 0"
+                                [nzDropdownMenu]="menu4">
+                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
+                                    nz-icon nzType="search"></span>
+                            </nz-filter-trigger>
+                        </th>
+                        <th nzCustomFilter
+                            class="text-gray-800 text-nowrap dark:text-gray-200 dark:bg-gray-900 border dark:border-gray-700">
+                            Choice  In Long Portion 
                             <nz-filter-trigger [(nzVisible)]="visible4" [nzActive]="searchValue.length > 0"
                                 [nzDropdownMenu]="menu4">
                                 <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
@@ -66,16 +111,31 @@
                             {{i+1}}</th>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{data.statement}}</td>
+                            {{data.schemaname}}</td>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{ data.questiontype }}</td>
+                            {{ data.questioninsortportion1 }}</td>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{ data.type }}</td>
+                            {{ data.questioninsortportion2 }}</td>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
-                            {{ data.chaptername }}</td>
+                            {{ data.questioninsortportion3 }}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.longportions }}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.choiceinsortportion1 }}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.choiceinsortportion2 }}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.choiceinsortportion3 }}</td>
+                        <td
+                            class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
+                            {{ data.choiceinlongquestions }}</td>
                         <td
                             class="text-gray-700  text-nowrap dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900 border-r dark:border-gray-700">
                             {{ data.cdate | date:'dd-MM-yyyy' }}</td>

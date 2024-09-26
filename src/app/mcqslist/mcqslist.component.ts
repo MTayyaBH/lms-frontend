@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { DbServiceService } from '../db-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './mcqslist.component.html',
   styleUrls: ['./mcqslist.component.css']
 })
-export class McqslistComponent implements OnInit {
+export class McqslistComponent implements OnInit ,AfterViewInit{
   initLoading = true;
   loadingMore = false;
   data: any[] = [];
@@ -29,6 +29,11 @@ export class McqslistComponent implements OnInit {
       this.classuid = params['ClassName'];
       this.getdata()
     });
+  }
+  ngAfterViewInit(): void {
+    if (typeof window.runDragScroll === 'function') {
+      window.runDragScroll();
+    }
   }
   getdata() {
     this.loadingMore = true

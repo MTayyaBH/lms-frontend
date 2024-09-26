@@ -64,6 +64,7 @@ import { AddquestionsComponent } from './addquestions/addquestions.component';
 import { QuestionslistComponent } from './questionslist/questionslist.component';
 import { AutogeneratepaperComponent } from './autogeneratepaper/autogeneratepaper.component';
 import { AddpaperschemasComponent } from './addpaperschemas/addpaperschemas.component';
+import { SchemaslistComponent } from './schemaslist/schemaslist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +99,8 @@ import { AddpaperschemasComponent } from './addpaperschemas/addpaperschemas.comp
     AddquestionsComponent,
     QuestionslistComponent,
     AutogeneratepaperComponent,
-    AddpaperschemasComponent
+    AddpaperschemasComponent,
+    SchemaslistComponent
   ],
   imports: [
     BrowserModule,NzIconModule,NzDrawerModule,NzCarouselModule,NzMessageModule,

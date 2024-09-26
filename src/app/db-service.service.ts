@@ -94,4 +94,6 @@ export class DbServiceService {
   createMessage(type: string, msg: string): void {
     this.message.create(type, msg);
   }
+  
 }
+

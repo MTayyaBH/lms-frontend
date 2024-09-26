@@ -26,6 +26,7 @@ import { AddquestionsComponent } from './addquestions/addquestions.component';
 import { QuestionslistComponent } from './questionslist/questionslist.component';
 import { AutogeneratepaperComponent } from './autogeneratepaper/autogeneratepaper.component';
 import { AddpaperschemasComponent } from './addpaperschemas/addpaperschemas.component';
+import { SchemaslistComponent } from './schemaslist/schemaslist.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
       { path: 'Questions-List', component: QuestionslistComponent },
       { path: 'Auto-Generate-Paper', component: AutogeneratepaperComponent },
       { path: 'Generate-Schemas', component: AddpaperschemasComponent },
+      { path: 'List-Schemas', component: SchemaslistComponent },
     ]
   },
   { path: 'LMS/OnlineTest', component: OnlineTestComponent },

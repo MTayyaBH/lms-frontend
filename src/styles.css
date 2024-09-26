@@ -126,13 +126,34 @@ font-weight: 400;
 /* .ant-menu-submenu-title:hover{
 color: #0e0e0e !important;
 } */
-/* nz-table-inner-default{
+.nztable nz-table-inner-default{
   overflow: auto;
 }
-nz-table-inner-default::-webkit-scrollbar {
+.nztable nz-table-inner-default::-webkit-scrollbar {
   width: 7px;
   height: 7px;
-} */
+}
+
+.nztable nz-table-inner-default::-webkit-scrollbar-track {
+  background: #dbdbdb;
+}
+
+.nztable nz-table-inner-default::-webkit-scrollbar-thumb {
+  background: #1b1b1b; /* Scrollbar color */
+  border-radius: 4px; /* Rounded corners */
+}
+.dark\:nztable:is(.dark *) nz-table-inner-default::-webkit-scrollbar {
+  width: 7px;
+}
+.dark\:nztable:is(.dark *) nz-table-inner-default::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  background: #474747;
+  border-radius: 10px;
+}
+.dark\:nztable:is(.dark *) nz-table-inner-default::-webkit-scrollbar-thumb {
+  background: yellow !important;
+  border-radius: 6px;
+}
 .spin .ant-spin-dot i{
   background-color: #1a1a1a !important;
 }

@@ -79,7 +79,51 @@
       wrapper.addEventListener("mouseleave", autoPlay);
     }
   </script>
-
+ <script>
+  function initializeDragScroll() {
+    const tableElements = document.querySelectorAll('.nztable .ant-table-container');
+    tableElements.forEach((element) => {
+      let isMouseDown = false;
+      let startX, scrollLeft;
+      element.addEventListener('mousedown', (event) => {
+        isMouseDown = true;
+        element.style.cursor = 'grabbing';
+        startX = event.pageX - element.offsetLeft;
+        scrollLeft = element.scrollLeft;
+      });
+      element.addEventListener('mouseup', () => {
+        isMouseDown = false;
+        element.style.cursor = 'pointer';
+      });
+      element.addEventListener('mousemove', (event) => {
+        if (!isMouseDown) return;
+        const x = event.pageX - element.offsetLeft;
+        const scroll = x - startX;
+        element.scrollLeft = scrollLeft - scroll;
+      });
+      element.addEventListener('mouseleave', () => {
+        isMouseDown = false;
+        element.style.cursor = 'pointer';
+      });
+      element.addEventListener('dragstart', (event) => {
+        event.preventDefault();
+      });
+    });
+  }
+  function observeTableListChanges() {
+    const tableContainer = document.querySelector('.nztable');
+    if (tableContainer) {
+      const observer = new MutationObserver(() => {
+        initializeDragScroll(); 
+      });
+      observer.observe(tableContainer, { childList: true, subtree: true });
+      initializeDragScroll();
+    }
+  }
+  function runDragScroll() {
+    observeTableListChanges();
+  }
+</script>
 </body>
 
 </html>

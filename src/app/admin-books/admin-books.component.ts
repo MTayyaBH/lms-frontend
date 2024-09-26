@@ -67,20 +67,33 @@ export class AdminBooksComponent implements OnInit {
 
     }
   }
+  loader:boolean=false
+  startLoading() {
+    this.loader = true
+    document.getElementById('imageloader')?.classList.add('disabled')
+  }
+  closeLoading() {
+    this.loader = false
+    document.getElementById('imageloader')?.classList.remove('disabled')
+  }
   onFileChange(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const formData = new FormData();
       formData.append('image', event.target.files[0]);
+      this.startLoading()
       this.uploadService.post('imageupload/create', formData).subscribe((res:any)=>{
         if (res) {
           console.log(res);
+          this.closeLoading()
           this.imageUrl=res
           this.msg.success('Image Uploaded')
         }else{
+          this.closeLoading()
           this.msg.error('Some error founded')
         }
       });
     } else {
+      this.closeLoading()
       console.log('No file selected');
       this.msg.error('Image not selected')
     }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { DbServiceService } from '../db-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './chapterslist.component.html',
   styleUrls: ['./chapterslist.component.css']
 })
-export class ChapterslistComponent implements OnInit {
+export class ChapterslistComponent implements OnInit ,AfterViewInit{
   initLoading = true;
   loadingMore = false;
   data1: any[] = [];
@@ -37,6 +37,11 @@ export class ChapterslistComponent implements OnInit {
       console.log(this.paremsData);
       this.getData()
     });
+  }
+  ngAfterViewInit(): void {
+    if (typeof window.runDragScroll === 'function') {
+      window.runDragScroll();
+    }
   }
   getData() {
     this.loadingMore = true

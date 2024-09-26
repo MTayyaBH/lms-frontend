@@ -1,14 +1,19 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { Component, ElementRef, OnInit, Renderer2, AfterViewInit } from '@angular/core';
 import { DbServiceService } from '../db-service.service';
-
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DragScrollDirective } from '../drag-scroll.directive';
+declare global {
+  interface Window {
+    runDragScroll: () => void;
+  }
+}
 @Component({
-  selector: 'app-questionslist',
-  templateUrl: './questionslist.component.html',
-  styleUrls: ['./questionslist.component.css']
+  selector: 'app-schemaslist',
+  templateUrl: './schemaslist.component.html',
+  styleUrls: ['./schemaslist.component.css']
 })
-export class QuestionslistComponent implements OnInit ,AfterViewInit{
+export class SchemaslistComponent implements OnInit,AfterViewInit{
   initLoading = true;
   loadingMore = false;
   data: any[] = [];
@@ -18,7 +23,7 @@ export class QuestionslistComponent implements OnInit ,AfterViewInit{
     private http: DbServiceService,
     private msg: NzMessageService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,private el: ElementRef, private renderer: Renderer2
   ) { }
   visible: boolean = false
   visible2: boolean = false
@@ -29,22 +34,17 @@ export class QuestionslistComponent implements OnInit ,AfterViewInit{
   searchValue = '';
   paremsData: any = {}
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.paremsData.ClassName = params['ClassName'];
-      this.paremsData.BookName = params['BookName'];
-      console.log(this.paremsData);
+    // this.route.queryParams.subscribe(params => {
+    //   this.paremsData.ClassName = params['ClassName'];
+    //   this.paremsData.BookName = params['BookName'];
+    //   console.log(this.paremsData);
       this.getData()
-    });
-  }
-  ngAfterViewInit(): void {
-    if (typeof window.runDragScroll === 'function') {
-      window.runDragScroll();
-    }
+    // });
   }
   getData() {
     this.loadingMore = true
     try {
-      this.http.getallwithdata('questions/books', this.paremsData).subscribe((res: any) => {
+      this.http.get('schemas').subscribe((res: any) => {
         this.data = res
         this.list = res
         console.log(res);
@@ -118,5 +118,10 @@ export class QuestionslistComponent implements OnInit ,AfterViewInit{
   extractNumber(classname: string): number | null {
     const match = classname.match(/\d+/);
     return match ? parseInt(match[0], 10) : null;
+  }
+  ngAfterViewInit(): void {
+    if (typeof window.runDragScroll === 'function') {
+      window.runDragScroll();
+    }
   }
 }

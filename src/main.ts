@@ -14,3 +14,4 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   setTimeout(() => {
     AOS.refresh();
   }, 0);
+  
