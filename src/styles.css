@@ -139,7 +139,16 @@ nz-table-inner-default::-webkit-scrollbar {
 .dark\:spin:is(.dark *) .ant-spin-dot i {
   background-color: #ffff00 !important;
 }
-
+.dark\:multiselect:is(.dark *) .ant-select-selection-item {
+  background-color: rgb(32, 32, 32) !important;
+  border-radius: 7px !important;
+}
+.dark\:multiselect:is(.dark *) .ant-select-selection-item-remove {
+  color: #f3f4f6 !important;
+}
+.ant-select-multiple .ant-select-selection-item{
+  border: 0 !important;
+}
 .ant-menu-dark .ant-menu-inline.ant-menu-sub {
   background: transparent !important;
 }

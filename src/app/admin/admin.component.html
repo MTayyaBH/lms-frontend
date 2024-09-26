@@ -1,5 +1,5 @@
 <main class="pt-20 w-full h-full flex">
-    <section [ngClass]="{'w-12 md:w-48':!iscolse,'w-12':iscolse}" #firstSection class="flex-shrink-0 z-30 h-full ">
+    <section [ngClass]="{'w-12 md:w-[200px]':!iscolse,'w-12':iscolse}" #firstSection class="flex-shrink-0 z-30 h-full ">
         <app-menu  (dataChanged)="handleDataChanged($event)" class="fixed overflow-y-auto h-[calc(100vh-80px)] scrollbar select-none dark:scrollbar"></app-menu>
     </section>
     <section #secondSection class="flex-grow">

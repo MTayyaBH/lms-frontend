@@ -62,6 +62,8 @@ import { BooklistComponent } from './booklist/booklist.component';
 import { ChapterslistComponent } from './chapterslist/chapterslist.component';
 import { AddquestionsComponent } from './addquestions/addquestions.component';
 import { QuestionslistComponent } from './questionslist/questionslist.component';
+import { AutogeneratepaperComponent } from './autogeneratepaper/autogeneratepaper.component';
+import { AddpaperschemasComponent } from './addpaperschemas/addpaperschemas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +96,9 @@ import { QuestionslistComponent } from './questionslist/questionslist.component'
     BooklistComponent,
     ChapterslistComponent,
     AddquestionsComponent,
-    QuestionslistComponent
+    QuestionslistComponent,
+    AutogeneratepaperComponent,
+    AddpaperschemasComponent
   ],
   imports: [
     BrowserModule,NzIconModule,NzDrawerModule,NzCarouselModule,NzMessageModule,

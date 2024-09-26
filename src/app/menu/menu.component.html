@@ -36,7 +36,7 @@
             List</li>
         </ul>
       </li>
-      
+
       <li nz-submenu nzTitle="Chapters" nzIcon="read">
         <ul>
           <li routerLink="Chapters" nz-menu-item>Add New Chapters</li>
@@ -53,12 +53,36 @@
         <ul>
           <li routerLink="Add-Questions" nz-menu-item>Add New Questions</li>
           <li *ngFor="let class of classes" nz-submenu [nzTitle]="class.classname + ' Book List'"
-          (nzOpenChange)="getBooks(class.uid)">
-          <ul>
-            <li *ngFor="let book of books[class.uid]" (click)="navegatertoquestion(class.uid,book.uid)" nz-menu-item>
-              {{ book.book_name }}</li>
-          </ul>
-        </li>
+            (nzOpenChange)="getBooks(class.uid)">
+            <ul>
+              <li *ngFor="let book of books[class.uid]" (click)="navegatertoquestion(class.uid,book.uid)" nz-menu-item>
+                {{ book.book_name }}</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Paperas" nzIcon="file-done">
+        <ul>
+          <li nz-submenu nzTitle="Generate Paper" >
+            <ul>
+              <li nz-menu-item> Custom Generate</li>
+              <li nz-menu-item routerLink="Auto-Generate-Paper"> Auto Generate</li>
+            </ul>
+          </li>
+          <li *ngFor="let class of classes" nz-menu-item>{{class.classname}} Books
+            List</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Paperas Schemas" nzIcon="schedule">
+        <ul>
+          <li routerLink="Generate-Schemas" nz-menu-item>Add New Schemas</li>
+          <li *ngFor="let class of classes" nz-submenu [nzTitle]="class.classname + ' Book List'"
+            (nzOpenChange)="getBooks(class.uid)">
+            <ul>
+              <li *ngFor="let book of books[class.uid]" nz-menu-item>
+                {{ book.book_name }}</li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
