@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { DbServiceService } from '../db-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-admin-books',
   templateUrl: './admin-books.component.html',
@@ -78,26 +78,105 @@ export class AdminBooksComponent implements OnInit {
   }
   onFileChange(event: any) {
     if (event.target.files && event.target.files.length > 0) {
-      const formData = new FormData();
-      formData.append('image', event.target.files[0]);
-      this.startLoading()
-      this.uploadService.post('imageupload/create', formData).subscribe((res:any)=>{
-        if (res) {
-          console.log(res);
-          this.closeLoading()
-          this.imageUrl=res
-          this.msg.success('Image Uploaded')
-        }else{
-          this.closeLoading()
-          this.msg.error('Some error founded')
-        }
-      });
+      const file = event.target.files[0];
+      const validImageTypes = ['image/jpeg','image/jpg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
+      if (validImageTypes.includes(file.type)) {
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        this.startLoading();
+        
+        this.uploadService.post('imageupload/create', formData).subscribe((res: any) => {
+          if (res) {
+            console.log(res);
+            this.closeLoading();
+            this.imageUrl = res;
+            this.msg.success('Image Uploaded');
+          } else {
+            this.closeLoading();
+            this.msg.error('Some error occurred');
+          }
+        });
+      } else {
+        this.closeLoading();
+        console.log('Invalid file type');
+        this.msg.error('Please select a valid image file');
+      }
     } else {
-      this.closeLoading()
+      this.closeLoading();
       console.log('No file selected');
-      this.msg.error('Image not selected')
+      this.msg.error('Image not selected');
     }
   }
+  
+ // onFileChange(evt: any) {
+  //   const target: DataTransfer = <DataTransfer>(evt.target);
+  //   if (target.files.length !== 1) {
+  //     console.error('Cannot use multiple files');
+  //     return;
+  //   }
+  //   this.startLoading()
+  //   const reader: FileReader = new FileReader();
+  //   reader.onload = (e: any) => {
+  //     const bstr: string = e.target.result;
+  //     const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+  //     const wsname: string = wb.SheetNames[0];
+  //     const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+  //     const data = XLSX.utils.sheet_to_json(ws, { header: 1 }); 
+  //     const headers:any = data[0]; 
+  //     const rows = data.slice(1);
+  //     const jsonData = rows.map((row: any) => {
+  //       const rowObj: any = {};
+  //       headers.forEach((header: string, index: number) => {
+  //         rowObj[header] = row[index] !== undefined ? row[index] : null;
+  //       });
+  //       return rowObj;
+  //     });
+  //     this.closeLoading()
+  //     console.log(JSON.stringify(jsonData, null, 2)); 
+  //   }; 
+    
+  //   reader.readAsBinaryString(target.files[0]);
+  // }
+  // uploadProgress:any=0
+  // onFileChange(evt: any) {
+  //   const file = evt.target.files[0];
+  //   if (!file) {
+  //     console.error('No file selected');
+  //     return;
+  //   }
+
+  //   this.startLoading();
+
+  //   const formData: FormData = new FormData();
+  //   formData.append('file', file, file.name);
+
+  //   // Post the formData and track the upload progress
+  //   this.http.post('http://localhost:3000/imageupload/xlsx', formData, {
+  //     reportProgress: true,
+  //     observe: 'events'
+  //   }).subscribe((event: HttpEvent<any>) => {
+  //     switch (event.type) {
+  //       case HttpEventType.UploadProgress:
+  //         // Compute and show the % done:
+  //         if (event.total) {
+  //           this.uploadProgress = Math.round(100 * event.loaded / event.total);
+  //           console.log(`Upload Progress: ${this.uploadProgress}%`);
+  //         }
+  //         break;
+  //       case HttpEventType.Response:
+  //         console.log('File uploaded successfully:', event.body);
+  //         this.uploadProgress = 0; // Reset progress on completion
+  //         this.closeLoading();
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   }, error => {
+  //     console.error('Error uploading file:', error);
+  //     this.closeLoading();
+  //   });
+  // }
   async onSubmit() {
     if (this.bookForm.valid && this.imageUrl) {
       const formData ={

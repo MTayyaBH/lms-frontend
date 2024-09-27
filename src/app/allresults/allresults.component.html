@@ -4,37 +4,42 @@
             Learning Management System Results Details
         </h1>
         <div class="overflow-x-auto scrollbar-hide select-none cursor-pointer" appDragScroll>
-            <nz-table id="customers" #sortTable [nzData]="list" nzTableLayout="fixed" class="nztable dark:nztable">
+            <nz-table id="customers" #sortTable [nzData]="list" nzTableLayout="auto" class="nztable dark:nztable">
                 <thead class="dark:!bg-gray-900">
                     <tr class="dark:!bg-gray-900 divide-x dark:divide-gray-100">
-                        <th class="w-24 text-gray-800 dark:!bg-gray-900 dark:text-gray-200">Image</th>
-                        <th class="text-gray-800 whitespace-nowrap  text-ellipsis dark:!bg-gray-900 dark:text-gray-200"
-                            nzCustomFilter>
+                        <th class="w-24 text-gray-800 dark:!bg-gray-900 dark:text-gray-200"
+                            style="white-space: nowrap;">Image</th>
+                        <th class="text-gray-800 whitespace-nowrap text-ellipsis dark:!bg-gray-900 dark:text-gray-200"
+                            style="white-space: nowrap;" nzCustomFilter>
                             Student Name
                             <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                                 [nzDropdownMenu]="menu">
-                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
-                                    nz-icon nzType="search"></span>
+                                <span class="!text-md hover:!bg-transparent text-gray-800 dark:text-gray-200" nz-icon
+                                    nzType="search"></span>
                             </nz-filter-trigger>
                         </th>
-                        <th class="text-gray-800 dark:text-gray-200 dark:!bg-gray-900" nzCustomFilter>
+                        <th class="text-gray-800 dark:text-gray-200 dark:!bg-gray-900" style="white-space: nowrap;"
+                            nzCustomFilter>
                             Class Name
                             <nz-filter-trigger [(nzVisible)]="visibleclass" [nzActive]="searchValue.length > 0"
                                 [nzDropdownMenu]="class">
-                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
-                                    nz-icon nzType="search"></span>
+                                <span class="!text-md hover:!bg-transparent text-gray-800 dark:text-gray-200" nz-icon
+                                    nzType="search"></span>
                             </nz-filter-trigger>
                         </th>
-                        <th class="text-gray-800 dark:text-gray-200 dark:!bg-gray-900" nzCustomFilter>
+                        <th class="text-gray-800 dark:text-gray-200 dark:!bg-gray-900" style="white-space: nowrap;"
+                            nzCustomFilter>
                             Book Name
                             <nz-filter-trigger [(nzVisible)]="visiblebook" [nzActive]="searchValue.length > 0"
                                 [nzDropdownMenu]="book">
-                                <span class="!text-md hover:!bg-transparent !pr-3 text-gray-800 dark:text-gray-200"
-                                    nz-icon nzType="search"></span>
+                                <span class="!text-md hover:!bg-transparent text-gray-800 dark:text-gray-200" nz-icon
+                                    nzType="search"></span>
                             </nz-filter-trigger>
                         </th>
-                        <th class="text-gray-800 dark:text-gray-200 dark:!bg-gray-900">Result</th>
-                        <th class="text-gray-800 dark:text-gray-200 dark:!bg-gray-900">Time Taken</th>
+                        <th class="text-gray-800 dark:text-gray-200 dark:!bg-gray-900" style="white-space: nowrap;">
+                            Result</th>
+                        <th class="text-gray-800 dark:text-gray-200 dark:!bg-gray-900" style="white-space: nowrap;">Time
+                            Taken</th>
                     </tr>
                 </thead>
                 <tbody class="dark:!bg-gray-800 relative">
@@ -43,30 +48,29 @@
                         nzSize="large"></nz-spin>
                     <tr *ngFor="let data of sortTable.data; let i=index"
                         class="hover:!bg-gray-100 dark:hover:!bg-gray-900 group">
-                        <td
-                            class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900">
+                        <td class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900"
+                            style="white-space: nowrap;">
                             <img class="w-10 h-10 object-fill rounded-full"
-                                [src]="data.image?data.image:'../../assets/images/3970786.jpg'" alt="">
+                                [src]="data.image ? data.image : '../../assets/images/3970786.jpg'" alt="">
                         </td>
-                        <td
-                            class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900">
+                        <td class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900"
+                            style="white-space: nowrap;">
                             {{ data.name }}
                         </td>
-                        <td
-                            class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900">
+                        <td class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900"
+                            style="white-space: nowrap;">
                             {{ data.classname }}
                         </td>
-                        <td
-                            class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900">
+                        <td class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900"
+                            style="white-space: nowrap;">
                             {{ data.book_name }}
                         </td>
-
-                        <td
-                            class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900">
+                        <td class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900"
+                            style="white-space: nowrap;">
                             {{data.correct}}/{{data.total}}
                         </td>
-                        <td
-                            class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900">
+                        <td class="text-gray-700 dark:text-gray-300 group-hover:bg-gray-100 dark:group-hover:bg-gray-900"
+                            style="white-space: nowrap;">
                             {{(10-data.min).toString().padStart(2, '0')}}:{{(59-data.sec).toString().padStart(2, '0')}}
                         </td>
                     </tr>

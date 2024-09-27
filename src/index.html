@@ -14,116 +14,54 @@
 
 <body class="dark:bg-slate-900 text-gray-300 dark:scrollbar">
   <app-root></app-root>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- dragscroll -->
   <script>
-   function carusel() {
-      const wrapper = document.querySelector(".wrapper");
-      const carousel = document.querySelector(".carousel");
-      const firstCardWidth = carousel.querySelector(".card").offsetWidth;
-      const arrowBtns = document.querySelectorAll(".wrapper i");
-      const carouselChildrens = [...carousel.children];
-      let isDragging = false, isAutoPlay = true, startX, startScrollLeft, timeoutId;
-      let cardPerView = Math.round(carousel.offsetWidth / firstCardWidth);
-      carouselChildrens.slice(-cardPerView).reverse().forEach(card => {
-        carousel.insertAdjacentHTML("afterbegin", card.outerHTML);
-      });
-      carouselChildrens.slice(0, cardPerView).forEach(card => {
-        carousel.insertAdjacentHTML("beforeend", card.outerHTML);
-      });
-      carousel.classList.add("no-transition");
-      carousel.scrollLeft = carousel.offsetWidth;
-      carousel.classList.remove("no-transition");
-      arrowBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          carousel.scrollLeft += btn.id == "left" ? -firstCardWidth : firstCardWidth;
+    function initializeDragScroll() {
+      const tableElements = document.querySelectorAll('.nztable .ant-table-container');
+      tableElements.forEach((element) => {
+        let isMouseDown = false;
+        let startX, scrollLeft;
+        element.addEventListener('mousedown', (event) => {
+          isMouseDown = true;
+          element.style.cursor = 'grabbing';
+          startX = event.pageX - element.offsetLeft;
+          scrollLeft = element.scrollLeft;
+        });
+        element.addEventListener('mouseup', () => {
+          isMouseDown = false;
+          element.style.cursor = 'pointer';
+        });
+        element.addEventListener('mousemove', (event) => {
+          if (!isMouseDown) return;
+          const x = event.pageX - element.offsetLeft;
+          const scroll = x - startX;
+          element.scrollLeft = scrollLeft - scroll;
+        });
+        element.addEventListener('mouseleave', () => {
+          isMouseDown = false;
+          element.style.cursor = 'pointer';
+        });
+        element.addEventListener('dragstart', (event) => {
+          event.preventDefault();
         });
       });
-      const dragStart = (e) => {
-        isDragging = true;
-        carousel.classList.add("dragging");
-        startX = e.pageX;
-        startScrollLeft = carousel.scrollLeft;
+    }
+    function observeTableListChanges() {
+      const tableContainer = document.querySelector('.nztable');
+      if (tableContainer) {
+        const observer = new MutationObserver(() => {
+          initializeDragScroll();
+        });
+        observer.observe(tableContainer, { childList: true, subtree: true });
+        initializeDragScroll();
       }
-      const dragging = (e) => {
-        if (!isDragging) return;
-        carousel.scrollLeft = startScrollLeft - (e.pageX - startX);
-      }
-      const dragStop = () => {
-        isDragging = false;
-        carousel.classList.remove("dragging");
-      }
-      const infiniteScroll = () => {
-        if (carousel.scrollLeft === 0) {
-          carousel.classList.add("no-transition");
-          carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidth);
-          carousel.classList.remove("no-transition");
-        }
-        else if (Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
-          carousel.classList.add("no-transition");
-          carousel.scrollLeft = carousel.offsetWidth;
-          carousel.classList.remove("no-transition");
-        }
-        clearTimeout(timeoutId);
-        if (!wrapper.matches(":hover")) autoPlay();
-      }
-      const autoPlay = () => {
-        // if (window.innerWidth < 800 || !isAutoPlay) return;
-        timeoutId = setTimeout(() => carousel.scrollLeft += firstCardWidth, 2500);
-      }
-      autoPlay();
-      carousel.addEventListener("mousedown", dragStart);
-      carousel.addEventListener("mousemove", dragging);
-      document.addEventListener("mouseup", dragStop);
-      carousel.addEventListener("scroll", infiniteScroll);
-      wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
-      wrapper.addEventListener("mouseleave", autoPlay);
+    }
+    function runDragScroll() {
+      observeTableListChanges();
     }
   </script>
- <script>
-  function initializeDragScroll() {
-    const tableElements = document.querySelectorAll('.nztable .ant-table-container');
-    tableElements.forEach((element) => {
-      let isMouseDown = false;
-      let startX, scrollLeft;
-      element.addEventListener('mousedown', (event) => {
-        isMouseDown = true;
-        element.style.cursor = 'grabbing';
-        startX = event.pageX - element.offsetLeft;
-        scrollLeft = element.scrollLeft;
-      });
-      element.addEventListener('mouseup', () => {
-        isMouseDown = false;
-        element.style.cursor = 'pointer';
-      });
-      element.addEventListener('mousemove', (event) => {
-        if (!isMouseDown) return;
-        const x = event.pageX - element.offsetLeft;
-        const scroll = x - startX;
-        element.scrollLeft = scrollLeft - scroll;
-      });
-      element.addEventListener('mouseleave', () => {
-        isMouseDown = false;
-        element.style.cursor = 'pointer';
-      });
-      element.addEventListener('dragstart', (event) => {
-        event.preventDefault();
-      });
-    });
-  }
-  function observeTableListChanges() {
-    const tableContainer = document.querySelector('.nztable');
-    if (tableContainer) {
-      const observer = new MutationObserver(() => {
-        initializeDragScroll(); 
-      });
-      observer.observe(tableContainer, { childList: true, subtree: true });
-      initializeDragScroll();
-    }
-  }
-  function runDragScroll() {
-    observeTableListChanges();
-  }
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/script.js"></script>
 </body>
 
 </html>
