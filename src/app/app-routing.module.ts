@@ -27,6 +27,7 @@ import { QuestionslistComponent } from './questionslist/questionslist.component'
 import { AutogeneratepaperComponent } from './autogeneratepaper/autogeneratepaper.component';
 import { AddpaperschemasComponent } from './addpaperschemas/addpaperschemas.component';
 import { SchemaslistComponent } from './schemaslist/schemaslist.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -36,8 +37,11 @@ const routes: Routes = [
   { path: 'SignUp', component: SignupComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'Results', component: AllresultsComponent },
-  { path: 'Admin', component: AdminComponent, 
-    children:[
+  {
+    path: 'Admin', component: AdminComponent,
+    children: [
+      { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
+      { path: 'Dashboard', component: DashboardComponent },
       { path: 'AddMcqs', component: AdminmcqsComponent },
       { path: 'EditMCQs', component: AdminmcqsComponent },
       { path: 'MCQsList', component: McqslistComponent },

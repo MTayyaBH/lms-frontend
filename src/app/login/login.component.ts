@@ -3,11 +3,12 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
 import { DbServiceService } from '../db-service.service';
 import { Route, Router } from '@angular/router';
+import confetti from 'canvas-confetti';
 import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css','./login.component.scss']
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   logindata: any = localStorage.getItem('userdata')
@@ -25,7 +26,33 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
   }
+  handleClick() {
+    const end = Date.now() + 3 * 1000; // 3 seconds
+    const colors = ['#a786ff', '#fd8bbc', '#eca184', '#f8deb1'];
+    const frame = () => {
+      if (Date.now() > end) return;
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 0, y: 0.5 },
+        colors: colors,
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 1, y: 0.5 },
+        colors: colors,
+      });
 
+      requestAnimationFrame(frame);
+    };
+
+    frame();
+  }
   constructor(
     private service: DbServiceService,
     private rout: Router,
@@ -65,6 +92,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
               localStorage.setItem('userdata', encryptedData);
               this.createMessage('success', 'Login Successful!');
               this.rout.navigate(['/home']);
+              this.handleClick()
             } else {
               this.createMessage('error', res.message)
             }
@@ -107,6 +135,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             const encryptedData = this.service.encrypt(JSON.stringify(res.user), this.service.secretkey);
               localStorage.setItem('userdata', encryptedData);
             this.rout.navigate(['/home']);
+            this.handleClick()
           } else {
             if (res.message === 'Password Incorrect') {
               this.createMessage('error', res.message);

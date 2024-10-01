@@ -65,6 +65,8 @@ import { QuestionslistComponent } from './questionslist/questionslist.component'
 import { AutogeneratepaperComponent } from './autogeneratepaper/autogeneratepaper.component';
 import { AddpaperschemasComponent } from './addpaperschemas/addpaperschemas.component';
 import { SchemaslistComponent } from './schemaslist/schemaslist.component';
+import { FooterComponent } from './footer/footer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,7 +102,9 @@ import { SchemaslistComponent } from './schemaslist/schemaslist.component';
     QuestionslistComponent,
     AutogeneratepaperComponent,
     AddpaperschemasComponent,
-    SchemaslistComponent
+    SchemaslistComponent,
+    FooterComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,NzIconModule,NzDrawerModule,NzCarouselModule,NzMessageModule,

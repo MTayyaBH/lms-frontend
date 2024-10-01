@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DbServiceService } from '../db-service.service';
-import confetti from 'canvas-confetti';
 
 
 @Component({
@@ -18,7 +17,7 @@ export class HomeComponent implements OnInit {
       this.checklogin();
     });
     this.checklogin();
-    this.handleClick();
+    this.startTypingAnimation();
   }
 
   checklogin() {
@@ -26,31 +25,56 @@ export class HomeComponent implements OnInit {
     this.login = !!data;
   }
 
-  handleClick() {
-    const end = Date.now() + 3 * 1000; // 3 seconds
-    const colors = ['#a786ff', '#fd8bbc', '#eca184', '#f8deb1'];
-    const frame = () => {
-      if (Date.now() > end) return;
-      confetti({
-        particleCount: 2,
-        angle: 60,
-        spread: 55,
-        startVelocity: 60,
-        origin: { x: 0, y: 0.5 },
-        colors: colors,
-      });
-      confetti({
-        particleCount: 2,
-        angle: 120,
-        spread: 55,
-        startVelocity: 60,
-        origin: { x: 1, y: 0.5 },
-        colors: colors,
-      });
 
-      requestAnimationFrame(frame);
-    };
-
-    frame();
+  phrases: string[] = [
+    'Training Platform!',
+    'Education Excellence!',
+    'Knowledge Awaits!',
+    'Future Ready!',
+    'Learn and Grow!',
+    'Empower Minds!'
+];
+  currentPhraseIndex: number = 0; 
+  displayedText: string = 'Welcome to the Education and'; 
+  typingInterval: any;
+  duration: number = 170; 
+  isDeleting: boolean = false; 
+  private i: number = 0; 
+  
+  startTypingAnimation(): void {
+    this.typingInterval = setInterval(() => {
+      const currentPhrase = this.phrases[this.currentPhraseIndex];
+      if (!this.isDeleting) {
+        if (this.i < currentPhrase.length) {
+          this.displayedText = 'Welcome to the Education and ' + currentPhrase.substring(0, this.i + 1);
+          this.i++;
+        } else {
+          this.isDeleting = true;
+          setTimeout(() => this.startDeleting(), 1300); 
+        }
+      }
+    }, this.duration);
   }
+  
+  startDeleting(): void {
+    this.typingInterval = setInterval(() => {
+      if (this.isDeleting) {
+        if (this.i > 0) {
+          this.displayedText = 'Welcome to the Education and ' + this.phrases[this.currentPhraseIndex].substring(0, this.i - 1);
+          this.i--;
+        } else {
+          clearInterval(this.typingInterval);
+          this.isDeleting = false;
+          this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
+          this.i = 0; 
+          setTimeout(() => this.startTypingAnimation(), 1300); 
+        }
+      }
+    }, this.duration / 2); 
+  }
+  
+  ngOnDestroy(): void {
+    clearInterval(this.typingInterval); 
+  }
+  
 }

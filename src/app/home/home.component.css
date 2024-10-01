@@ -11,3 +11,16 @@
   transform: translateX(10px);
   transition-duration: 700ms;
 }
+.cursor {
+  display: inline-block;
+  width: 10px; /* Width of cursor */
+  height: 20px; /* Height of cursor */
+  margin-left: 5px; /* Space between text and cursor */
+  animation: blink 0.7s step-end infinite; /* Blinking effect */
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0; /* Blink effect */
+  }
+}
