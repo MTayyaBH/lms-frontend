@@ -1,0 +1,9 @@
+.custom-select-height {
+    max-height: 40px !important; /* Adjust height as necessary */
+    overflow-y: auto; /* Allows for scrolling */
+
+}
+.custom-select-height::-webkit-scrollbar {
+    width: 3px; /* Width of the scrollbar */
+    height: 3px; /* Width of the scrollbar */
+}

@@ -32,7 +32,7 @@
                     </div>
                     <div class="w-full">
                         <label for="testtype" class="block mb-1">Test Type</label>
-                        <nz-select class="w-full ngselectbn bookselected dark:bookselected" [nzSize]="inputsize"
+                        <nz-select class="w-full ngselectbn bookselected dark:bookselected " [nzSize]="inputsize"
                             id="testtype" nzShowSearch nzAllowClear nzPlaceHolder="Select Chapter"
                             formControlName="testtype">
                             <nz-option nzLabel='Full Book' nzValue='Full Book'></nz-option>
@@ -43,7 +43,7 @@
                 <div class="w-full md:flex md:space-x-4 space-y-4 md:space-y-0">
                     <div *ngIf="form.value?.testtype === 'Select Chapter'" class="w-full">
                         <label for="chapternames" class="block mb-1">Chapter</label>
-                        <nz-select class="w-full ngselectbn dark:multiselect bookselected dark:bookselected"
+                        <nz-select class="w-full ngselectbn dark:multiselect bookselected dark:bookselected custom-select-height"
                             [nzSize]="inputsize" id="chapternames" nzMode="multiple" nzShowSearch nzAllowClear
                             nzPlaceHolder="Select Chapter" formControlName="chapternames">
                             <nz-option *ngFor="let Chapter of Chapters" [nzLabel]="Chapter.title"

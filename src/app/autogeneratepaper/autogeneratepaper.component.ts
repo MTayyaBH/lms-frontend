@@ -58,10 +58,12 @@ export class AutogeneratepaperComponent implements OnInit, AfterViewInit {
           console.log(res);
           if (res) {
             this.closeLoading()
+            this.msg.success('Paper Generate Successfully')
           }
         })
        } catch (error) {
         console.log(error);
+        this.msg.error('Some error founded')
         this.closeLoading()
        }
     }

@@ -43,7 +43,7 @@
                     <div *ngIf="form.value?.testtype === 'Select Chapter'" class="w-full">
                         <label for="chapternames" class="block mb-1">Chapter</label>
                         <nz-select (ngModelChange)="getSchemasWithChapters($event)"
-                            class="w-full ngselectbn dark:multiselect bookselected dark:bookselected"
+                            class="w-full  ngselectbn dark:multiselect bookselected dark:bookselected custom-select-height"
                             [nzSize]="inputsize" id="chapternames" nzMode="multiple" nzShowSearch nzAllowClear
                             nzPlaceHolder="Select Chapter" formControlName="chapternames">
                             <nz-option *ngFor="let Chapter of Chapters" [nzLabel]="Chapter.title"
