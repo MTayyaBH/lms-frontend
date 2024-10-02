@@ -1,9 +1,10 @@
-<main class="">
+<main id="loaderdiv2" class="  relative nzspin dark:nzspin">
+    <nz-spin *ngIf="loader" class="top-1/2 z-50 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2"
+            [nzSize]="'large'" nzSimple></nz-spin>
     <div
         class=" bg-gray-300 dark:bg-gray-900  dark:text-white min-h-[calc(100vh-80px)] text-gray-900 flex items-center justify-center">
-        <div id="loaderdiv2" class="w-full relative nzspin dark:nzspin  max-w-md md:max-w-5xl  px-3">
-            <nz-spin *ngIf="loader" class="top-1/2 z-50 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2"
-            [nzSize]="'large'" nzSimple></nz-spin>
+        <div  class="w-full  max-w-md md:max-w-5xl  px-3">
+            
             <form [formGroup]="form" (ngSubmit)="onSubmit()"
                 class="bg-gray-200 my-3 dark:bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
                 <h2 class="text-2xl w-full font-sans text-center font-bold dark:text-gray-200 text-gray-900">Generate
