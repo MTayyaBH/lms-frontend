@@ -1,0 +1,143 @@
+<section class="h-screen flex flex-col">
+    <div [ngClass]="{'!overflow-hidden':isDrawerOpen}"
+        class="reel-container flex-1 overflow-y-scroll snap-y snap-mandatory relative max-w-[400px] mx-auto">
+
+        <div *ngFor="let video of videos" class="reel snap-start h-full flex justify-center items-center relative">
+            <div (click)="closeDrawer()" class="h-full w-full bg-gray-800">
+                <video #videoElement class="video-player h-full w-full object-cover" [muted]="video.isMuted" loop
+                    (click)="togglePlayPause(videoElement)" (touchstart)="onTouchStart($event)"
+                    (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()"
+                    (timeupdate)="updateProgress(videoElement)">
+                    <source [src]="video.src" type="video/mp4" />
+                </video>
+            </div>
+            <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+                <button *ngIf="videoElement.paused" class="play-pause-btn" (click)="togglePlayPause(videoElement)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 fill-white" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="absolute bottom-8 left-4 flex items-center space-x-2 text-white">
+                <img src="../../assets/team-2.jpg" alt="profile" class="h-12 w-12 rounded-full object-cover" />
+                <div>
+                    <h3 class="font-semibold text-white">{{ video.username }}</h3>
+                    <p class="text-xs text-gray-200">{{ video.description }}</p>
+                </div>
+            </div>
+            <div class="flex fixed top-5 left-1/2 transform -translate-x-1/2 justify-center items-center">
+                <div class="flex space-x-8">
+                    <!-- Following Tab Button -->
+                    <button class="py-2 text-sm font-semibold"
+                        [ngClass]="{ 'text-white border-b-2 border-white': activeTab === 'following', 'text-gray-400': activeTab !== 'following' }"
+                        (click)="setActiveTab('following')">
+                        Following
+                    </button>
+
+                    <!-- For You Tab Button -->
+                    <button class="py-2 text-sm font-semibold"
+                        [ngClass]="{ 'text-white border-b-2 border-white': activeTab === 'foryou', 'text-gray-400': activeTab !== 'foryou' }"
+                        (click)="setActiveTab('foryou')">
+                        For You
+                    </button>
+                    <button class="py-2 text-sm font-semibold"
+                        [ngClass]="{ 'text-white border-b-2 border-white': activeTab === 'Products', 'text-gray-400': activeTab !== 'Products' }"
+                        (click)="setActiveTab('Products')">
+                        Products
+                    </button>
+                </div>
+            </div>
+            <!-- Updated Progress Bar with Click to Seek -->
+            <div class="absolute bottom-2 left-0 px-3 h-[6px] w-full">
+                <div class=" w-full cursor-pointer h-[6px] rounded-full bg-gray-300" (click)="seekVideo($event, videoElement)">
+                    <div class="h-full bg-[#b68150] rounded-full" [style.width.%]="progress"></div>
+                </div>
+            </div>
+
+            <div class="absolute right-4 bottom-24 text-white space-y-3 flex flex-col items-center">
+                <div class="text-white flex flex-col items-center">
+                    <img src="../../assets/team-2.jpg" alt="profile" class="h-12 w-12 rounded-full object-cover " />
+                    <div class="h-5">
+                        <div *ngIf="!video.isfollow" class="flex justify-center items-center">
+                            <i (click)="follow(video)"
+                                class="bg-pink-600 text-white z-30 mx-auto text-sm w-5 h-5 -mt-[10px] rounded-full flex justify-center items-center fa-solid fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Like Button -->
+                <div class="like-button flex flex-col items-center">
+                    <button (click)="like(video)" class="flex flex-col items-center">
+                        <i *ngIf="video.isLiked" class="fa-solid fa-heart text-pink-600 text-2xl"></i>
+                        <i *ngIf="!video.isLiked" class="fa-regular fa-heart text-white text-2xl"></i>
+                        <span class="-mt-1">{{ video.likes }}</span>
+                    </button>
+                </div>
+
+                <!-- Comment Button -->
+                <div class="comment-button flex flex-col items-center">
+                    <button (click)="openDrawer()" class="flex flex-col items-center">
+                        <i class="fas fa-comment text-2xl"></i>
+                        <span>{{ video.comments }}</span>
+                    </button>
+                </div>
+                <div class="share-button flex flex-col items-center">
+                    <button (click)="shareOnPlatform('whatsapp')" class="flex flex-col items-center">
+                        <i class="fas fa-share-alt h-8 w-8 text-2xl"></i>
+                        <span>{{ video.shares }}</span>
+                    </button>
+                </div>
+            </div>
+            <div [ngClass]="{'hidden':!isDrawerOpen}" id="drawer-example"
+                class="absolute bottom-0 left-0 z-40 h-[50vh] p-4 overflow-y-auto transition-transform rounded-t-xl duration-500 border-x border-gray-300  bg-white w-full dark:bg-gray-800"
+                [class.translate-y-full]="!isDrawerOpen" [class.translate-y-0]="isDrawerOpen" tabindex="-1"
+                aria-labelledby="drawer-label">
+                <h5 id="drawer-label"
+                    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                    <svg class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    Comments
+                </h5>
+                <button (click)="closeDrawer()" aria-controls="drawer-example"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close menu</span>
+                </button>
+                <div class="relative w-full h-[89%]">
+                    <div class="h-[83%] overflow-auto reel-container">
+                        <div *ngFor="let comment of comments" class="comment flex items-start mb-4">
+                            <img src="../../assets/team-2.jpg" alt="Profile Photo"
+                                class="h-10 w-10 rounded-full object-cover mr-3">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center mb-1">
+                                    <h4 class="font-semibold text-gray-800">{{ comment.username }}</h4>
+                                    <span class="text-xs text-gray-500">{{ comment.date }}</span>
+                                </div>
+                                <p class="text-gray-700">{{ comment.text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full">
+                        <div
+                            class="w-full bg-white rounded-full h-10 px-4 border border-gray-400 flex justify-center items-center">
+                            <input [(ngModel)]="newComment" (keyup.enter)="addComment()"
+                                class="w-full text-gray-800 text-[16px] h-6 outline-none"
+                                placeholder="Add a comment...">
+                            <span (click)="addComment()" class="text-gray-800 text-lg -mt-1 cursor-pointer" nz-icon
+                                nzType="send" nzTheme="outline"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>

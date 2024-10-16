@@ -28,6 +28,8 @@ import { AutogeneratepaperComponent } from './autogeneratepaper/autogeneratepape
 import { AddpaperschemasComponent } from './addpaperschemas/addpaperschemas.component';
 import { SchemaslistComponent } from './schemaslist/schemaslist.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { Papertheem1Component } from './papertheem1/papertheem1.component';
+import { ReelsComponent } from './reels/reels.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -59,8 +61,10 @@ const routes: Routes = [
       { path: 'Auto-Generate-Paper', component: AutogeneratepaperComponent },
       { path: 'Generate-Schemas', component: AddpaperschemasComponent },
       { path: 'List-Schemas', component: SchemaslistComponent },
+      { path: 'Papertheem', component: Papertheem1Component },
     ]
   },
+  { path: 'reels', component: ReelsComponent },
   { path: 'LMS/OnlineTest', component: OnlineTestComponent },
   { path: 'LMS/OnlineTest/Result', component: ResultComponent },
   { path: 'LMS/OnlineTest/Result-Details', component: QuizResultsComponent },

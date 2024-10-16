@@ -67,6 +67,8 @@ import { AddpaperschemasComponent } from './addpaperschemas/addpaperschemas.comp
 import { SchemaslistComponent } from './schemaslist/schemaslist.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { Papertheem1Component } from './papertheem1/papertheem1.component';
+import { ReelsComponent } from './reels/reels.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,7 +106,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AddpaperschemasComponent,
     SchemaslistComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    Papertheem1Component,
+    ReelsComponent
   ],
   imports: [
     BrowserModule,NzIconModule,NzDrawerModule,NzCarouselModule,NzMessageModule,

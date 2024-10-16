@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DbServiceService } from '../db-service.service';
+import { Location } from '@angular/common';
 import * as CryptoJS from 'crypto-js';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import Swal from 'sweetalert2'
@@ -32,8 +33,8 @@ export class StarttestComponent implements OnInit,OnDestroy {
     private router: Router,
     private dbservice: DbServiceService,
     public message: NzMessageService,
-    private renderer: Renderer2
-  ) {
+    private renderer: Renderer2,
+    private location: Location  ) {
     this.myForm = this.fb.group({
       option: [false]
     });
@@ -53,6 +54,7 @@ export class StarttestComponent implements OnInit,OnDestroy {
   }
   ngOnDestroy() {
     this.stopCounter()
+    this.Cancel()
   }
   min: any = 9;
   sec: any = 59;
@@ -255,10 +257,6 @@ export class StarttestComponent implements OnInit,OnDestroy {
     Swal.fire({
       title: `<strong class="text-sm md:text-xl">Are You Want to Cancel!</strong>`,
       icon: "warning",
-      // html: `
-      //       <div class="text-xs md:text-lg text-gray-700 dark:text-gray-200">
-      //         Please Submit or Cancel Test!
-      //       </div>`,
       showCloseButton: false,
       showCancelButton: true,
       focusConfirm: false,
@@ -283,10 +281,11 @@ export class StarttestComponent implements OnInit,OnDestroy {
         this.isTestStart = false
         this.getmcqs();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-
-      }
+        this.location.back(); 
+       }
     })
   }
+
   submitbutton() {
     Swal.fire({
       title: `<strong class="text-sm md:text-xl">Are You Want to Submit!</strong>`,

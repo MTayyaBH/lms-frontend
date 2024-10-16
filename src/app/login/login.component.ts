@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ) { }
   ngAfterViewInit(): void {
     google.accounts.id.initialize({
-      client_id: '539887466213-eb830e4mvb4012pl2c7lfu2siaknfar9.apps.googleusercontent.com',
+      client_id: '613357913726-u57j7i4tbdnmmpddm9c21f1h351fu03d.apps.googleusercontent.com',
       callback: (res: any) => this.handleLogin(res)
     });
     google.accounts.id.renderButton(document.getElementById('login-google-btn'), {

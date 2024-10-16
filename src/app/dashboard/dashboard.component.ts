@@ -6,7 +6,9 @@ import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent 
+implements OnInit, OnDestroy
+ {
   private scriptElements: HTMLScriptElement[] = [];
   private linkElements: HTMLLinkElement[] = [];
   isscriptload: boolean = false;
@@ -17,17 +19,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (!this.isscriptload) {
       const scripts = [
         'assets/js/plugins/chartjs.min.js',
-        // 'assets/js/plugins/Chart.extension.js',
-        // 'assets/js/plugins/perfect-scrollbar.min.js',
         'assets/js/chart-1.js',
         'assets/js/chart-2.js',
         'assets/js/dropdown.js',
         'assets/js/fixed-plugin.js',
-        // 'assets/js/nav-pills.js',
         'assets/js/navbar-collapse.js',
-        // 'assets/js/navbar-sticky.js',
-        // 'assets/js/perfect-scrollbar.js',
-        // 'assets/js/sidenav-burger.js',
         'assets/js/soft-ui-dashboard-tailwind.js',
         'assets/js/soft-ui-dashboard-tailwind.min.js',
         'assets/js/tooltips.js'
@@ -43,8 +39,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         'assets/css/nucleo-svg.css',
         'assets/css/nucleo-icons.css',
         'assets/css/tooltips.css',
-        // 'assets/css/perfect-scrollbar.css',
-        // 'assets/css/soft-ui-dashboard-tailwind.css',
         'assets/css/soft-ui-dashboard-tailwind.min.css'
       ];
 
@@ -52,19 +46,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.loadStylesheet(stylesheet);
       });
 
-      this.isscriptload = true;  // Ensure scripts are not loaded again
+      this.isscriptload = true; 
     }
   }
 
   ngOnDestroy(): void {
-    // Remove all dynamically loaded scripts
     this.scriptElements.forEach(script => {
       if (script.parentNode) {
         this.renderer.removeChild(document.body, script);
       }
     });
 
-    // Remove all dynamically loaded stylesheets
     this.linkElements.forEach(link => {
       if (link.parentNode) {
         this.renderer.removeChild(document.head, link);
@@ -83,7 +75,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     script.onerror = onErrorCallback || (() => { console.error(`Error loading script: ${src}`); });
     this.renderer.appendChild(document.body, script);
 
-    // Store reference to script element
     this.scriptElements.push(script);
   }
 
@@ -94,7 +85,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     link.type = 'text/css';
     this.renderer.appendChild(document.head, link);
 
-    // Store reference to link element
     this.linkElements.push(link);
   }
 }
