@@ -70,7 +70,7 @@ export class ChaptersComponent implements OnInit {
 
   getdataClasses() {
     try {
-      this.http.get('classes').subscribe((res: any) => {
+      this.http.post('classes/getclasses',{}).subscribe((res: any) => {
         console.log(res);
         this.clases = this.sortClasses(res);
       });
@@ -98,7 +98,7 @@ export class ChaptersComponent implements OnInit {
   books: any;
   getbooks(id: any) {
     try {
-      this.http.getbyid('books', id).subscribe((res) => {
+      this.http.post('books/getbyid', {id}).subscribe((res) => {
         console.log(res);
         this.books = res;
       });

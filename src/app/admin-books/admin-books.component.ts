@@ -45,7 +45,7 @@ export class AdminBooksComponent implements OnInit {
       const urlParams = new URLSearchParams(this.pathtoupdaterouter.split('?')[1]);
       this.routerclassuid = urlParams.get('ClassName');
       this.updateuid = uid
-      this.http.getbyid('books/bk', uid).subscribe(
+      this.http.post('books/getbyuid', {id:uid}).subscribe(
         (res: any) => {
           if (res && res.length > 0) {
             this.editMode = true;
@@ -236,7 +236,7 @@ export class AdminBooksComponent implements OnInit {
 
   getdata() {
     try {
-      this.http.get('classes').subscribe((res: any) => {
+      this.http.post('classes/getclasses',{}).subscribe((res: any) => {
         console.log(res);
         this.clases = this.sortClasses(res)
         this.checkEditMode()

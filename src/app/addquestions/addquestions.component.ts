@@ -47,7 +47,7 @@ export class AddquestionsComponent implements OnInit{
       this.routerclassuid = urlParams.get('ClassName');
       this.routerbookuid = urlParams.get('BookName');
       this.updateuid = uid
-      this.dbservice.getbyid('questions', uid).subscribe(
+      this.dbservice.post('questions/getbyuid', {id:uid}).subscribe(
         (res: any) => {
           console.log(res);
           
@@ -113,7 +113,7 @@ export class AddquestionsComponent implements OnInit{
   }
   getdata() {
     try {
-      this.dbservice.get('classes').subscribe((res: any) => {
+      this.dbservice.post('classes/getclasses',{}).subscribe((res: any) => {
         console.log(res);
         this.checkEditMode()
         this.classes = this.sortClasses(res)
@@ -143,7 +143,7 @@ export class AddquestionsComponent implements OnInit{
     console.log(id);
     this.bookid = id
     try {
-      this.dbservice.getbyid('books', id).subscribe((res) => {
+      this.dbservice.post('books/getbyid', {id}).subscribe((res) => {
         console.log(res);
         this.Books = res
       })
@@ -159,7 +159,7 @@ export class AddquestionsComponent implements OnInit{
       ClassName: this.bookid,
       BookName: id
     }
-    this.dbservice.getallwithdata('chapters/books', chapterids)
+    this.dbservice.post('chapters/books/getbydata', chapterids)
       .subscribe({
         next: (res: any) => {
           if (res && res['0'] && res['0'].chapters) {

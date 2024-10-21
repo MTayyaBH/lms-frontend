@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
@@ -15,10 +15,14 @@ export class DbServiceService {
     this.notify.emit();
   }
   public secretkey: string = 'lmsdatadcinandularnestjsmongodb97etc';
-  private url: string = 'http://localhost:3000';
-  // private url: string = 'http://192.168.10.17:3000';
+  // private url: string = 'https://neat-lobster-physically.ngrok-free.app/lms.api.edu.pk';
+  // private url: string = 'https://fleet-factually-fowl.ngrok-free.app/lms.api.edu.pk';
+  // private url: string = 'https://9375-39-59-12-216.ngrok-free.app/lms.api.edu.pk';
+  private url: string = 'http://localhost:3000/lms.api.edu.pk';
+  // private url: string = 'http://192.168.10.6:80/lms.api.edu.pk';
   logindata: any;
   TestMCQs: any
+  
   constructor(
     private httpclient: HttpClient,
     private message: NzMessageService,
@@ -45,8 +49,12 @@ export class DbServiceService {
   delete(table:any,id:any){
     return this.httpclient.delete(`${this.url}/${table}/${id}`);
   }
-  get(table: any) {
-    return this.httpclient.get(`${this.url}/${table}`)
+  get(table: any):any {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', // Specify the content type
+      'Accept': 'application/json'         // Expect JSON response
+    });
+    return this.httpclient.get<any>(`${this.url}/${table}`,{headers})
   }
 
   getallwithdata(table: any, data: any) {

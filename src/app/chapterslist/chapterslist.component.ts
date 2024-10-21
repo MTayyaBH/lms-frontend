@@ -46,7 +46,7 @@ export class ChapterslistComponent implements OnInit ,AfterViewInit{
   getData() {
     this.loadingMore = true
     try {
-      this.http.getallwithdata('chapters/books', this.paremsData).subscribe((res: any) => {
+      this.http.post('chapters/books/getbydata', this.paremsData).subscribe((res: any) => {
         if (res) {
           this.data1 = res
           this.loadingMore = false
@@ -74,18 +74,18 @@ export class ChapterslistComponent implements OnInit ,AfterViewInit{
     );
   }
   popconfirm(uid: any) {
-    const chapter = this.chapters.filter((a: { uid: any; }) => a.uid !== uid)
-    try {
-      this.http.updatebyid('chapters', this.datauid, chapter).subscribe((res: any) => {
-        if (res) {
-          this.msg.success('Deleted Successfully')
-          this.getData()
-        }
-      })
-    } catch (error) {
-      this.msg.error('Some error founded!')
-      console.log(error);
-    }
+    // const chapter = this.chapters.filter((a: { uid: any; }) => a.uid !== uid)
+    // try {
+    //   this.http.updatebyid('chapters', this.datauid, chapter).subscribe((res: any) => {
+    //     if (res) {
+    //       this.msg.success('Deleted Successfully')
+    //       this.getData()
+    //     }
+    //   })
+    // } catch (error) {
+    //   this.msg.error('Some error founded!')
+    //   console.log(error);
+    // }
   }
   popcancel() {
     this.msg.warning('Cancel Successfully')

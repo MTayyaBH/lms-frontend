@@ -44,7 +44,7 @@ export class QuestionslistComponent implements OnInit ,AfterViewInit{
   getData() {
     this.loadingMore = true
     try {
-      this.http.getallwithdata('questions/books', this.paremsData).subscribe((res: any) => {
+      this.http.post('questions/books/getdata', this.paremsData).subscribe((res: any) => {
         this.data = res
         this.list = res
         console.log(res);

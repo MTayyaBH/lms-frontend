@@ -19,7 +19,7 @@ export class BooksComponent implements OnInit {
   routingdata: any
   books: any
   getbooks(id: any) {
-    this.http.getbyid('books', id).subscribe({
+    this.http.post('books/getbyid', {id}).subscribe({
       next: (res: any) => {
         setTimeout(() => {
           this.loader = false;
@@ -28,7 +28,7 @@ export class BooksComponent implements OnInit {
           } else {
             this.books = res;
           }
-        }, 500);
+        }, 0);
         
       },
       error: (error) => {

@@ -16,8 +16,9 @@ export class OnlineTestComponent implements OnInit {
     this.getdata()
   }
   getdata() {
+    let data={}
     try {
-      this.http.get('classes').subscribe((res: any) => {
+      this.http.post('classes/getclasses',data).subscribe((res: any) => {
         console.log(res);
         setTimeout(() => {
           this.loader=false
@@ -26,7 +27,7 @@ export class OnlineTestComponent implements OnInit {
           } else {
             this.clases =this.sortClasses(res) 
           }
-        }, 500);
+        }, 0);
       })
     } catch (error) {
       console.log(error);

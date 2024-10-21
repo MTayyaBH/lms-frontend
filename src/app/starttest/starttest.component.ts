@@ -54,7 +54,7 @@ export class StarttestComponent implements OnInit,OnDestroy {
   }
   ngOnDestroy() {
     this.stopCounter()
-    this.Cancel()
+    // this.Cancel()
   }
   min: any = 9;
   sec: any = 59;
@@ -142,7 +142,7 @@ export class StarttestComponent implements OnInit,OnDestroy {
     };
     console.log(data);
 
-    this.dbservice.getallwithdata('lms-mcqs', data).subscribe((res: any) => {
+    this.dbservice.post('lms-mcqs/getbydata', data).subscribe((res: any) => {
       if (res) {
         setTimeout(() => {
           this.loader = false
@@ -281,7 +281,7 @@ export class StarttestComponent implements OnInit,OnDestroy {
         this.isTestStart = false
         this.getmcqs();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.location.back(); 
+        // this.location.back(); 
        }
     })
   }

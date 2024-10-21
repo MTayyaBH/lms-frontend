@@ -38,7 +38,7 @@ export class McqslistComponent implements OnInit ,AfterViewInit{
   getdata() {
     this.loadingMore = true
     try {
-      this.http.getbyid('lms-mcqs', this.classuid).subscribe((res: any) => {
+      this.http.post('lms-mcqs/byid', {id:this.classuid}).subscribe((res: any) => {
         this.data = res
         this.list = res;
         console.log(res);

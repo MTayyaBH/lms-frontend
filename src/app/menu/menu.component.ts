@@ -36,8 +36,9 @@ export class MenuComponent implements OnInit {
   }
   classes: any
   getdata() {
+   let data={}
     try {
-      this.sharedService.get('classes').subscribe((res: any) => {
+      this.sharedService.post('classes/getclasses',data).subscribe((res: any) => {
         console.log(res);
         this.classes = this.sortClasses(res)
       })
@@ -85,7 +86,7 @@ export class MenuComponent implements OnInit {
   books: any[] = [];
   getBooks(id: any): void {
     try {
-      this.sharedService.getbyid('books', id).subscribe(
+      this.sharedService.post('books/getbyid', {id}).subscribe(
         (res: any) => {
           this.books[id] = res || [];
         },

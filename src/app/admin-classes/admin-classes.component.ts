@@ -43,7 +43,7 @@ ngOnInit() {
       const urlParams = new URLSearchParams(this.pathtoupdaterouter.split('?')[1]);
       this.routerclassuid = urlParams.get('ClassName');
       this.updateuid = uid
-      this.http.getbyid('classes', uid).subscribe(
+      this.http.post('classes/getbyid', {id:uid}).subscribe(
         (res: any) => {
           console.log(res); 
           if (res && res.length > 0) {

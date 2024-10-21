@@ -30,7 +30,7 @@ export class ChemistryComponent implements OnInit {
   notfound:boolean=false
   getData() {
     try {
-      this.dbservice.getallwithdata('chapters/books', this.paremsData).subscribe((res: any) => {
+      this.dbservice.post('chapters/books/getbydata', this.paremsData).subscribe((res: any) => {
         if (res) {
           setTimeout(() => {
             this.loader=false
@@ -42,7 +42,7 @@ export class ChemistryComponent implements OnInit {
               this.chapters = res['0'].chapters;
               this.imageurl = res['0'].image_url;
             }
-          }, 500);
+          }, 0);
         }
 
       })

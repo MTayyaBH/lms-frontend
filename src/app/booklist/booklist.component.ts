@@ -38,7 +38,7 @@ export class BooklistComponent implements OnInit,AfterViewInit{
   getdata() {
     this.loadingMore = true
     try {
-      this.http.getbyid('books', this.classuid).subscribe((res: any) => {
+      this.http.post('books/getbyid', {id:this.classuid}).subscribe((res: any) => {
         this.data = res
         this.list = res;
         console.log(res);

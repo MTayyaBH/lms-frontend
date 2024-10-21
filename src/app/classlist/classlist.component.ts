@@ -36,16 +36,19 @@ export class ClasslistComponent implements OnInit,AfterViewInit{
     }
   }
   getdata() {
+    const data={}
     this.loadingMore = true
     try {
-      this.http.get('classes').subscribe((res: any) => {
+      this.http.post('classes/getclasses',data).subscribe((res: any) => {
+        console.log(JSON.stringify(res));
+        
         this.data = this.sortClasses(res)
         this.list = this.sortClasses(res)
         console.log(res);
         this.loadingMore = false
       })
     } catch (error) {
-      console.log(error);
+      console.log(JSON.stringify(error));
       this.loadingMore = false
     }
   }
